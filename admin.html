@@ -1,0 +1,3693 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Quản trị hệ thống - EduHealth AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;0,600;1,300;1,500&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        :root {
+            --blue-primary: #3b82f6;
+            --blue-deep: #2563eb;
+            --pink-primary: #f472b6;
+            --pink-deep: #ec489a;
+            --grad-blue-pink: linear-gradient(135deg, var(--blue-primary), var(--pink-primary));
+            --grad-pink-blue: linear-gradient(135deg, var(--pink-deep), var(--blue-primary));
+            --bg-body: linear-gradient(135deg, #ffffff 0%, #fff5f8 100%);
+            --bg-surface: #fff5f8;
+            --card-bg: #ffffff;
+            --text-dark: #0f172a;
+            --text-mid: #334155;
+            --text-dim: #64748b;
+            --border-light: #ffe0ec;
+            --border-soft: #fef0f5;
+            --shadow-sm: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+            --hover-glow: rgba(59, 130, 246, 0.12);
+            --nav-bg: rgba(255, 255, 255, 0.95);
+            --tag-bg: #fce7f3;
+            --input-bg: #ffffff;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        body.dark {
+            --bg-body: linear-gradient(135deg, #0f172a 0%, #1e1b2e 100%);
+            --bg-surface: #1e293b;
+            --card-bg: #1e293b;
+            --text-dark: #f1f5f9;
+            --text-mid: #cbd5e1;
+            --text-dim: #94a3b8;
+            --border-light: #334155;
+            --border-soft: #2d3a4e;
+            --nav-bg: rgba(15, 23, 42, 0.95);
+            --tag-bg: #2d3a4e;
+            --input-bg: #1e293b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-body);
+            color: var(--text-dark);
+            transition: background-color 0.3s ease;
+            min-height: 100vh;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--border-soft); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: var(--pink-primary); border-radius: 10px; }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+            height: 74px;
+            background: var(--nav-bg);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-mark {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--pink-deep), var(--blue-primary));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+        }
+
+        .logo-type {
+            font-family: 'Fraunces', serif;
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--pink-deep), var(--blue-primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-link {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-mid);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-link i { color: var(--pink-primary); }
+        .nav-link:hover { color: var(--blue-primary); }
+
+        .theme-toggle {
+            background: transparent;
+            border: 1px solid var(--border-light);
+            border-radius: 40px;
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-mid);
+            font-family: 'DM Sans', sans-serif;
+        }
+        .theme-toggle:hover {
+            border-color: var(--blue-primary);
+            color: var(--blue-primary);
+        }
+
+        .admin-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 100px 20px 60px;
+        }
+
+        .admin-header {
+            margin-bottom: 32px;
+        }
+        .admin-header h1 {
+            font-family: 'Fraunces', serif;
+            font-size: 32px;
+            font-weight: 500;
+            background: linear-gradient(135deg, var(--blue-primary), var(--pink-primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 12px 28px;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text-mid);
+            cursor: pointer;
+            border-radius: 40px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tab-btn i { font-size: 16px; }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--blue-primary), var(--pink-primary));
+            color: white;
+            box-shadow: 0 6px 14px rgba(59, 130, 246, 0.3);
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: var(--tag-bg);
+            color: var(--blue-primary);
+        }
+
+        .form-card, .list-card {
+            background: var(--card-bg);
+            border-radius: 32px;
+            padding: 32px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 30px;
+        }
+
+        .card-title {
+            font-family: 'Fraunces', serif;
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-light);
+            background: linear-gradient(135deg, var(--blue-primary), var(--pink-primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--text-mid);
+            margin-bottom: 8px;
+            font-size: 14px;
+            display: block;
+        }
+
+        .form-control, .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 24px;
+            border: 1px solid var(--border-light);
+            background: var(--input-bg);
+            color: var(--text-dark);
+            transition: all 0.3s;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .form-control:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--blue-primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--blue-primary), var(--pink-primary));
+            border: none;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-success {
+            background: var(--success);
+            border: none;
+            padding: 6px 14px;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            border: none;
+            padding: 6px 14px;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .btn-warning {
+            background: var(--warning);
+            border: none;
+            padding: 6px 14px;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-light);
+            padding: 8px 20px;
+            border-radius: 40px;
+            color: var(--text-mid);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-outline:hover {
+            border-color: var(--blue-primary);
+            color: var(--blue-primary);
+        }
+
+        .btn-pdf {
+            background: linear-gradient(135deg, #ef4444, #f97316);
+            border: none;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+        }
+        .btn-pdf:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.3);
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .col-full {
+            grid-column: span 2;
+        }
+
+        .map-picker-container {
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        #locationMap {
+            height: 300px;
+            width: 100%;
+        }
+        .map-coords-info {
+            padding: 12px;
+            background: var(--bg-surface);
+            border-top: 1px solid var(--border-light);
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .map-coords-info input {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: 30px;
+            border: 1px solid var(--border-light);
+            background: var(--input-bg);
+            color: var(--text-dark);
+            font-size: 13px;
+        }
+
+        .location-item, .post-item, .handbook-item, .news-item {
+            background: var(--bg-surface);
+            border-radius: 20px;
+            padding: 18px;
+            margin-bottom: 12px;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s;
+        }
+
+        .location-item:hover, .post-item:hover, .handbook-item:hover, .news-item:hover {
+            transform: translateX(5px);
+            border-color: var(--pink-primary);
+        }
+
+        .badge-hospital {
+            background: var(--danger);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+        }
+
+        .badge-pharmacy {
+            background: var(--success);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+        }
+
+        .badge-pending {
+            background: var(--warning);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 11px;
+        }
+
+        .badge-approved {
+            background: var(--success);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 11px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 24px 20px;
+            border: 1px solid var(--border-light);
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .stat-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--pink-primary);
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            font-family: 'Fraunces', serif;
+            background: linear-gradient(135deg, var(--blue-primary), var(--pink-primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .flex-between {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .flex-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .toast-custom {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+        }
+        .toast {
+            background: var(--success);
+            color: white;
+            padding: 14px 24px;
+            border-radius: 50px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .toast.error { background: var(--danger); }
+
+        .knowledge-section {
+            background: var(--bg-surface);
+            border-radius: 24px;
+            padding: 24px;
+            margin-bottom: 28px;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s;
+        }
+        .knowledge-section:hover {
+            border-color: var(--pink-primary);
+            box-shadow: var(--shadow-sm);
+        }
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--blue-primary);
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border-light);
+        }
+        .section-title i {
+            font-size: 1.3rem;
+            color: var(--pink-primary);
+        }
+        .section-desc {
+            font-size: 13px;
+            color: var(--text-dim);
+            margin-bottom: 16px;
+            padding: 8px 12px;
+            background: var(--tag-bg);
+            border-radius: 12px;
+        }
+        textarea.knowledge-textarea {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            font-size: 14px;
+            font-family: 'DM Sans', monospace;
+            resize: vertical;
+            margin-bottom: 15px;
+            background: var(--input-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        textarea.knowledge-textarea:focus {
+            outline: none;
+            border-color: var(--blue-primary);
+        }
+        .knowledge-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .status {
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            margin-top: 12px;
+            display: inline-block;
+        }
+        .status.success {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success);
+        }
+        .status.error {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--danger);
+        }
+
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 24px;
+        }
+
+        .chat-list-container {
+            background: var(--card-bg);
+            border-radius: 28px;
+            border: 1px solid var(--border-light);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 600px;
+        }
+
+        .chat-list-header {
+            padding: 18px 20px;
+            background: var(--bg-surface);
+            border-bottom: 1px solid var(--border-light);
+            flex-shrink: 0;
+        }
+        .chat-list-header h3 {
+            font-family: 'Fraunces', serif;
+            font-size: 18px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .search-chat-box {
+            position: relative;
+        }
+        .search-chat-box input {
+            width: 100%;
+            padding: 12px 16px 12px 40px;
+            border: 1px solid var(--border-light);
+            border-radius: 30px;
+            font-size: 14px;
+            background: var(--input-bg);
+            color: var(--text-dark);
+        }
+        .search-chat-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-dim);
+        }
+
+        .chat-list {
+            flex: 1;
+            overflow-y: auto;
+            min-height: 0;
+        }
+
+        .chat-item {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-light);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .chat-item:hover {
+            background: var(--tag-bg);
+        }
+
+        .chat-item.active {
+            background: var(--tag-bg);
+            border-left: 4px solid var(--blue-primary);
+        }
+
+        .chat-name {
+            font-weight: 700;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .chat-name i {
+            color: var(--pink-primary);
+            font-size: 14px;
+        }
+
+        .chat-preview {
+            font-size: 12px;
+            color: var(--text-dim);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chat-time {
+            font-size: 11px;
+            color: var(--text-dim);
+            margin-top: 6px;
+        }
+
+        .chat-detail-container {
+            background: var(--card-bg);
+            border-radius: 28px;
+            border: 1px solid var(--border-light);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 600px;
+        }
+
+        .chat-detail-header {
+            padding: 18px 24px;
+            background: var(--bg-surface);
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+        .chat-detail-header h3 {
+            font-family: 'Fraunces', serif;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ai-toggle {
+            background: var(--success);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 8px 18px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+        .ai-toggle.off {
+            background: var(--text-dim);
+        }
+        .ai-toggle:hover {
+            transform: scale(1.02);
+        }
+
+        .messages-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: var(--bg-surface);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-height: 0;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 20px;
+            margin-bottom: 4px;
+        }
+
+        .message.admin {
+            background: linear-gradient(135deg, var(--blue-primary), var(--pink-primary));
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message.user {
+            background: var(--card-bg);
+            color: var(--text-dark);
+            border: 1px solid var(--border-light);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .message.ai {
+            background: var(--tag-bg);
+            border-left: 4px solid var(--success);
+            align-self: flex-start;
+        }
+
+        .message-system {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--warning);
+            text-align: center;
+            align-self: center;
+            max-width: 90%;
+            font-size: 12px;
+        }
+
+        .message-sender {
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 6px;
+            opacity: 0.8;
+        }
+
+        .message-text {
+            font-size: 14px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        .message-text strong { font-weight: 700; }
+        .message-text em { font-style: italic; }
+
+        .message-time {
+            font-size: 10px;
+            margin-top: 6px;
+            opacity: 0.6;
+        }
+
+        .message-image {
+            max-width: 180px;
+            border-radius: 12px;
+            margin-top: 8px;
+            cursor: pointer;
+            border: 1px solid var(--border-light);
+        }
+
+        .chat-input-area {
+            padding: 16px 20px;
+            border-top: 1px solid var(--border-light);
+            display: flex;
+            gap: 12px;
+            background: var(--card-bg);
+            flex-shrink: 0;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            padding: 12px 18px;
+            border: 1px solid var(--border-light);
+            border-radius: 40px;
+            background: var(--input-bg);
+            color: var(--text-dark);
+            font-family: 'DM Sans', sans-serif;
+        }
+        .chat-input-area input:focus {
+            outline: none;
+            border-color: var(--blue-primary);
+        }
+
+        .chat-input-area button {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--blue-primary), var(--pink-primary));
+            color: white;
+            border: none;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .chat-input-area button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* ========== MODAL STYLES ========== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+
+        .modal-content {
+            background: var(--card-bg);
+            border-radius: 32px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }
+
+        .modal-header {
+            flex-shrink: 0;
+            background: var(--card-bg);
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+        .modal-header h3 { 
+            font-family: 'Fraunces', serif; 
+            font-size: 22px; 
+            background: linear-gradient(135deg, var(--blue-primary), var(--pink-primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--text-dim);
+            transition: 0.2s;
+        }
+        .modal-close:hover { color: var(--pink-primary); }
+
+        .modal-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+        }
+
+        .modal-content-text {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text-mid);
+        }
+
+        .modal-content-text * {
+            max-width: 100%;
+        }
+
+        .modal-content-text p {
+            margin-bottom: 1.2em;
+        }
+
+        .modal-content-text h1 {
+            font-size: 1.8em;
+            font-weight: 600;
+            margin: 1.2em 0 0.6em;
+            font-family: 'Fraunces', serif;
+            color: var(--text-dark);
+        }
+
+        .modal-content-text h2 {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin: 1em 0 0.5em;
+            font-family: 'Fraunces', serif;
+            color: var(--text-dark);
+        }
+
+        .modal-content-text h3 {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin: 0.8em 0 0.4em;
+            font-family: 'Fraunces', serif;
+            color: var(--text-dark);
+        }
+
+        .modal-content-text h4 {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin: 0.6em 0 0.3em;
+            font-family: 'Fraunces', serif;
+            color: var(--text-dark);
+        }
+
+        .modal-content-text ul, 
+        .modal-content-text ol {
+            margin: 0.8em 0 0.8em 1.8em;
+            padding-left: 0;
+        }
+
+        .modal-content-text li {
+            margin: 0.3em 0;
+            line-height: 1.6;
+        }
+
+        .modal-content-text img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 16px;
+            margin: 1em 0;
+        }
+
+        .modal-content-text a {
+            color: var(--blue-primary);
+            text-decoration: none;
+        }
+
+        .modal-content-text a:hover {
+            text-decoration: underline;
+        }
+
+        .modal-content-text blockquote {
+            border-left: 4px solid var(--pink-primary);
+            padding-left: 1.2em;
+            margin: 1em 0;
+            color: var(--text-dim);
+            font-style: italic;
+        }
+
+        .modal-content-text code {
+            background: var(--tag-bg);
+            padding: 0.2em 0.4em;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+
+        .modal-content-text pre {
+            background: var(--bg-surface);
+            padding: 1em;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 1em 0;
+        }
+
+        .modal-content-text table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1em 0;
+        }
+
+        .modal-content-text th,
+        .modal-content-text td {
+            border: 1px solid var(--border-light);
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        .modal-content-text th {
+            background: var(--bg-surface);
+            font-weight: 600;
+        }
+
+        .modal-content-text hr {
+            border: none;
+            border-top: 1px solid var(--border-light);
+            margin: 1.5em 0;
+        }
+
+        .modal-content-text .ql-align-center {
+            text-align: center !important;
+        }
+
+        .modal-content-text .ql-align-right {
+            text-align: right !important;
+        }
+
+        .modal-content-text .ql-align-left {
+            text-align: left !important;
+        }
+
+        .modal-content-text .ql-align-justify {
+            text-align: justify !important;
+        }
+
+        .modal-content-text .ql-indent-1 { padding-left: 2em !important; }
+        .modal-content-text .ql-indent-2 { padding-left: 4em !important; }
+        .modal-content-text .ql-indent-3 { padding-left: 6em !important; }
+        .modal-content-text .ql-indent-4 { padding-left: 8em !important; }
+        .modal-content-text .ql-indent-5 { padding-left: 10em !important; }
+        .modal-content-text .ql-indent-6 { padding-left: 12em !important; }
+        .modal-content-text .ql-indent-7 { padding-left: 14em !important; }
+        .modal-content-text .ql-indent-8 { padding-left: 16em !important; }
+
+        .modal-content-text strong, 
+        .modal-content-text b {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .modal-content-text em, 
+        .modal-content-text i {
+            font-style: italic;
+        }
+
+        .post-content-box {
+            background: var(--bg-surface);
+            border-radius: 24px;
+            padding: 24px;
+            margin-bottom: 24px;
+            border: 2px solid var(--border-light);
+        }
+
+        .comment-section-box {
+            background: var(--bg-surface);
+            border-radius: 24px;
+            padding: 24px;
+            border: 2px solid var(--border-light);
+        }
+
+        .comments-list {
+            margin-top: 20px;
+            padding-top: 10px;
+        }
+        .comment-item {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            border: 1px solid var(--border-light);
+        }
+        .comment-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--blue-primary), var(--pink-primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        .comment-content {
+            flex: 1;
+        }
+        .comment-author { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+        .comment-text { font-size: 14px; color: var(--text-mid); line-height: 1.4; }
+        .comment-time { font-size: 11px; color: var(--text-dim); margin-top: 6px; }
+
+        .quiz-option {
+            background: var(--tag-bg);
+            border-radius: 16px;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+            color: var(--text-dark);
+        }
+        .quiz-option:hover { background: var(--blue-primary); color: white; }
+        .quiz-option.correct { background: var(--success); color: white; border-color: var(--success); }
+        .quiz-option.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+
+        .poll-option {
+            background: var(--tag-bg);
+            border-radius: 16px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid var(--border-light);
+        }
+        .poll-bar {
+            background: linear-gradient(90deg, var(--pink-primary), var(--pink-deep));
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            border-radius: 16px;
+            transition: width 0.3s ease;
+            opacity: 0.7;
+            z-index: 0;
+        }
+        .poll-text {
+            position: relative;
+            z-index: 1;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 400;
+            color: var(--text-mid);
+        }
+        .poll-percent {
+            font-weight: 500;
+            color: var(--blue-primary);
+        }
+
+        .post-title-link {
+            color: var(--blue-primary);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .post-title-link:hover {
+            text-decoration: underline;
+        }
+        
+        .text-pink {
+            color: var(--pink-primary);
+        }
+
+        .modal-post-stats {
+            display: flex;
+            gap: 24px;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-light);
+            color: var(--text-dim);
+            font-size: 14px;
+        }
+        .modal-post-stats span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .handbook-stats {
+            display: flex;
+            gap: 16px;
+            font-size: 12px;
+            color: var(--text-dim);
+            padding-top: 12px;
+            border-top: 1px solid var(--border-light);
+            margin-top: 24px;
+        }
+
+        .empty-chat {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-dim);
+        }
+        .empty-chat i {
+            font-size: 48px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        .image-modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 16px;
+        }
+        .close-image-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+        }
+
+        .upload-area {
+            border: 2px dashed var(--border-light);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 15px;
+        }
+        .upload-area:hover {
+            border-color: var(--blue-primary);
+            background: var(--bg-surface);
+        }
+        .upload-area i {
+            font-size: 32px;
+            color: var(--text-dim);
+            margin-bottom: 8px;
+        }
+        .upload-area p {
+            font-size: 13px;
+            color: var(--text-dim);
+        }
+        .image-preview {
+            max-width: 150px;
+            max-height: 150px;
+            border-radius: 12px;
+            margin-top: 10px;
+        }
+
+        /* Handbook form specific styles - UI giống thuy-dau.html */
+        .handbook-preview-card {
+            background: var(--bg-surface);
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 24px;
+            border: 2px solid var(--border-light);
+        }
+        .handbook-preview-title {
+            font-family: 'Fraunces', serif;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--blue-primary);
+        }
+        .info-rows-preview {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .info-row-preview {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            background: var(--card-bg);
+            border-radius: 14px;
+            padding: 12px 16px;
+            border: 1px solid var(--border-light);
+        }
+        .info-icon-preview {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        .info-label-preview {
+            font-size: 0.82rem;
+            font-weight: 800;
+            margin-bottom: 2px;
+        }
+        .info-text-preview {
+            font-size: 0.9rem;
+            color: var(--text-mid);
+            line-height: 1.5;
+        }
+        .two-col-preview {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 24px;
+        }
+        .info-card-preview {
+            border-radius: 18px;
+            padding: 16px;
+            border: 1.5px solid var(--border-light);
+            background: var(--card-bg);
+        }
+        .info-card-header-preview {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .info-card-icon-preview {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .info-card-title-preview {
+            font-size: 1rem;
+            font-weight: 800;
+        }
+        .steps-preview {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+        .step-preview {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 12px 16px;
+            border: 1.5px solid var(--border-light);
+        }
+        .step-num-preview {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+            font-weight: 900;
+            flex-shrink: 0;
+        }
+        .danger-box-preview {
+            border: 2px solid #ef4444;
+            border-radius: 18px;
+            padding: 16px;
+            background: rgba(239, 68, 68, 0.07);
+        }
+        .danger-header-preview {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .danger-list-preview {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .danger-list-preview li {
+            font-size: 0.85rem;
+            color: #b91c1c;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .row { grid-template-columns: 1fr; }
+            .col-full { grid-column: span 1; }
+            .admin-tabs { flex-direction: column; }
+            .tab-btn { justify-content: center; }
+            .nav-menu { display: none; }
+            .form-card, .list-card { padding: 20px; }
+            .two-columns { grid-template-columns: 1fr; }
+            .messages-area { height: 350px; }
+            .message { max-width: 90%; }
+            .chat-list-container, .chat-detail-container { height: 450px; }
+            .modal-content { max-width: 95%; }
+            .modal-content-text { font-size: 15px; }
+            .modal-content-text h1 { font-size: 1.5em; }
+            .modal-content-text h2 { font-size: 1.3em; }
+            .two-col-preview { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid { grid-template-columns: 1fr; }
+            .admin-container { padding: 90px 16px 40px; }
+            .card-title { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">
+            <div class="logo-mark"><i class="fas fa-heartbeat"></i></div>
+            <div class="logo-type">EduHealth AI</div>
+        </a>
+        <div class="nav-menu">
+            <a href="index.html" class="nav-link"><i class="fas fa-clipboard-list"></i> Cẩm nang sức khỏe</a>
+            <a href="checkin.html" class="nav-link"><i class="fas fa-clipboard-list"></i> Check-in sức khỏe</a>
+            <a href="map.html" class="nav-link"><i class="fas fa-hospital-user"></i> Điểm hỗ trợ y tế</a>
+            <a href="forum.html" class="nav-link"><i class="fas fa-comments"></i> Diễn đàn</a>
+            <a href="EPH.html" class="nav-link" style="background: linear-gradient(135deg, #f59e0b, #ec489a); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700;">
+                <i class="fas fa-gamepad" style="color: #f59e0b;"></i> EduPlay Health
+            </a>
+        </div>
+        <button class="theme-toggle" id="themeToggleBtn"><i class="fas fa-moon"></i> <span>Chế độ tối</span></button>
+    </nav>
+
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1><i class="fas fa-shield-alt"></i> Bảng điều khiển quản trị</h1>
+        </div>
+
+        <div class="admin-tabs">
+            <button class="tab-btn active" onclick="switchTab('knowledge')">
+                <i class="fas fa-database"></i> Kiến thức AI
+            </button>
+            <button class="tab-btn" onclick="switchTab('chat')">
+                <i class="fas fa-comments"></i> Quản lý trò chuyện
+            </button>
+            <button class="tab-btn" onclick="switchTab('locations')">
+                <i class="fas fa-hospital-user"></i> Cơ sở y tế
+            </button>
+            <button class="tab-btn" onclick="switchTab('posts')">
+                <i class="fas fa-newspaper"></i> Duyệt bài đăng
+            </button>
+            <button class="tab-btn" onclick="switchTab('handbook')">
+                <i class="fas fa-book-medical"></i> Cẩm nang y tế
+            </button>
+            <button class="tab-btn" onclick="switchTab('news')">
+                <i class="fas fa-newspaper"></i> Bản tin y tế
+            </button>
+            <button class="tab-btn" onclick="window.location.href='admin-kh.html'">
+                <i class="fas fa-chalkboard-user"></i> Quản lý khóa học
+            </button>
+        </div>
+
+        <!-- Tab: Quản lý kiến thức AI -->
+        <div id="tab-knowledge" class="tab-content">
+            <div class="form-card">
+                <h2 style="margin-bottom: 8px;"><i class="fas fa-brain"></i> Kho kiến thức của EduHealth AI</h2>
+                <p style="color: var(--text-dim); margin-bottom: 24px;">AI sẽ đọc toàn bộ nội dung dưới đây để hỗ trợ người dùng. Hãy cập nhật kiến thức đầy đủ và chính xác nhé.</p>
+                
+                <div class="knowledge-section">
+                    <div class="section-title">
+                        <i class="fas fa-list-check"></i> 1. Kiến thức tạo checklist
+                    </div>
+                    <div class="section-desc">
+                        <i class="fas fa-info-circle"></i> Nội dung này giúp AI đặt câu hỏi để thu thập thông tin triệu chứng từ người dùng.
+                    </div>
+                    <textarea id="checklistKnowledge" class="knowledge-textarea" rows="8" placeholder="Nhập kiến thức về cách tạo checklist triệu chứng..."></textarea>
+                    <div class="knowledge-actions">
+                        <label class="btn-outline" style="cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-file-word"></i> Import từ Word
+                            <input type="file" id="importChecklistWord" accept=".docx" style="display: none;" onchange="importWordToKnowledge('checklist', this)">
+                        </label>
+                        <button class="btn-primary" onclick="saveKnowledge('checklist')">
+                            <i class="fas fa-save"></i> Lưu kiến thức
+                        </button>
+                        <div id="checklistStatus" class="status"></div>
+                    </div>
+                </div>
+                
+                <div class="knowledge-section">
+                    <div class="section-title">
+                        <i class="fas fa-stethoscope"></i> 2. Kiến thức phân tích bệnh
+                    </div>
+                    <div class="section-desc">
+                        <i class="fas fa-info-circle"></i> Nội dung này giúp AI phân tích triệu chứng và đưa ra gợi ý ban đầu.
+                    </div>
+                    <textarea id="diagnosisKnowledge" class="knowledge-textarea" rows="8" placeholder="Nhập kiến thức về phân tích bệnh da liễu..."></textarea>
+                    <div class="knowledge-actions">
+                        <label class="btn-outline" style="cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-file-word"></i> Import từ Word
+                            <input type="file" id="importDiagnosisWord" accept=".docx" style="display: none;" onchange="importWordToKnowledge('diagnosis', this)">
+                        </label>
+                        <button class="btn-primary" onclick="saveKnowledge('diagnosis')">
+                            <i class="fas fa-save"></i> Lưu kiến thức
+                        </button>
+                        <div id="diagnosisStatus" class="status"></div>
+                    </div>
+                </div>
+                
+                <div class="knowledge-section">
+                    <div class="section-title">
+                        <i class="fas fa-comment-dots"></i> 3. Kiến thức tư vấn chat
+                    </div>
+                    <div class="section-desc">
+                        <i class="fas fa-info-circle"></i> Nội dung này giúp AI trả lời các câu hỏi trong khung trò chuyện.
+                    </div>
+                    <textarea id="chatKnowledge" class="knowledge-textarea" rows="8" placeholder="Nhập kiến thức để AI trả lời trong chat..."></textarea>
+                    <div class="knowledge-actions">
+                        <label class="btn-outline" style="cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-file-word"></i> Import từ Word
+                            <input type="file" id="importChatWord" accept=".docx" style="display: none;" onchange="importWordToKnowledge('chat_response', this)">
+                        </label>
+                        <button class="btn-primary" onclick="saveKnowledge('chat_response')">
+                            <i class="fas fa-save"></i> Lưu kiến thức
+                        </button>
+                        <div id="chatStatus" class="status"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Quản lý trò chuyện -->
+        <div id="tab-chat" class="tab-content" style="display: none;">
+            <div class="two-columns">
+                <div class="chat-list-container">
+                    <div class="chat-list-header">
+                        <h3><i class="fas fa-users"></i> Danh sách cuộc trò chuyện</h3>
+                        <div class="search-chat-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="searchChat" placeholder="Tìm theo tên người dùng...">
+                        </div>
+                    </div>
+                    <div class="chat-list" id="chatList">
+                        <div class="empty-chat"><i class="fas fa-spinner fa-pulse"></i><p>Đang tải...</p></div>
+                    </div>
+                </div>
+                
+                <div class="chat-detail-container">
+                    <div class="chat-detail-header">
+                        <h3><i class="fas fa-message"></i> <span id="currentChatName">Chọn cuộc trò chuyện</span></h3>
+                        <div style="display: flex; gap: 10px;">
+                            <button class="btn-pdf" id="downloadChatPdfBtn" style="display: none;">
+                                <i class="fas fa-file-pdf"></i> Quản lý PDF
+                            </button>
+                            <button class="ai-toggle" id="aiToggle" style="display: none;">
+                                <i class="fas fa-robot"></i> Bật AI
+                            </button>
+                        </div>
+                    </div>
+                    <div class="messages-area" id="messagesArea">
+                        <div class="empty-chat">
+                            <i class="fas fa-comment-dots"></i>
+                            <p>Chọn một cuộc trò chuyện để xem tin nhắn</p>
+                        </div>
+                    </div>
+                    <div class="chat-input-area" id="chatInputArea" style="display: none;">
+                        <input type="text" id="adminMessageInput" placeholder="Nhập tin nhắn...">
+                        <button id="sendMessageBtn"><i class="fas fa-paper-plane"></i> Gửi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Quản lý địa điểm -->
+        <div id="tab-locations" class="tab-content" style="display: none;">
+            <div class="stats-grid">
+                <div class="stat-card"><div class="stat-number" id="totalLocations">0</div><div class="text-muted">Tổng cơ sở</div></div>
+                <div class="stat-card"><div class="stat-number" id="totalHospitals">0</div><div class="text-muted">🏥 Bệnh viện & Phòng khám</div></div>
+                <div class="stat-card"><div class="stat-number" id="totalPharmacies">0</div><div class="text-muted">💊 Nhà thuốc</div></div>
+                <div class="stat-card"><div class="stat-number" id="totalLocationsCount">0</div><div class="text-muted">📍 Tổng số</div></div>
+            </div>
+
+            <div class="form-card">
+                <div class="card-title">
+                    <span><i class="fas fa-plus-circle" style="color: var(--blue-primary);"></i> Thêm mới cơ sở y tế</span>
+                </div>
+                <form id="locationForm">
+                    <div class="row">
+                        <div class="col-full">
+                            <label class="form-label">🗺️ Chọn vị trí trên bản đồ</label>
+                            <div class="map-picker-container">
+                                <div id="locationMap" style="height: 300px;"></div>
+                                <div class="map-coords-info">
+                                    <input type="text" id="coordinates" placeholder="Tọa độ (Lat, Lng)" readonly>
+                                    <button type="button" class="btn-outline" id="getCurrentLocationBtn" style="padding: 8px 16px;">
+                                        <i class="fas fa-location-dot"></i> Vị trí hiện tại
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="form-label">🏠 Địa chỉ</label>
+                            <input type="text" class="form-control" id="address" required>
+                        </div>
+                        <div>
+                            <label class="form-label">🏷️ Phân loại</label>
+                            <select class="form-select" id="type" required>
+                                <option value="">Chọn</option>
+                                <option value="hospital">🏥 Bệnh viện & Phòng khám</option>
+                                <option value="pharmacy">💊 Nhà thuốc</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label">📛 Tên cơ sở</label>
+                            <input type="text" class="form-control" id="shortNote" required>
+                        </div>
+                        <div class="col-full">
+                            <label class="form-label">📝 Mô tả chi tiết</label>
+                            <textarea class="form-control" id="longNote" rows="2"></textarea>
+                        </div>
+                        <div>
+                            <label class="form-label">⭐ Số sao (1-5)</label>
+                            <input type="number" class="form-control" id="rating" min="1" max="5" step="0.5" required>
+                        </div>
+                        <div>
+                            <label class="form-label">📞 Số điện thoại</label>
+                            <input type="tel" class="form-control" id="phone">
+                        </div>
+                        <div>
+                            <label class="form-label">🕒 Giờ mở cửa</label>
+                            <input type="text" class="form-control" id="openingHours" placeholder="7:00 - 21:00">
+                        </div>
+                        <div>
+                            <label class="form-label">🔗 Link Google Maps</label>
+                            <input type="url" class="form-control" id="googleMapsLink">
+                        </div>
+                    </div>
+                    <input type="hidden" id="editLocationId" value="">
+                    <button type="submit" class="btn-primary" style="margin-top: 24px; width: auto;">
+                        <i class="fas fa-save"></i> Lưu vào Firestore
+                    </button>
+                </form>
+            </div>
+
+            <div class="list-card">
+                <div class="card-title">
+                    <span><i class="fas fa-list"></i> Danh sách cơ sở y tế</span>
+                    <button class="btn-outline" onclick="loadLocations()">
+                        <i class="fas fa-sync-alt"></i> Tải lại
+                    </button>
+                </div>
+                <div id="locationList"></div>
+            </div>
+        </div>
+
+        <!-- Tab: Duyệt bài đăng -->
+        <div id="tab-posts" class="tab-content" style="display: none;">
+            <div class="stats-grid">
+                <div class="stat-card"><div class="stat-number" id="totalPending">0</div><div class="text-muted">⏳ Chờ duyệt</div></div>
+                <div class="stat-card"><div class="stat-number" id="totalApproved">0</div><div class="text-muted">✅ Đã duyệt</div></div>
+                <div class="stat-card"><div class="stat-number" id="totalPostsCount">0</div><div class="text-muted">📝 Tổng bài</div></div>
+                <div class="stat-card"><div class="stat-number" id="totalComments">0</div><div class="text-muted">💬 Bình luận</div></div>
+            </div>
+
+            <div class="list-card">
+                <div class="card-title">
+                    <span><i class="fas fa-clock"></i> Bài đăng chờ duyệt</span>
+                </div>
+                <div id="pendingPostsList"></div>
+                
+                <div class="card-title" style="margin-top: 32px;">
+                    <span><i class="fas fa-check-circle"></i> Bài đăng đã duyệt</span>
+                </div>
+                <div id="approvedPostsList"></div>
+            </div>
+        </div>
+
+        <!-- Tab: Cẩm nang y tế - Phiên bản mới với UI giống thuy-dau.html -->
+        <div id="tab-handbook" class="tab-content" style="display: none;">
+            <div class="stats-grid">
+                <div class="stat-card"><div class="stat-number" id="totalHandbook">0</div><div class="text-muted">📚 Tổng bài viết</div></div>
+                <div class="stat-card"><div class="stat-number" id="totalHandbookViews">0</div><div class="text-muted">👁️ Tổng lượt xem</div></div>
+            </div>
+
+            <div class="form-card">
+                <div class="card-title">
+                    <span><i class="fas fa-plus-circle"></i> Đăng bài viết cẩm nang</span>
+                </div>
+                
+                <form id="handbookForm">
+                    <!-- Tiêu đề và chuyên mục -->
+                    <div class="row">
+                        <div class="col-full">
+                            <label class="form-label">📌 Tiêu đề bài viết</label>
+                            <input type="text" class="form-control" id="handbookTitle" required placeholder="VD: Nốt nước lắm drama – Thủy đậu">
+                        </div>
+                        <div>
+                            <label class="form-label">📂 Chuyên mục</label>
+                            <select class="form-select" id="handbookCategory" required>
+                                <option value="">-- Chọn chuyên mục --</option>
+                                <option value="da_lieu">I. Da liễu học đường</option>
+                                <option value="truyen_nhiem">II. Bệnh truyền nhiễm thường gặp</option>
+                                <option value="mat">III. Sức khỏe mắt và thị lực</option>
+                                <option value="tinh_than">IV. Sức khỏe tinh thần và giấc ngủ</option>
+                                <option value="tuoi_day_thi">V. Sức khỏe tuổi dậy thì</option>
+                                <option value="tieu_hoa">VI. Tiêu hóa - Dinh dưỡng - Thể chất</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label">😊 Icon cảm xúc (emoji)</label>
+                            <input type="text" class="form-control" id="handbookEmoji" placeholder="VD: 😟, 🤒, 👁️" value="😟">
+                        </div>
+                    </div>
+
+                    <!-- Ảnh bìa -->
+                    <div style="margin-bottom: 20px;">
+                        <label class="form-label">🖼️ Ảnh bìa</label>
+                        <div class="upload-area" id="handbookCoverUpload" onclick="document.getElementById('handbookCoverFile').click()">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Nhấp để tải ảnh lên hoặc kéo thả ảnh vào đây (hoặc nhập link ảnh bên dưới)</p>
+                        </div>
+                        <input type="file" id="handbookCoverFile" accept="image/*" style="display: none;" onchange="uploadImageToBase64(this, 'handbookCoverPreview', 'handbookCoverData')">
+                        <input type="hidden" id="handbookCoverData" value="">
+                        <div style="margin-top: 12px;">
+                            <input type="text" class="form-control" id="handbookCoverUrl" placeholder="Hoặc nhập URL ảnh bìa">
+                        </div>
+                        <img id="handbookCoverPreview" class="image-preview" style="display: none;">
+                    </div>
+
+                    <!-- Ảnh minh họa 1 -->
+                    <div style="margin-bottom: 20px;">
+                        <label class="form-label">🖼️ Ảnh minh họa 1 (mụn nước)</label>
+                        <div class="upload-area" id="handbookImage1Upload" onclick="document.getElementById('handbookImage1File').click()">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Nhấp để tải ảnh lên hoặc nhập link ảnh</p>
+                        </div>
+                        <input type="file" id="handbookImage1File" accept="image/*" style="display: none;" onchange="uploadImageToBase64(this, 'handbookImage1Preview', 'handbookImage1Data')">
+                        <input type="hidden" id="handbookImage1Data" value="">
+                        <div style="margin-top: 12px;">
+                            <input type="text" class="form-control" id="handbookImage1Url" placeholder="URL ảnh minh họa 1">
+                            <input type="text" class="form-control" id="handbookImage1Caption" style="margin-top: 8px;" placeholder="Chú thích ảnh 1">
+                        </div>
+                        <img id="handbookImage1Preview" class="image-preview" style="display: none;">
+                    </div>
+
+                    <!-- Ảnh minh họa 2 -->
+                    <div style="margin-bottom: 20px;">
+                        <label class="form-label">🖼️ Ảnh minh họa 2 (tổng thể)</label>
+                        <div class="upload-area" id="handbookImage2Upload" onclick="document.getElementById('handbookImage2File').click()">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Nhấp để tải ảnh lên hoặc nhập link ảnh</p>
+                        </div>
+                        <input type="file" id="handbookImage2File" accept="image/*" style="display: none;" onchange="uploadImageToBase64(this, 'handbookImage2Preview', 'handbookImage2Data')">
+                        <input type="hidden" id="handbookImage2Data" value="">
+                        <div style="margin-top: 12px;">
+                            <input type="text" class="form-control" id="handbookImage2Url" placeholder="URL ảnh minh họa 2">
+                            <input type="text" class="form-control" id="handbookImage2Caption" style="margin-top: 8px;" placeholder="Chú thích ảnh 2">
+                        </div>
+                        <img id="handbookImage2Preview" class="image-preview" style="display: none;">
+                    </div>
+
+                    <!-- Info rows - 3 dòng thông tin -->
+                    <div class="handbook-preview-card">
+                        <div class="handbook-preview-title"><i class="fas fa-info-circle"></i> Thông tin cơ bản (3 mục)</div>
+                        <div class="info-rows-preview">
+                            <div class="info-row-preview">
+                                <div class="info-icon-preview" style="background: #ede9fe;">💜</div>
+                                <div style="flex:1">
+                                    <div class="info-label-preview" style="color: #7c3aed;">Cái tên "sang chảnh"</div>
+                                    <input type="text" class="form-control" id="handbookScientificName" placeholder="VD: Varicella (Chickenpox)">
+                                </div>
+                            </div>
+                            <div class="info-row-preview">
+                                <div class="info-icon-preview" style="background: #fce7f3;">🧬</div>
+                                <div style="flex:1">
+                                    <div class="info-label-preview" style="color: #db2777;">Nó là gì thế?</div>
+                                    <textarea class="form-control" id="handbookShortDesc" rows="2" placeholder="VD: Là bệnh do virus gây sốt, mệt và ban ngứa..."></textarea>
+                                </div>
+                            </div>
+                            <div class="info-row-preview">
+                                <div class="info-icon-preview" style="background: #fff3e0;">🎭</div>
+                                <div style="flex:1">
+                                    <div class="info-label-preview" style="color: #ea580c;">"Drama" dễ gặp tại trường</div>
+                                    <textarea class="form-control" id="handbookSituation" rows="2" placeholder="VD: Cùng lớp có người mắc nhưng vẫn đi học..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Two col: Nguyên nhân & Triệu chứng -->
+                    <div class="two-col-preview">
+                        <div class="info-card-preview">
+                            <div class="info-card-header-preview">
+                                <div class="info-card-icon-preview" style="background: #3b5ef6; color: white;">⚠</div>
+                                <div class="info-card-title-preview" style="color: #3b5ef6;">Nguyên nhân</div>
+                            </div>
+                            <textarea class="form-control" id="handbookCause" rows="3" placeholder="VD: Virus Varicella-Zoster lây qua giọt bắn và tiếp xúc dịch mụn nước..."></textarea>
+                        </div>
+                        <div class="info-card-preview">
+                            <div class="info-card-header-preview">
+                                <div class="info-card-icon-preview" style="background: #ef4444; color: white;">♥</div>
+                                <div class="info-card-title-preview" style="color: #ef4444;">Check-list dấu hiệu</div>
+                            </div>
+                            <textarea class="form-control" id="handbookSymptoms" rows="3" placeholder="Mỗi mục trên một dòng&#10;VD: Sốt, đau đầu, chán ăn&#10;Ban ngứa rồi nổi mụn nước&#10;Nốt thường bắt đầu ở thân mình rồi lan"></textarea>
+                            <small class="text-muted" style="display: block; margin-top: 8px;">* Mỗi dòng là một dấu hiệu</small>
+                        </div>
+                    </div>
+
+                    <!-- Bí kíp xử lý (4 bước) -->
+                    <div class="handbook-preview-card">
+                        <div class="handbook-preview-title"><i class="fas fa-lightbulb"></i> Bí kíp xử lý tại chỗ</div>
+                        <div class="steps-preview">
+                            <div class="step-preview">
+                                <div class="step-num-preview" style="background: #f97316;">1</div>
+                                <input type="text" class="form-control" id="handbookStep1" placeholder="VD: NGỪNG: Ngừng đi học, đi chơi khi đang sốt hoặc còn nổi nốt mới">
+                            </div>
+                            <div class="step-preview">
+                                <div class="step-num-preview" style="background: #3b82f6;">2</div>
+                                <input type="text" class="form-control" id="handbookStep2" placeholder="VD: RỬA: Giữ da sạch, rửa tay sau khi chạm vào nốt">
+                            </div>
+                            <div class="step-preview">
+                                <div class="step-num-preview" style="background: #f59e0b;">3</div>
+                                <input type="text" class="form-control" id="handbookStep3" placeholder="VD: DỊU: Cắt móng tay ngắn, chườm mát, nghỉ ngơi">
+                            </div>
+                            <div class="step-preview">
+                                <div class="step-num-preview" style="background: #22c55e;">4</div>
+                                <input type="text" class="form-control" id="handbookStep4" placeholder="VD: KHÁM: Tuổi teen bị thủy đậu nên được theo dõi kỹ hơn, cần đi khám khi nặng">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tips phòng thủ -->
+                    <div class="handbook-preview-card">
+                        <div class="handbook-preview-title"><i class="fas fa-shield-alt"></i> Tips phòng thủ</div>
+                        <textarea class="form-control" id="handbookDefenseTips" rows="3" placeholder="VD: Rửa tay, đeo khẩu trang, uống đủ nước, nghỉ ngơi, vệ sinh cá nhân..."></textarea>
+                    </div>
+
+                    <!-- Dấu hiệu nguy hiểm -->
+                    <div class="danger-box-preview">
+                        <div class="danger-header-preview">
+                            <div class="danger-icon-wrap" style="width: 38px; height: 38px; border-radius: 12px; background: #7f1d1d; display: flex; align-items: center; justify-content: center;">⚠️</div>
+                            <div class="danger-title" style="font-size: 1rem; font-weight: 900; color: #ef4444;">SOS - Khi nào cần gặp bác sĩ?</div>
+                        </div>
+                        <textarea class="form-control" id="handbookDangerSigns" rows="3" placeholder="Mỗi dấu hiệu trên một dòng&#10;VD: Sốt cao kéo dài&#10;Nốt đỏ nóng đau, rỉ mủ&#10;Khó thở, nôn nhiều hoặc lơ mơ"></textarea>
+                        <small class="text-muted" style="display: block; margin-top: 8px;">* Mỗi dòng là một dấu hiệu nguy hiểm</small>
+                    </div>
+
+                    <input type="hidden" id="editHandbookId" value="">
+                    <button type="submit" class="btn-primary" style="margin-top: 24px;">
+                        <i class="fas fa-paper-plane"></i> Đăng bài
+                    </button>
+                </form>
+            </div>
+
+            <div class="list-card">
+                <div class="card-title">
+                    <span><i class="fas fa-list"></i> Danh sách bài viết cẩm nang</span>
+                    <button class="btn-outline" onclick="loadHandbook()">
+                        <i class="fas fa-sync-alt"></i> Tải lại
+                    </button>
+                </div>
+                <div id="handbookList"></div>
+            </div>
+        </div>
+
+        <!-- Tab: Bản tin y tế -->
+        <div id="tab-news" class="tab-content" style="display: none;">
+            <div class="stats-grid">
+                <div class="stat-card"><div class="stat-number" id="totalNews">0</div><div class="text-muted">📰 Tổng bản tin</div></div>
+                <div class="stat-card"><div class="stat-number" id="totalNewsViews">0</div><div class="text-muted">👁️ Tổng lượt xem</div></div>
+            </div>
+
+            <div class="form-card">
+                <div class="card-title">
+                    <span><i class="fas fa-plus-circle"></i> Đăng bản tin y tế</span>
+                </div>
+                <form id="newsForm">
+                    <div style="margin-bottom: 20px;">
+                        <label class="form-label">📌 Tiêu đề bản tin</label>
+                        <input type="text" class="form-control" id="newsTitle" required>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label class="form-label">🖼️ Ảnh bìa</label>
+                        <div class="upload-area" id="newsCoverUpload" onclick="document.getElementById('newsCoverFile').click()">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Nhấp để tải ảnh lên hoặc kéo thả ảnh vào đây</p>
+                        </div>
+                        <input type="file" id="newsCoverFile" accept="image/*" style="display: none;" onchange="uploadImageToBase64(this, 'newsCoverPreview', 'newsCoverData')">
+                        <input type="hidden" id="newsCoverData" value="">
+                        <div style="margin-top: 12px;">
+                            <input type="text" class="form-control" id="newsCoverUrl" placeholder="Hoặc nhập URL ảnh bìa">
+                        </div>
+                        <img id="newsCoverPreview" class="image-preview" style="display: none;">
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label class="form-label">📝 Nội dung bản tin</label>
+                        <div class="editor-container">
+                            <div id="newsEditor"></div>
+                        </div>
+                        <div class="knowledge-actions" style="margin-top: 12px;">
+                            <label class="btn-outline" style="cursor: pointer;">
+                                <i class="fas fa-file-word"></i> Import từ Word (giữ nguyên định dạng)
+                                <input type="file" id="importNewsWord" accept=".docx" style="display: none;" onchange="importWordToEditor('newsEditor', this)">
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-paper-plane"></i> Đăng bản tin
+                    </button>
+                </form>
+            </div>
+
+            <div class="list-card">
+                <div class="card-title">
+                    <span><i class="fas fa-list"></i> Danh sách bản tin y tế</span>
+                    <button class="btn-outline" onclick="loadNews()">
+                        <i class="fas fa-sync-alt"></i> Tải lại
+                    </button>
+                </div>
+                <div id="newsList"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-custom" id="toast" style="display: none;">
+        <div class="toast" id="toastInner">
+            <i class="fas fa-check-circle"></i> <span id="toastMessage"></span>
+        </div>
+    </div>
+
+    <!-- Modal for viewing posts -->
+    <div id="postModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Bài viết</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Image Modal for chat -->
+    <div class="image-modal" id="imageModal">
+        <span class="close-image-modal">&times;</span>
+        <img id="modalImage" src="">
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-check-compat.js"></script>
+<script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDOYFgLyliWFfNWtXHzxDQrbe_ISgmavno",
+            authDomain: "eduhealth-4bcab.firebaseapp.com",
+            projectId: "eduhealth-4bcab",
+            storageBucket: "eduhealth-4bcab.firebasestorage.app",
+            messagingSenderId: "390541255938",
+            appId: "1:390541255938:web:aa7b5beca0105c28f70e1b",
+            measurementId: "G-GSP46EVLYG"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+
+  // === TH�M �O?N CODE M?I ===
+  // Kh?i t?o App Check v?i reCAPTCHA Enterprise
+  const appCheck = firebase.appCheck();
+  appCheck.activate(
+    new firebase.appCheck.ReCaptchaEnterpriseProvider(
+      '6LfZOsIsAAAAAK_vBWSNgolKHjLsfWxGBicixs37'
+    ),
+    true
+  );
+  // ===============================
+
+const db = firebase.firestore();
+const auth = firebase.auth();  // THÊM DÒNG NÀY
+
+// ========== KIỂM TRA QUYỀN ADMIN ==========
+const ADMIN_EMAIL = "admin@eduhealth-ai.com";
+
+// Ẩn nội dung trang cho đến khi xác thực xong
+document.body.style.display = "none";
+
+// Kiểm tra trạng thái đăng nhập và quyền admin
+auth.onAuthStateChanged(async (user) => {
+    if (!user) {
+        window.location.href = "login.html";
+        return;
+    }
+    
+    if (user.email !== ADMIN_EMAIL) {
+        await auth.signOut();
+        localStorage.removeItem('healthUserId');
+        localStorage.removeItem('healthUserEmail');
+        localStorage.removeItem('healthUserName');
+        alert("Bạn không có quyền truy cập trang quản trị!");
+        window.location.href = "index.html";
+        return;
+    }
+    
+    document.body.style.display = "block";
+    
+    loadLocations();
+    loadPostsForApproval();
+    loadHandbook();
+    loadNews();
+    loadKnowledge();
+    initNewsEditor();
+    initLocationMap();
+});
+
+let locations = [];
+
+        let pendingPosts = [];
+        let approvedPosts = [];
+        let handbookPosts = [];
+        let newsPosts = [];
+        let newsQuill = null;
+        
+        let locationMap = null;
+        let mapMarker = null;
+        let currentLat = 21.0285;
+        let currentLng = 105.8542;
+        
+        let currentChatId = null;
+        let currentChatData = null;
+        let messageListener = null;
+        let allChats = [];
+        const ADMIN_ID = 'admin_support';
+
+        // ========== HÀM RESIZE ẢNH VÀ CHUYỂN BASE64 ==========
+        async function resizeImageToBase64(file, maxWidth = 500) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        let width = img.width;
+                        let height = img.height;
+                        
+                        if (width > maxWidth) {
+                            height = (height * maxWidth) / width;
+                            width = maxWidth;
+                        }
+                        
+                        const canvas = document.createElement('canvas');
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+                        
+                        const base64 = canvas.toDataURL(file.type || 'image/jpeg', 0.8);
+                        resolve(base64);
+                    };
+                    img.onerror = reject;
+                    img.src = e.target.result;
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // ========== UPLOAD ẢNH TỪ MÁY ==========
+        async function uploadImageToBase64(input, previewId, dataId) {
+            const file = input.files[0];
+            if (!file) return;
+            
+            if (!file.type.startsWith('image/')) {
+                showToast('Vui lòng chọn file ảnh!', true);
+                return;
+            }
+            
+            try {
+                showToast('Đang xử lý ảnh...');
+                const base64 = await resizeImageToBase64(file, 720);
+                
+                const preview = document.getElementById(previewId);
+                if (preview) {
+                    preview.src = base64;
+                    preview.style.display = 'block';
+                }
+                
+                document.getElementById(dataId).value = base64;
+                
+                showToast('Đã tải ảnh lên thành công!');
+            } catch (error) {
+                console.error('Lỗi xử lý ảnh:', error);
+                showToast('Lỗi xử lý ảnh!', true);
+            }
+        }
+
+        // ========== LẤY URL ẢNH TỪ INPUT (ưu tiên file base64 hơn URL) ==========
+        function getImageUrl(imageDataId, imageUrlId) {
+            const base64 = document.getElementById(imageDataId).value;
+            if (base64) return base64;
+            const url = document.getElementById(imageUrlId).value;
+            if (url && url.trim()) return url.trim();
+            return '';
+        }
+
+        // ========== IMPORT WORD VÀO EDITOR ==========
+        async function importWordToEditor(editorId, input) {
+            const file = input.files[0];
+            if (!file) return;
+            
+            if (!file.name.endsWith('.docx')) {
+                showToast('Vui lòng chọn file Word (.docx)!', true);
+                return;
+            }
+            
+            try {
+                showToast('Đang đọc file Word...');
+                
+                const arrayBuffer = await file.arrayBuffer();
+                const result = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
+                
+                let html = result.value;
+                
+                html = html.replace(/<p>/g, '<p class="ql-align-justify">');
+                html = html.replace(/<h1>/g, '<h1 class="ql-align-left">');
+                html = html.replace(/<h2>/g, '<h2 class="ql-align-left">');
+                html = html.replace(/<h3>/g, '<h3 class="ql-align-left">');
+                html = html.replace(/<h4>/g, '<h4 class="ql-align-left">');
+                html = html.replace(/<ul>/g, '<ul class="ql-indent-1">');
+                html = html.replace(/<ol>/g, '<ol class="ql-indent-1">');
+                
+                const quill = newsQuill;
+                if (quill) {
+                    quill.root.innerHTML = html;
+                    showToast('Đã import thành công!');
+                }
+            } catch (error) {
+                console.error('Lỗi import Word:', error);
+                showToast('Lỗi đọc file Word!', true);
+            }
+            
+            input.value = '';
+        }
+
+        // ========== IMPORT WORD VÀO KIẾN THỨC AI ==========
+        async function importWordToKnowledge(knowledgeType, input) {
+            const file = input.files[0];
+            if (!file) return;
+            
+            if (!file.name.endsWith('.docx')) {
+                showToast('Vui lòng chọn file Word (.docx)!', true);
+                return;
+            }
+            
+            try {
+                showToast('Đang đọc file Word...');
+                
+                const arrayBuffer = await file.arrayBuffer();
+                const result = await mammoth.extractRawText({ arrayBuffer: arrayBuffer });
+                
+                let text = result.value;
+                
+                let textareaId = '';
+                if (knowledgeType === 'checklist') textareaId = 'checklistKnowledge';
+                else if (knowledgeType === 'diagnosis') textareaId = 'diagnosisKnowledge';
+                else textareaId = 'chatKnowledge';
+                
+                const textarea = document.getElementById(textareaId);
+                const currentContent = textarea.value;
+                
+                const newContent = currentContent + '\n\n--- Import từ Word ---\n' + text;
+                textarea.value = newContent;
+                
+                showToast('Đã thêm nội dung từ Word vào cuối!');
+            } catch (error) {
+                console.error('Lỗi import Word:', error);
+                showToast('Lỗi đọc file Word!', true);
+            }
+            
+            input.value = '';
+        }
+
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            const toastInner = document.getElementById('toastInner');
+            toastMessage.textContent = message;
+            toastInner.classList.remove('error');
+            if (isError) toastInner.classList.add('error');
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+
+        function closeModal() {
+            document.getElementById('postModal').classList.remove('active');
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+            document.getElementById(`tab-${tab}`).style.display = 'block';
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            if (tab === 'posts') loadPostsForApproval();
+            if (tab === 'handbook') loadHandbook();
+            if (tab === 'news') loadNews();
+            if (tab === 'chat') loadChatList();
+            if (tab === 'knowledge') loadKnowledge();
+            if (tab === 'locations') {
+                setTimeout(() => initLocationMap(), 100);
+            }
+        }
+
+        function initLocationMap() {
+            if (locationMap) return;
+            locationMap = L.map('locationMap').setView([currentLat, currentLng], 15);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(locationMap);
+            
+            locationMap.on('click', function(e) {
+                currentLat = e.latlng.lat;
+                currentLng = e.latlng.lng;
+                updateMapMarker();
+                document.getElementById('coordinates').value = `${currentLat}, ${currentLng}`;
+            });
+        }
+        
+        function updateMapMarker() {
+            if (mapMarker) locationMap.removeLayer(mapMarker);
+            mapMarker = L.marker([currentLat, currentLng]).addTo(locationMap);
+            locationMap.setView([currentLat, currentLng], 15);
+        }
+        
+        function setMapLocation(lat, lng) {
+            currentLat = lat;
+            currentLng = lng;
+            if (locationMap) {
+                updateMapMarker();
+            }
+            document.getElementById('coordinates').value = `${lat}, ${lng}`;
+        }
+        
+        document.getElementById('getCurrentLocationBtn')?.addEventListener('click', () => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        setMapLocation(position.coords.latitude, position.coords.longitude);
+                        showToast('📍 Đã cập nhật vị trí hiện tại');
+                    },
+                    () => showToast('⚠️ Không thể lấy vị trí', true)
+                );
+            } else {
+                showToast('⚠️ Trình duyệt không hỗ trợ định vị', true);
+            }
+        });
+
+        function formatMarkdown(text) {
+            if (!text) return '';
+            let formatted = text;
+            formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            formatted = formatted.replace(/__(.*?)__/g, '<strong>$1</strong>');
+            formatted = formatted.replace(/\*(.*?)\*/g, '<em>$1</em>');
+            formatted = formatted.replace(/_(.*?)_/g, '<em>$1</em>');
+            formatted = formatted.replace(/^### (.*?)$/gm, '<h4>$1</h4>');
+            formatted = formatted.replace(/^## (.*?)$/gm, '<h3>$1</h3>');
+            formatted = formatted.replace(/^# (.*?)$/gm, '<h2>$1</h2>');
+            formatted = formatted.replace(/^- (.*?)$/gm, '<li>$1</li>');
+            formatted = formatted.replace(/(<li>.*?<\/li>\n?)+/g, '<ul>$&</ul>');
+            formatted = formatted.replace(/^\d+\. (.*?)$/gm, '<li>$1</li>');
+            formatted = formatted.replace(/\n\n/g, '</p><p>');
+            formatted = formatted.replace(/\n/g, '<br>');
+            formatted = '<p>' + formatted + '</p>';
+            formatted = formatted.replace(/<p><\/p>/g, '');
+            formatted = formatted.replace(/<p><br><\/p>/g, '');
+            return formatted;
+        }
+
+        function formatMarkdownForPDF(text) {
+            if (!text) return '';
+            let formatted = text;
+            formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            formatted = formatted.replace(/__(.*?)__/g, '<strong>$1</strong>');
+            formatted = formatted.replace(/\*(.*?)\*/g, '<em>$1</em>');
+            formatted = formatted.replace(/_(.*?)_/g, '<em>$1</em>');
+            formatted = formatted.replace(/^### (.*?)$/gm, '<h4>$1</h4>');
+            formatted = formatted.replace(/^## (.*?)$/gm, '<h3>$1</h3>');
+            formatted = formatted.replace(/^# (.*?)$/gm, '<h2>$1</h2>');
+            formatted = formatted.replace(/^- (.*?)$/gm, '<li>$1</li>');
+            formatted = formatted.replace(/(<li>.*?<\/li>\n?)+/g, '<ul>$&</ul>');
+            formatted = formatted.replace(/^\d+\. (.*?)$/gm, '<li>$1</li>');
+            formatted = formatted.replace(/\n\n/g, '</p><p>');
+            formatted = formatted.replace(/\n/g, '<br>');
+            formatted = '<p>' + formatted + '</p>';
+            formatted = formatted.replace(/<p><\/p>/g, '');
+            formatted = formatted.replace(/<p><br><\/p>/g, '');
+            return formatted;
+        }
+
+        async function loadKnowledge() {
+            const snapshot = await db.collection('knowledge_base').get();
+            let checklistText = '';
+            let diagnosisText = '';
+            let chatText = '';
+            
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                const content = data.answer || '';
+                if (data.type === 'checklist') {
+                    checklistText += content + '\n';
+                } else if (data.type === 'diagnosis') {
+                    diagnosisText += content + '\n';
+                } else if (data.type === 'chat_response') {
+                    chatText += content + '\n';
+                }
+            });
+            
+            document.getElementById('checklistKnowledge').value = checklistText || 'Chưa có kiến thức. Hãy thêm kiến thức về cách tạo checklist.';
+            document.getElementById('diagnosisKnowledge').value = diagnosisText || 'Chưa có kiến thức. Hãy thêm kiến thức về phân tích bệnh.';
+            document.getElementById('chatKnowledge').value = chatText || 'Chưa có kiến thức. Hãy thêm kiến thức để AI trả lời chat.';
+        }
+        
+        window.saveKnowledge = async (type) => {
+            let content = '';
+            let statusId = '';
+            
+            if (type === 'checklist') {
+                content = document.getElementById('checklistKnowledge').value;
+                statusId = 'checklistStatus';
+            } else if (type === 'diagnosis') {
+                content = document.getElementById('diagnosisKnowledge').value;
+                statusId = 'diagnosisStatus';
+            } else {
+                content = document.getElementById('chatKnowledge').value;
+                statusId = 'chatStatus';
+            }
+            
+            if (!content.trim()) {
+                document.getElementById(statusId).innerHTML = '<span class="status error">⚠️ Vui lòng nhập nội dung kiến thức</span>';
+                setTimeout(() => {
+                    document.getElementById(statusId).innerHTML = '';
+                }, 3000);
+                return;
+            }
+            
+            try {
+                const oldSnapshot = await db.collection('knowledge_base').where('type', '==', type).get();
+                for (const doc of oldSnapshot.docs) {
+                    await db.collection('knowledge_base').doc(doc.id).delete();
+                }
+                
+                await db.collection('knowledge_base').add({
+                    type: type,
+                    question: '',
+                    answer: content,
+                    keywords: [],
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                document.getElementById(statusId).innerHTML = '<span class="status success">✅ Đã lưu thành công!</span>';
+                setTimeout(() => {
+                    document.getElementById(statusId).innerHTML = '';
+                }, 3000);
+                
+                await loadKnowledge();
+            } catch (error) {
+                console.error('Error saving:', error);
+                document.getElementById(statusId).innerHTML = '<span class="status error">❌ Lỗi khi lưu. Vui lòng thử lại.</span>';
+            }
+        };
+
+        async function loadChatList() {
+            const snapshot = await db.collection('health_chats')
+                .orderBy('lastMessageTime', 'desc')
+                .get();
+            
+            allChats = [];
+            snapshot.forEach(doc => {
+                allChats.push({ id: doc.id, ...doc.data() });
+            });
+            
+            filterAndDisplayChats();
+        }
+        
+        function filterAndDisplayChats() {
+            const searchTerm = document.getElementById('searchChat').value.toLowerCase();
+            let filtered = allChats;
+            
+            if (searchTerm) {
+                filtered = allChats.filter(chat => 
+                    (chat.userName || chat.name || '').toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            const chatList = document.getElementById('chatList');
+            if (filtered.length === 0) {
+                chatList.innerHTML = '<div class="empty-chat"><i class="fas fa-comments"></i><p>Không tìm thấy cuộc trò chuyện</p></div>';
+                return;
+            }
+            
+            let html = '';
+            filtered.forEach(chat => {
+                const isActive = currentChatId === chat.id ? 'active' : '';
+                const displayName = chat.userName || chat.name || 'Khách hàng';
+                const lastMsg = chat.lastMessage ? (chat.lastMessage.length > 50 ? chat.lastMessage.substring(0, 50) + '...' : chat.lastMessage) : 'Chưa có tin nhắn';
+                html += `
+                    <div class="chat-item ${isActive}" data-id="${chat.id}">
+                        <div class="chat-name">
+                            <i class="fas fa-user-circle"></i> ${escapeHtml(displayName)}
+                        </div>
+                        <div class="chat-preview">${escapeHtml(lastMsg)}</div>
+                        <div class="chat-time">${formatChatTime(chat.lastMessageTime)}</div>
+                    </div>
+                `;
+            });
+            chatList.innerHTML = html;
+            
+            document.querySelectorAll('.chat-item').forEach(item => {
+                item.addEventListener('click', () => selectChat(item.dataset.id));
+            });
+        }
+        
+        document.getElementById('searchChat')?.addEventListener('input', filterAndDisplayChats);
+        
+        async function selectChat(chatId) {
+            if (messageListener) messageListener();
+            currentChatId = chatId;
+            
+            const doc = await db.collection('health_chats').doc(chatId).get();
+            currentChatData = doc.data();
+            
+            const displayName = currentChatData.userName || currentChatData.name || 'Khách hàng';
+            document.getElementById('currentChatName').textContent = displayName;
+            document.getElementById('chatInputArea').style.display = 'flex';
+            
+            const pdfBtn = document.getElementById('downloadChatPdfBtn');
+            const aiToggle = document.getElementById('aiToggle');
+            
+            pdfBtn.style.display = 'inline-flex';
+            aiToggle.style.display = 'inline-flex';
+            
+            const isAIEnabled = currentChatData.aiEnabled !== false;
+            aiToggle.innerHTML = isAIEnabled ? '<i class="fas fa-robot"></i> Tắt AI' : '<i class="fas fa-robot"></i> Bật AI';
+            aiToggle.className = isAIEnabled ? 'ai-toggle' : 'ai-toggle off';
+            
+            aiToggle.onclick = async () => {
+                const newStatus = currentChatData.aiEnabled !== false ? false : true;
+                await db.collection('health_chats').doc(chatId).update({ aiEnabled: newStatus });
+                currentChatData.aiEnabled = newStatus;
+                aiToggle.innerHTML = newStatus ? '<i class="fas fa-robot"></i> Tắt AI' : '<i class="fas fa-robot"></i> Bật AI';
+                aiToggle.className = newStatus ? 'ai-toggle' : 'ai-toggle off';
+            };
+            
+            loadMessages(chatId);
+            
+            document.querySelectorAll('.chat-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.dataset.id === chatId) item.classList.add('active');
+            });
+        }
+        
+        function loadMessages(chatId) {
+            const messagesArea = document.getElementById('messagesArea');
+            messagesArea.innerHTML = '';
+            
+            messageListener = db.collection('health_chats')
+                .doc(chatId)
+                .collection('messages')
+                .orderBy('timestamp', 'asc')
+                .onSnapshot((snapshot) => {
+                    if (snapshot.empty && messagesArea.children.length === 0) {
+                        messagesArea.innerHTML = '<div class="empty-chat"><i class="fas fa-comment-dots"></i><p>Chưa có tin nhắn</p></div>';
+                    }
+                    
+                    snapshot.docChanges().forEach((change) => {
+                        if (change.type === 'added') {
+                            const message = { id: change.doc.id, ...change.doc.data() };
+                            displayAdminMessage(message);
+                        }
+                    });
+                    scrollToBottomAdmin();
+                });
+        }
+        
+        function displayAdminMessage(message) {
+            const container = document.getElementById('messagesArea');
+            const msgDiv = document.createElement('div');
+            
+            if (message.senderId === ADMIN_ID) {
+                msgDiv.className = 'message admin';
+            } else if (message.senderId === 'ai') {
+                msgDiv.className = 'message ai';
+            } else if (message.senderId === 'system') {
+                msgDiv.className = 'message message-system';
+            } else {
+                msgDiv.className = 'message user';
+            }
+            
+            if (message.senderId !== ADMIN_ID && message.senderId !== 'system') {
+                const sender = document.createElement('div');
+                sender.className = 'message-sender';
+                let senderName = '';
+                if (message.senderId === 'ai') senderName = '🤖 EduHealth AI';
+                else if (message.senderId === 'user') senderName = message.senderName || 'Khách hàng';
+                else senderName = message.senderName || 'Khách hàng';
+                sender.textContent = senderName;
+                msgDiv.appendChild(sender);
+            }
+            
+            const textDiv = document.createElement('div');
+            textDiv.className = 'message-text';
+            textDiv.innerHTML = formatMarkdown(message.text || '');
+            msgDiv.appendChild(textDiv);
+            
+            if (message.imageData) {
+                const img = document.createElement('img');
+                img.src = message.imageData;
+                img.className = 'message-image';
+                img.onclick = () => openImageModal(message.imageData);
+                msgDiv.appendChild(img);
+            }
+            
+            const timeDiv = document.createElement('div');
+            timeDiv.className = 'message-time';
+            if (message.timestamp) {
+                const date = message.timestamp.toDate();
+                timeDiv.textContent = date.toLocaleString('vi-VN');
+            }
+            msgDiv.appendChild(timeDiv);
+            
+            container.appendChild(msgDiv);
+        }
+        
+        function scrollToBottomAdmin() {
+            const area = document.getElementById('messagesArea');
+            setTimeout(() => {
+                area.scrollTop = area.scrollHeight;
+            }, 100);
+        }
+        
+        async function exportChatToPDF() {
+            if (!currentChatId || !currentChatData) {
+                showToast('Chưa chọn cuộc trò chuyện!', true);
+                return;
+            }
+            
+            const btn = document.getElementById('downloadChatPdfBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Đang tạo...';
+            btn.disabled = true;
+            
+            try {
+                const messagesSnapshot = await db.collection('health_chats')
+                    .doc(currentChatId)
+                    .collection('messages')
+                    .orderBy('timestamp', 'asc')
+                    .get();
+                
+                let messagesHtml = '';
+                messagesSnapshot.forEach(doc => {
+                    const msg = doc.data();
+                    const senderName = msg.senderName || (msg.senderId === 'admin_support' ? 'Cộng tác viên y tế' : (msg.senderId === 'ai' ? 'EduHealth AI' : 'Học sinh'));
+                    const time = msg.timestamp ? msg.timestamp.toDate().toLocaleString('vi-VN') : '';
+                    
+                    let messageText = msg.text || '';
+                    messageText = formatMarkdownForPDF(messageText);
+                    
+                    messagesHtml += `
+                        <div style="margin-bottom: 20px; padding: 12px; border-bottom: 1px solid #e0e0e0;">
+                            <div style="font-weight: bold; color: #3b82f6; margin-bottom: 6px;">${escapeHtml(senderName)}</div>
+                            <div style="margin: 5px 0; line-height: 1.6;">${messageText}</div>
+                            ${msg.imageData ? `<img src="${msg.imageData}" style="max-width: 200px; border-radius: 12px; margin-top: 8px;">` : ''}
+                            <div style="font-size: 10px; color: #999; margin-top: 6px;">${time}</div>
+                        </div>
+                    `;
+                });
+                
+                const displayName = currentChatData.userName || currentChatData.name || 'Khách hàng';
+                const pdfHtml = `
+                    <!DOCTYPE html>
+                    <html>
+                    <head><meta charset="UTF-8"><title>Lịch sử trò chuyện</title>
+                    <style>
+                        body { font-family: 'DM Sans', Arial, sans-serif; padding: 40px; line-height: 1.6; }
+                        .header { text-align: center; border-bottom: 2px solid #f472b6; padding-bottom: 15px; margin-bottom: 20px; }
+                        .info { background: #f7fafc; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+                        .footer { text-align: center; margin-top: 30px; font-size: 10px; color: #718096; }
+                        .message-container { margin-top: 20px; }
+                        strong { font-weight: 700; color: #1e293b; }
+                        em { font-style: italic; }
+                        h2 { font-size: 1.3em; margin: 1em 0 0.5em; color: #3b82f6; }
+                        h3 { font-size: 1.2em; margin: 0.8em 0 0.4em; color: #f472b6; }
+                        h4 { font-size: 1.1em; margin: 0.6em 0 0.3em; }
+                        ul, ol { margin: 0.5em 0 0.5em 1.5em; }
+                        li { margin: 0.2em 0; }
+                        p { margin: 0.5em 0; }
+                    </style>
+                    </head>
+                    <body>
+                        <div class="header">
+                            <h1>🏥 EduHealth AI - Lịch sử trò chuyện</h1>
+                            <p>Ngày xuất: ${new Date().toLocaleString('vi-VN')}</p>
+                        </div>
+                        <div class="info">
+                            <div><strong>👤 Học sinh:</strong> ${escapeHtml(displayName)}</div>
+                            <div><strong>🆔 Mã chat:</strong> ${currentChatId}</div>
+                            <div><strong>📅 Ngày tạo:</strong> ${currentChatData.createdAt ? currentChatData.createdAt.toDate().toLocaleString('vi-VN') : 'N/A'}</div>
+                        </div>
+                        <div class="message-container">
+                            <h2>💬 Nội dung trò chuyện</h2>
+                            ${messagesHtml || '<p>Chưa có tin nhắn nào.</p>'}
+                        </div>
+                        <div class="footer">© 2026 EduHealth AI</div>
+                    </body>
+                    </html>
+                `;
+                
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = pdfHtml;
+                tempDiv.style.position = 'fixed';
+                tempDiv.style.left = '-9999px';
+                tempDiv.style.top = '0';
+                tempDiv.style.width = '800px';
+                tempDiv.style.background = 'white';
+                document.body.appendChild(tempDiv);
+                
+                await new Promise(resolve => setTimeout(resolve, 300));
+                
+                const canvas = await html2canvas(tempDiv, { scale: 2.5, backgroundColor: '#ffffff' });
+                const imgData = canvas.toDataURL('image/jpeg', 0.98);
+                const { jsPDF } = window.jspdf;
+                const imgWidth = 190;
+                const pageHeight = 277;
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                let heightLeft = imgHeight;
+                let position = 0;
+                const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+                doc.addImage(imgData, 'JPEG', 10, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+                while (heightLeft > 0) {
+                    position = heightLeft - imgHeight;
+                    doc.addPage();
+                    doc.addImage(imgData, 'JPEG', 10, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+                doc.save(`EduHealth_Chat_${displayName.replace(/[^a-zA-Z0-9]/g, '_')}_${Date.now()}.pdf`);
+                
+                document.body.removeChild(tempDiv);
+                showToast('Đã tải PDF thành công!');
+            } catch (error) {
+                console.error('Lỗi tạo PDF:', error);
+                showToast('Lỗi: ' + error.message, true);
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+        
+        document.getElementById('sendMessageBtn')?.addEventListener('click', async () => {
+            const input = document.getElementById('adminMessageInput');
+            const text = input.value.trim();
+            if (!text || !currentChatId) return;
+            
+            await db.collection('health_chats').doc(currentChatId).collection('messages').add({
+                text: text,
+                senderId: ADMIN_ID,
+                senderName: 'Cộng tác viên y tế',
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            
+            await db.collection('health_chats').doc(currentChatId).update({
+                lastMessage: text,
+                lastMessageTime: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            
+            input.value = '';
+        });
+        
+        document.getElementById('adminMessageInput')?.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') document.getElementById('sendMessageBtn').click();
+        });
+        
+        document.getElementById('downloadChatPdfBtn')?.addEventListener('click', () => {
+            if (!currentChatId || !currentChatData) {
+                showToast('Chưa chọn cuộc trò chuyện!', true);
+                return;
+            }
+
+    
+            const chatInfo = {
+                chatId: currentChatId,
+                userName: currentChatData.userName || currentChatData.name || 'Khách hàng',
+                createdAt: currentChatData.createdAt ? currentChatData.createdAt.toDate().toISOString() : new Date().toISOString()
+            };
+            localStorage.setItem('selectedChatForPDF', JSON.stringify(chatInfo));
+    
+    
+            window.location.href = 'qlpdf.html';
+        });
+        
+        function openImageModal(src) {
+            const modal = document.getElementById('imageModal');
+            document.getElementById('modalImage').src = src;
+            modal.style.display = 'flex';
+        }
+        
+        document.querySelector('.close-image-modal')?.addEventListener('click', () => {
+            document.getElementById('imageModal').style.display = 'none';
+        });
+
+        async function loadLocations() {
+            try {
+                const querySnapshot = await db.collection('medicalLocations').orderBy('createdAt', 'desc').get();
+                locations = [];
+                querySnapshot.forEach((doc) => {
+                    locations.push({ id: doc.id, ...doc.data() });
+                });
+                displayLocations();
+                updateLocationStats();
+            } catch (error) {
+                showToast('Lỗi: ' + error.message, true);
+            }
+        }
+
+        function updateLocationStats() {
+            const hospitals = locations.filter(l => l.type === 'hospital').length;
+            const pharmacies = locations.filter(l => l.type === 'pharmacy').length;
+            document.getElementById('totalLocations').textContent = locations.length;
+            document.getElementById('totalHospitals').textContent = hospitals;
+            document.getElementById('totalPharmacies').textContent = pharmacies;
+            document.getElementById('totalLocationsCount').textContent = locations.length;
+        }
+
+        function displayLocations() {
+            const container = document.getElementById('locationList');
+            if (locations.length === 0) {
+                container.innerHTML = '<div class="text-center text-muted" style="padding: 40px;">📭 Chưa có dữ liệu cơ sở y tế</div>';
+                return;
+            }
+            container.innerHTML = locations.map(loc => `
+                <div class="location-item">
+                    <div class="flex-between">
+                        <div>
+                            <h6 style="margin-bottom: 8px;">
+                                ${loc.type === 'hospital' ? '🏥' : '💊'} ${escapeHtml(loc.shortNote)}
+                                <span class="${loc.type === 'hospital' ? 'badge-hospital' : 'badge-pharmacy'} ms-2">
+                                    ${loc.type === 'hospital' ? 'Bệnh viện & Phòng khám' : 'Nhà thuốc'}
+                                </span>
+                            </h6>
+                            <p class="text-muted small" style="margin-bottom: 4px;">${escapeHtml(loc.address)}</p>
+                            <div class="small">⭐ ${loc.rating || 0}/5</div>
+                            ${loc.phone ? `<small class="text-muted"><i class="fas fa-phone"></i> ${escapeHtml(loc.phone)}</small>` : ''}
+                        </div>
+                        <div class="flex-buttons">
+                            <button class="btn-warning" onclick="editLocation('${loc.id}')">
+                                <i class="fas fa-edit"></i> Sửa
+                            </button>
+                            <button class="btn-danger" onclick="deleteLocation('${loc.id}')">
+                                <i class="fas fa-trash"></i> Xóa
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function editLocation(id) {
+            const location = locations.find(l => l.id === id);
+            if (!location) return;
+            
+            document.getElementById('address').value = location.address || '';
+            document.getElementById('type').value = location.type || '';
+            document.getElementById('shortNote').value = location.shortNote || '';
+            document.getElementById('longNote').value = location.longNote || '';
+            document.getElementById('rating').value = location.rating || 5;
+            document.getElementById('phone').value = location.phone || '';
+            document.getElementById('openingHours').value = location.openingHours || '';
+            document.getElementById('googleMapsLink').value = location.googleMapsLink || '';
+            document.getElementById('editLocationId').value = id;
+            
+            if (location.lat && location.lng) {
+                setMapLocation(location.lat, location.lng);
+            } else if (location.coordinates) {
+                const [lat, lng] = location.coordinates.split(',').map(c => parseFloat(c.trim()));
+                if (!isNaN(lat) && !isNaN(lng)) setMapLocation(lat, lng);
+            }
+            
+            document.querySelector('#locationForm .btn-primary').innerHTML = '<i class="fas fa-save"></i> Cập nhật cơ sở';
+            
+            document.getElementById('locationForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        async function deleteLocation(id) {
+            if (confirm('⚠️ Xóa cơ sở này?')) {
+                await db.collection('medicalLocations').doc(id).delete();
+                showToast('Đã xóa cơ sở y tế!');
+                loadLocations();
+            }
+        }
+
+        document.getElementById('locationForm')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const locationData = {
+                coordinates: `${currentLat}, ${currentLng}`,
+                lat: currentLat,
+                lng: currentLng,
+                address: document.getElementById('address').value,
+                type: document.getElementById('type').value,
+                shortNote: document.getElementById('shortNote').value,
+                longNote: document.getElementById('longNote').value,
+                rating: parseFloat(document.getElementById('rating').value),
+                phone: document.getElementById('phone').value,
+                openingHours: document.getElementById('openingHours').value,
+                googleMapsLink: document.getElementById('googleMapsLink').value,
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+            
+            const editId = document.getElementById('editLocationId').value;
+            if (editId) {
+                await db.collection('medicalLocations').doc(editId).update(locationData);
+                showToast('✅ Đã cập nhật cơ sở y tế!');
+                document.getElementById('editLocationId').value = '';
+                document.querySelector('#locationForm .btn-primary').innerHTML = '<i class="fas fa-save"></i> Lưu vào Firestore';
+            } else {
+                locationData.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+                await db.collection('medicalLocations').add(locationData);
+                showToast('✅ Đã thêm cơ sở y tế!');
+            }
+            document.getElementById('locationForm').reset();
+            loadLocations();
+        });
+
+        async function loadPostsForApproval() {
+            try {
+                const pendingSnap = await db.collection('posts').where('status', '==', 'pending').orderBy('createdAt', 'desc').get();
+                const approvedSnap = await db.collection('posts').where('status', '==', 'approved').orderBy('createdAt', 'desc').get();
+                
+                pendingPosts = [];
+                approvedPosts = [];
+                pendingSnap.forEach(doc => pendingPosts.push({ id: doc.id, ...doc.data() }));
+                approvedSnap.forEach(doc => approvedPosts.push({ id: doc.id, ...doc.data() }));
+                
+                const totalComments = [...pendingPosts, ...approvedPosts].reduce((sum, p) => sum + (p.comments?.length || 0), 0);
+                
+                document.getElementById('totalPending').textContent = pendingPosts.length;
+                document.getElementById('totalApproved').textContent = approvedPosts.length;
+                document.getElementById('totalPostsCount').textContent = pendingPosts.length + approvedPosts.length;
+                document.getElementById('totalComments').textContent = totalComments;
+                
+                displayPendingPosts();
+                displayApprovedPosts();
+            } catch (error) {
+                console.error('Lỗi:', error);
+            }
+        }
+
+        function truncateHtml(html, maxLength = 100) {
+            const temp = document.createElement('div');
+            temp.innerHTML = html;
+            const text = temp.textContent || temp.innerText || '';
+            return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+        }
+
+        function displayPendingPosts() {
+            const container = document.getElementById('pendingPostsList');
+            if (pendingPosts.length === 0) {
+                container.innerHTML = '<div class="text-center text-muted" style="padding: 40px;">✨ Không có bài đăng chờ duyệt</div>';
+                return;
+            }
+            container.innerHTML = pendingPosts.map(post => `
+                <div class="post-item">
+                    <div class="flex-between">
+                        <div style="flex:1">
+                            <div class="post-title-link" onclick="viewForumPost('${post.id}')">
+                                <strong style="color: var(--blue-primary);">${escapeHtml(post.title || 'Không tiêu đề')}</strong>
+                            </div>
+                            <span class="badge-pending">Chờ duyệt</span>
+                            <div class="small text-pink mt-1">
+                                <i class="fas fa-user"></i> ${escapeHtml(post.author || 'Ẩn danh')} | 
+                                <i class="far fa-clock"></i> ${post.createdAt ? new Date(post.createdAt.toDate()).toLocaleString('vi-VN') : 'N/A'}
+                                ${post.type ? ` | <i class="fas fa-tag"></i> ${post.type}` : ''}
+                            </div>
+                            <div class="small mt-2 text-muted">${truncateHtml(post.content || '', 120)}</div>
+                        </div>
+                        <div class="flex-buttons">
+                            <button class="btn-success" onclick="viewForumPost('${post.id}')">
+                                <i class="fas fa-eye"></i> Xem
+                            </button>
+                            <button class="btn-success" onclick="approvePost('${post.id}')">
+                                <i class="fas fa-check"></i> Duyệt
+                            </button>
+                            <button class="btn-danger" onclick="rejectPost('${post.id}')">
+                                <i class="fas fa-times"></i> Từ chối
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function displayApprovedPosts() {
+            const container = document.getElementById('approvedPostsList');
+            if (approvedPosts.length === 0) {
+                container.innerHTML = '<div class="text-center text-muted" style="padding: 40px;">📭 Chưa có bài đăng nào được duyệt</div>';
+                return;
+            }
+            container.innerHTML = approvedPosts.map(post => `
+                <div class="post-item">
+                    <div class="flex-between">
+                        <div>
+                            <div class="post-title-link" onclick="viewForumPost('${post.id}')">
+                                <strong style="color: var(--blue-primary);">${escapeHtml(post.title || 'Không tiêu đề')}</strong>
+                            </div>
+                            <span class="badge-approved">Đã duyệt</span>
+                            <div class="small text-pink mt-1">
+                                <i class="fas fa-user"></i> ${escapeHtml(post.author || 'Ẩn danh')} | 
+                                <i class="far fa-heart"></i> ${post.likes || 0} thích | 
+                                <i class="far fa-comment"></i> ${post.comments?.length || 0} bình luận
+                            </div>
+                        </div>
+                        <div class="flex-buttons">
+                            <button class="btn-warning" onclick="viewForumPost('${post.id}')">
+                                <i class="fas fa-eye"></i> Xem
+                            </button>
+                            <button class="btn-danger" onclick="deletePost('${post.id}')">
+                                <i class="fas fa-trash"></i> Xóa
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function viewForumPost(postId) {
+            const post = [...pendingPosts, ...approvedPosts].find(p => p.id === postId);
+            if (!post) return;
+
+            const modal = document.getElementById('postModal');
+            const modalBody = document.getElementById('modalBody');
+            
+            let videoHtml = '';
+            if (post.type === 'video' && post.videoUrl) {
+                let embedUrl = post.videoUrl;
+                if (post.videoUrl.includes('youtube.com/watch')) {
+                    const vid = post.videoUrl.split('v=')[1]?.split('&')[0];
+                    if (vid) embedUrl = `https://www.youtube.com/embed/${vid}`;
+                }
+                videoHtml = `<div style="position:relative; padding-bottom:56.25%; margin-bottom:20px;"><iframe src="${embedUrl}" style="position:absolute; top:0; left:0; width:100%; height:100%; border-radius:16px;" frameborder="0" allowfullscreen></iframe></div>`;
+            }
+            
+            let imageHtml = '';
+            if (post.type === 'infographic' && post.imageUrl) {
+                imageHtml = `<img src="${post.imageUrl}" style="max-width:100%; border-radius:20px; margin-top:20px;" onerror="this.src='https://placehold.co/800x400?text=Image+not+found'">`;
+            }
+
+            let quizHtml = '';
+            if (post.type === 'quiz' && post.quizData) {
+                quizHtml = `<div id="quizContainer" style="margin: 20px 0;"></div>`;
+                setTimeout(() => {
+                    const qc = document.getElementById('quizContainer');
+                    if (qc && post.quizData.questions) {
+                        qc.innerHTML = post.quizData.questions.map((q, idx) => `
+                            <div style="margin-bottom: 24px;">
+                                <strong style="font-size:16px;">Câu ${idx+1}: ${escapeHtml(q.question)}</strong>
+                                ${q.options.map((opt, oi) => `
+                                    <div class="quiz-option" onclick="selectQuizAnswer(${idx}, ${oi}, ${q.correct})" data-q="${idx}" data-opt="${oi}" data-correct="${q.correct}">
+                                        ${String.fromCharCode(65+oi)}. ${escapeHtml(opt)}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `).join('');
+                    }
+                }, 50);
+            }
+
+            let pollHtml = '';
+            if (post.type === 'poll' && post.pollData) {
+                const totalVotes = post.pollData.votes?.reduce((a, b) => a + b, 0) || 0;
+                pollHtml = `<div id="pollContainer" style="margin: 20px 0;"></div>`;
+                setTimeout(() => {
+                    const pc = document.getElementById('pollContainer');
+                    if (pc && post.pollData.options) {
+                        pc.innerHTML = post.pollData.options.map((opt, idx) => {
+                            const votes = post.pollData.votes?.[idx] || 0;
+                            const percent = totalVotes > 0 ? Math.round((votes / totalVotes) * 100) : 0;
+                            return `
+                                <div class="poll-option">
+                                    <div class="poll-bar" style="width: ${percent}%;"></div>
+                                    <div class="poll-text">
+                                        <span>${escapeHtml(opt)}</span>
+                                        <span class="poll-percent">${percent}% (${votes} phiếu)</span>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('');
+                    }
+                }, 50);
+            }
+
+            modalBody.innerHTML = `
+                <div class="post-content-box">
+                    <div class="modal-content-text">
+                        ${videoHtml}
+                        <div>${post.content || ''}</div>
+                        ${post.type === 'infographic' ? imageHtml : ''}
+                        ${quizHtml}
+                        ${pollHtml}
+                    </div>
+                    <div class="modal-post-stats">
+                        <span><i class="fas fa-heart"></i> ${post.likes || 0} thích</span>
+                        <span><i class="far fa-comment"></i> ${post.comments?.length || 0} bình luận</span>
+                        <span><i class="far fa-eye"></i> ${post.views || 0} lượt xem</span>
+                    </div>
+                </div>
+                <div class="comment-section-box">
+                    <h6 style="margin-bottom:16px;">💬 Bình luận (${post.comments?.length || 0})</h6>
+                    <div class="comments-list" id="commentsList">
+                        ${(post.comments || []).map(c => `
+                            <div class="comment-item">
+                                <div class="comment-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="comment-content">
+                                    <div class="comment-author">${escapeHtml(c.author)}</div>
+                                    <div class="comment-text">${escapeHtml(c.text)}</div>
+                                    <div class="comment-time">${new Date(c.timestamp).toLocaleString('vi-VN')}</div>
+                                </div>
+                            </div>
+                        `).join('') || '<div class="empty-state" style="padding:20px;">Chưa có bình luận nào.</div>'}
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('modalTitle').innerText = post.title || 'Bài đăng diễn đàn';
+            modal.classList.add('active');
+        }
+
+        // ========== HANDBOOK FUNCTIONS - Phiên bản mới ==========
+        function getCategoryName(category) {
+            const categories = {
+                'da_lieu': 'I. Da liễu học đường',
+                'truyen_nhiem': 'II. Bệnh truyền nhiễm thường gặp',
+                'mat': 'III. Sức khỏe mắt và thị lực',
+                'tinh_than': 'IV. Sức khỏe tinh thần và giấc ngủ',
+                'tuoi_day_thi': 'V. Sức khỏe tuổi dậy thì',
+                'tieu_hoa': 'VI. Tiêu hóa - Dinh dưỡng - Thể chất'
+            };
+            return categories[category] || 'Chưa phân loại';
+        }
+
+        // Hàm chuyển đổi mảng triệu chứng/dấu hiệu thành HTML list
+        function arrayToHtmlList(items, isUl = true) {
+            if (!items) return '';
+            if (typeof items === 'string') items = items.split('\n').filter(l => l.trim());
+            if (!items.length) return '';
+            const tag = isUl ? 'ul' : 'ul';
+            const listItems = items.map(item => `<li>${escapeHtml(item.trim())}</li>`).join('');
+            return `<${tag} style="margin: 0.8em 0 0.8em 1.8em;">${listItems}</${tag}>`;
+        }
+
+        // Hàm tạo HTML nội dung bài viết từ các trường dữ liệu
+        function buildHandbookHTML(data) {
+            // Xử lý triệu chứng
+            let symptomsHtml = '';
+            if (data.symptoms) {
+                const symptomsList = typeof data.symptoms === 'string' ? data.symptoms.split('\n').filter(l => l.trim()) : data.symptoms;
+                if (symptomsList.length) {
+                    symptomsHtml = `<ul style="margin: 0.8em 0 0.8em 1.8em;">${symptomsList.map(s => `<li>${escapeHtml(s.trim())}</li>`).join('')}</ul>`;
+                }
+            }
+
+            // Xử lý dấu hiệu nguy hiểm
+            let dangerHtml = '';
+            if (data.dangerSigns) {
+                const dangerList = typeof data.dangerSigns === 'string' ? data.dangerSigns.split('\n').filter(l => l.trim()) : data.dangerSigns;
+                if (dangerList.length) {
+                    dangerHtml = `<div class="danger-box" style="border: 2px solid #ef4444; border-radius: 18px; padding: 20px 22px 18px; background: rgba(239,68,68,0.07); margin: 24px 0;">
+                        <div class="danger-header" style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px;">
+                            <div style="width: 38px; height: 38px; border-radius: 12px; background: #7f1d1d; display: flex; align-items: center; justify-content: center;">⚠️</div>
+                            <div style="font-size: 1rem; font-weight: 900; color: #ef4444;">SOS - Khi nào cần gặp bác sĩ?</div>
+                        </div>
+                        <ul class="danger-list" style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
+                            ${dangerList.map(d => `<li style="font-size: 0.9rem; color: #b91c1c; font-weight: 700; display: flex; align-items: center; gap: 8px;"><span>⚠️</span> ${escapeHtml(d.trim())}</li>`).join('')}
+                        </ul>
+                    </div>`;
+                }
+            }
+
+            // Xử lý 4 bước
+            let stepsHtml = '';
+            if (data.step1 || data.step2 || data.step3 || data.step4) {
+                const steps = [
+                    { num: 1, text: data.step1, color: '#f97316' },
+                    { num: 2, text: data.step2, color: '#3b82f6' },
+                    { num: 3, text: data.step3, color: '#f59e0b' },
+                    { num: 4, text: data.step4, color: '#22c55e' }
+                ].filter(s => s.text);
+                stepsHtml = `<div class="steps" style="display: flex; flex-direction: column; gap: 12px; margin: 24px 0;">
+                    ${steps.map(s => `<div class="step" style="display: flex; align-items: center; gap: 16px; background: var(--bg-surface); border-radius: 16px; padding: 16px 20px; border: 1.5px solid var(--border-light);">
+                        <div class="step-num" style="width: 38px; height: 38px; border-radius: 50%; background: ${s.color}; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.1rem; font-weight: 900;">${s.num}</div>
+                        <div class="step-text" style="font-size: 0.92rem; color: var(--text-dark); font-weight: 600; line-height: 1.4;">${escapeHtml(s.text)}</div>
+                    </div>`).join('')}
+                </div>`;
+            }
+
+            // Xây dựng HTML hoàn chỉnh
+            return `
+                <div style="font-family: 'Nunito', 'DM Sans', sans-serif;">
+                    <!-- Header -->
+                    <div style="background: linear-gradient(120deg, #f7567c 0%, #ff9a3c 100%); padding: 28px 32px 24px; border-radius: 24px 24px 0 0;">
+                        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 14px;">
+                            <div style="width: 64px; height: 64px; background: #fff; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 36px; box-shadow: 0 4px 16px rgba(0,0,0,0.12);">${data.emoji || '😟'}</div>
+                            <div>
+                                <h1 style="font-size: 1.7rem; font-weight: 900; color: #fff; letter-spacing: -0.5px; line-height: 1.2; margin: 0;">${escapeHtml(data.title)}</h1>
+                                <div style="color: rgba(255,255,255,0.85); font-size: 0.95rem; font-weight: 600; margin-top: 2px;">${escapeHtml(data.scientificName || '')}</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <span style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 700; border: 2px solid rgba(255,255,255,0.7); color: #fff; background: rgba(255,255,255,0.18);">⚠️ Cần biết</span>
+                            <span style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 700; border: 2px solid rgba(255,255,255,0.7); color: #fff; background: rgba(255,255,255,0.18);"><span style="width: 7px; height: 7px; border-radius: 50%; background: #fff; display: inline-block;"></span> Nguy hiểm</span>
+                        </div>
+                    </div>
+
+                    <!-- Image Grid -->
+                    ${data.image1 || data.image2 ? `
+                    <div style="display: grid; grid-template-columns: ${data.image1 && data.image2 ? '2fr 1fr' : '1fr'}; gap: 0; background: #222; max-height: 320px; overflow: hidden;">
+                        ${data.image1 ? `<div style="position: relative; overflow: hidden;"><img src="${data.image1}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.background='#ddd'"><div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.55); color: #fff; font-size: 0.72rem; padding: 6px 10px; font-weight: 600;">${escapeHtml(data.image1Caption || '')}</div></div>` : ''}
+                        ${data.image2 ? `<div style="position: relative; overflow: hidden;"><img src="${data.image2}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.background='#ddd'"><div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.55); color: #fff; font-size: 0.72rem; padding: 6px 10px; font-weight: 600;">${escapeHtml(data.image2Caption || '')}</div></div>` : ''}
+                    </div>
+                    ` : ''}
+
+                    <!-- Body -->
+                    <div style="padding: 28px 32px;">
+                        <!-- Info rows -->
+                        <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px;">
+                            <div style="display: flex; align-items: flex-start; gap: 14px; background: var(--bg-surface); border-radius: 14px; padding: 14px 16px;">
+                                <div style="width: 40px; height: 40px; border-radius: 12px; background: #ede9fe; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">💜</div>
+                                <div><div style="font-size: 0.82rem; font-weight: 800; color: #7c3aed; margin-bottom: 2px;">Cái tên \"sang chảnh\"</div><div style="font-size: 0.9rem; color: var(--text-dark); line-height: 1.5;">${escapeHtml(data.scientificName || '')}</div></div>
+                            </div>
+                            <div style="display: flex; align-items: flex-start; gap: 14px; background: var(--bg-surface); border-radius: 14px; padding: 14px 16px;">
+                                <div style="width: 40px; height: 40px; border-radius: 12px; background: #fce7f3; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">🧬</div>
+                                <div><div style="font-size: 0.82rem; font-weight: 800; color: #db2777; margin-bottom: 2px;">Nó là gì thế?</div><div style="font-size: 0.9rem; color: var(--text-dark); line-height: 1.5;">${escapeHtml(data.shortDesc || '')}</div></div>
+                            </div>
+                            <div style="display: flex; align-items: flex-start; gap: 14px; background: var(--bg-surface); border-radius: 14px; padding: 14px 16px;">
+                                <div style="width: 40px; height: 40px; border-radius: 12px; background: #fff3e0; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">🎭</div>
+                                <div><div style="font-size: 0.82rem; font-weight: 800; color: #ea580c; margin-bottom: 2px;">\"Drama\" dễ gặp tại trường</div><div style="font-size: 0.9rem; color: var(--text-dark); line-height: 1.5;">${escapeHtml(data.situation || '')}</div></div>
+                            </div>
+                        </div>
+
+                        <!-- Two col: Nguyên nhân & Triệu chứng -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 28px;">
+                            <div style="border-radius: 18px; padding: 20px 20px 18px; border: 1.5px solid var(--border-light); background: var(--card-bg);">
+                                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px;">
+                                    <div style="width: 38px; height: 38px; border-radius: 12px; background: #3b5ef6; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.1rem;">⚠</div>
+                                    <div style="font-size: 1rem; font-weight: 800; color: #3b5ef6;">Nguyên nhân</div>
+                                </div>
+                                <div style="font-size: 0.88rem; color: var(--text-dark); line-height: 1.6;">${escapeHtml(data.cause || '')}</div>
+                            </div>
+                            <div style="border-radius: 18px; padding: 20px 20px 18px; border: 1.5px solid var(--border-light); background: var(--card-bg);">
+                                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px;">
+                                    <div style="width: 38px; height: 38px; border-radius: 12px; background: #ef4444; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.1rem;">♥</div>
+                                    <div style="font-size: 1rem; font-weight: 800; color: #ef4444;">Check-list dấu hiệu</div>
+                                </div>
+                                ${symptomsHtml || `<div style="font-size: 0.88rem; color: var(--text-dark); line-height: 1.6;">${escapeHtml(data.symptoms || '')}</div>`}
+                            </div>
+                        </div>
+
+                        <!-- Bí kíp xử lý -->
+                        <div style="margin-bottom: 20px;">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 18px;">
+                                <div style="width: 34px; height: 34px; border-radius: 50%; background: #4ade80; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1rem;">C</div>
+                                <div style="font-size: 1.05rem; font-weight: 800; color: #16a34a;">Bí kíp xử lý tại chỗ</div>
+                            </div>
+                            ${stepsHtml}
+                        </div>
+
+                        ${dangerHtml}
+                    </div>
+                </div>
+            `;
+        }
+
+        async function loadHandbook() {
+            try {
+                const querySnapshot = await db.collection('handbook').orderBy('createdAt', 'desc').get();
+                handbookPosts = [];
+                querySnapshot.forEach((doc) => {
+                    handbookPosts.push({ id: doc.id, ...doc.data() });
+                });
+                displayHandbook();
+                updateHandbookStats();
+            } catch (error) {
+                console.error('Lỗi tải cẩm nang:', error);
+            }
+        }
+
+        function updateHandbookStats() {
+            const totalViews = handbookPosts.reduce((sum, p) => sum + (p.views || 0), 0);
+            document.getElementById('totalHandbook').textContent = handbookPosts.length;
+            document.getElementById('totalHandbookViews').textContent = totalViews;
+        }
+
+        function displayHandbook() {
+            const container = document.getElementById('handbookList');
+            if (handbookPosts.length === 0) {
+                container.innerHTML = '<div class="text-center text-muted" style="padding: 40px;">📭 Chưa có bài viết cẩm nang nào</div>';
+                return;
+            }
+            container.innerHTML = handbookPosts.map(post => `
+                <div class="handbook-item">
+                    <div class="flex-between">
+                        <div style="flex:1">
+                            <div style="display: flex; gap: 16px; align-items: flex-start;">
+                                ${post.coverImage ? `<img src="${post.coverImage}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 12px;" onerror="this.style.display='none'">` : ''}
+                                <div>
+                                    <div class="post-title-link" onclick="viewHandbookPost('${post.id}')">
+                                        <strong style="color: var(--blue-primary);">${escapeHtml(post.title)}</strong>
+                                    </div>
+                                    <div class="small text-pink mt-1">
+                                        <i class="fas fa-folder"></i> ${getCategoryName(post.category)} |
+                                        <i class="far fa-clock"></i> ${post.createdAt ? new Date(post.createdAt.toDate()).toLocaleString('vi-VN') : 'N/A'} |
+                                        <i class="far fa-eye"></i> ${post.views || 0} lượt xem
+                                    </div>
+                                    <div class="small mt-1 text-muted">${escapeHtml(post.shortDesc || '').substring(0, 100)}...</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-buttons">
+                            <button class="btn-warning" onclick="viewHandbookPost('${post.id}')">
+                                <i class="fas fa-eye"></i> Xem
+                            </button>
+                            <button class="btn-danger" onclick="deleteHandbookPost('${post.id}')">
+                                <i class="fas fa-trash"></i> Xóa
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function viewHandbookPost(postId) {
+            const post = handbookPosts.find(p => p.id === postId);
+            if (!post) return;
+
+            const modal = document.getElementById('postModal');
+            const modalBody = document.getElementById('modalBody');
+
+            // Sử dụng nội dung HTML đã được xây dựng sẵn khi lưu
+            modalBody.innerHTML = `
+                <div class="modal-content-text">${post.fullContent || buildHandbookHTML(post)}</div>
+                <div class="handbook-stats">
+                    <span><i class="far fa-eye"></i> ${post.views || 0} lượt xem</span>
+                    <span><i class="far fa-calendar-alt"></i> ${post.createdAt ? new Date(post.createdAt.toDate()).toLocaleString('vi-VN') : 'N/A'}</span>
+                    <span><i class="fas fa-folder"></i> ${getCategoryName(post.category)}</span>
+                </div>
+            `;
+            
+            document.getElementById('modalTitle').innerText = post.title || 'Bài viết cẩm nang';
+            modal.classList.add('active');
+        }
+
+        async function deleteHandbookPost(id) {
+            if (confirm('Xóa bài viết cẩm nang này?')) {
+                await db.collection('handbook').doc(id).delete();
+                showToast('Đã xóa bài viết cẩm nang');
+                loadHandbook();
+            }
+        }
+
+        document.getElementById('handbookForm')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Lấy dữ liệu từ form
+            const title = document.getElementById('handbookTitle').value.trim();
+            const category = document.getElementById('handbookCategory').value;
+            const emoji = document.getElementById('handbookEmoji').value.trim() || '😟';
+            const scientificName = document.getElementById('handbookScientificName').value.trim();
+            const shortDesc = document.getElementById('handbookShortDesc').value.trim();
+            const situation = document.getElementById('handbookSituation').value.trim();
+            const cause = document.getElementById('handbookCause').value.trim();
+            const symptoms = document.getElementById('handbookSymptoms').value.trim();
+            const step1 = document.getElementById('handbookStep1').value.trim();
+            const step2 = document.getElementById('handbookStep2').value.trim();
+            const step3 = document.getElementById('handbookStep3').value.trim();
+            const step4 = document.getElementById('handbookStep4').value.trim();
+            const defenseTips = document.getElementById('handbookDefenseTips').value.trim();
+            const dangerSigns = document.getElementById('handbookDangerSigns').value.trim();
+            
+            // Lấy ảnh
+            let coverImage = getImageUrl('handbookCoverData', 'handbookCoverUrl');
+            let image1 = getImageUrl('handbookImage1Data', 'handbookImage1Url');
+            let image2 = getImageUrl('handbookImage2Data', 'handbookImage2Url');
+            const image1Caption = document.getElementById('handbookImage1Caption').value.trim();
+            const image2Caption = document.getElementById('handbookImage2Caption').value.trim();
+            
+            if (!title) {
+                showToast('Vui lòng nhập tiêu đề!', true);
+                return;
+            }
+            if (!category) {
+                showToast('Vui lòng chọn chuyên mục!', true);
+                return;
+            }
+            if (!coverImage) {
+                showToast('Vui lòng tải ảnh bìa lên hoặc nhập URL ảnh!', true);
+                return;
+            }
+            
+            // Xây dựng object dữ liệu
+            const handbookData = {
+                title: title,
+                category: category,
+                emoji: emoji,
+                scientificName: scientificName,
+                shortDesc: shortDesc,
+                situation: situation,
+                cause: cause,
+                symptoms: symptoms,
+                defenseTips: defenseTips,
+                step1: step1,
+                step2: step2,
+                step3: step3,
+                step4: step4,
+                dangerSigns: dangerSigns,
+                coverImage: coverImage,
+                image1: image1,
+                image2: image2,
+                image1Caption: image1Caption,
+                image2Caption: image2Caption,
+                author: 'Quản trị viên',
+                type: 'handbook',
+                status: 'approved',
+                views: 0,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+            
+            // Tạo HTML đầy đủ để hiển thị
+            handbookData.fullContent = buildHandbookHTML(handbookData);
+            
+            try {
+                await db.collection('handbook').add(handbookData);
+                showToast('✅ Đã đăng bài viết cẩm nang!');
+                
+                // Reset form
+                document.getElementById('handbookForm').reset();
+                document.getElementById('handbookCoverPreview').style.display = 'none';
+                document.getElementById('handbookImage1Preview').style.display = 'none';
+                document.getElementById('handbookImage2Preview').style.display = 'none';
+                document.getElementById('handbookCoverData').value = '';
+                document.getElementById('handbookImage1Data').value = '';
+                document.getElementById('handbookImage2Data').value = '';
+                document.getElementById('handbookCoverUrl').value = '';
+                document.getElementById('handbookImage1Url').value = '';
+                document.getElementById('handbookImage2Url').value = '';
+                document.getElementById('handbookEmoji').value = '😟';
+                
+                loadHandbook();
+            } catch (error) {
+                showToast('Lỗi: ' + error.message, true);
+            }
+        });
+
+        // ========== NEWS FUNCTIONS ==========
+        async function loadNews() {
+            try {
+                const querySnapshot = await db.collection('news').orderBy('createdAt', 'desc').get();
+                newsPosts = [];
+                querySnapshot.forEach((doc) => {
+                    newsPosts.push({ id: doc.id, ...doc.data() });
+                });
+                displayNews();
+                updateNewsStats();
+            } catch (error) {
+                console.error('Lỗi tải bản tin:', error);
+            }
+        }
+
+        function updateNewsStats() {
+            const totalViews = newsPosts.reduce((sum, p) => sum + (p.views || 0), 0);
+            document.getElementById('totalNews').textContent = newsPosts.length;
+            document.getElementById('totalNewsViews').textContent = totalViews;
+        }
+
+        function displayNews() {
+            const container = document.getElementById('newsList');
+            if (newsPosts.length === 0) {
+                container.innerHTML = '<div class="text-center text-muted" style="padding: 40px;">📭 Chưa có bản tin y tế nào</div>';
+                return;
+            }
+            container.innerHTML = newsPosts.map(post => `
+                <div class="news-item">
+                    <div class="flex-between">
+                        <div style="flex:1">
+                            <div style="display: flex; gap: 16px; align-items: flex-start;">
+                                ${post.coverImage ? `<img src="${post.coverImage}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 12px;" onerror="this.style.display='none'">` : ''}
+                                <div>
+                                    <div class="post-title-link" onclick="viewNewsPost('${post.id}')">
+                                        <strong style="color: var(--blue-primary);">${escapeHtml(post.title)}</strong>
+                                    </div>
+                                    <div class="small text-pink mt-1">
+                                        <i class="far fa-clock"></i> ${post.createdAt ? new Date(post.createdAt.toDate()).toLocaleString('vi-VN') : 'N/A'} |
+                                        <i class="far fa-eye"></i> ${post.views || 0} lượt xem
+                                    </div>
+                                    <div class="small mt-1 text-muted">${truncateHtml(post.content || '', 100)}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-buttons">
+                            <button class="btn-warning" onclick="viewNewsPost('${post.id}')">
+                                <i class="fas fa-eye"></i> Xem
+                            </button>
+                            <button class="btn-danger" onclick="deleteNewsPost('${post.id}')">
+                                <i class="fas fa-trash"></i> Xóa
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function viewNewsPost(postId) {
+            const post = newsPosts.find(p => p.id === postId);
+            if (!post) return;
+
+            const modal = document.getElementById('postModal');
+            const modalBody = document.getElementById('modalBody');
+
+            modalBody.innerHTML = `
+                <div class="modal-content-text">${post.content || ''}</div>
+                <div class="handbook-stats">
+                    <span><i class="far fa-eye"></i> ${post.views || 0} lượt xem</span>
+                    <span><i class="far fa-calendar-alt"></i> ${post.createdAt ? new Date(post.createdAt.toDate()).toLocaleString('vi-VN') : 'N/A'}</span>
+                </div>
+            `;
+            
+            document.getElementById('modalTitle').innerText = post.title || 'Bản tin y tế';
+            modal.classList.add('active');
+        }
+
+        async function deleteNewsPost(id) {
+            if (confirm('Xóa bản tin y tế này?')) {
+                await db.collection('news').doc(id).delete();
+                showToast('Đã xóa bản tin y tế');
+                loadNews();
+            }
+        }
+
+        function initNewsEditor() {
+            if (newsQuill) return;
+            newsQuill = new Quill('#newsEditor', {
+                theme: 'snow',
+                placeholder: '✍️ Viết nội dung bản tin y tế...',
+                modules: {
+                    toolbar: [
+                        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        [{ 'align': [] }],
+                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                        [{ 'indent': '-1'}, { 'indent': '+1' }],
+                        ['blockquote', 'code-block'],
+                        ['link', 'image'],
+                        [{ 'size': ['small', false, 'large', 'huge'] }],
+                        [{ 'color': [] }, { 'background': [] }],
+                        ['clean']
+                    ]
+                }
+            });
+        }
+
+        document.getElementById('newsForm')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            initNewsEditor();
+            
+            const title = document.getElementById('newsTitle').value.trim();
+            let coverImage = getImageUrl('newsCoverData', 'newsCoverUrl');
+            const content = newsQuill.root.innerHTML;
+            
+            if (!title) {
+                showToast('Vui lòng nhập tiêu đề!', true);
+                return;
+            }
+            if (!coverImage) {
+                showToast('Vui lòng tải ảnh bìa lên hoặc nhập URL ảnh!', true);
+                return;
+            }
+            if (!content || content === '<p><br></p>') {
+                showToast('Vui lòng nhập nội dung!', true);
+                return;
+            }
+            
+            const newsData = {
+                title: title,
+                coverImage: coverImage,
+                content: content,
+                author: 'Quản trị viên',
+                type: 'news',
+                status: 'approved',
+                views: 0,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+            
+            try {
+                await db.collection('news').add(newsData);
+                showToast('✅ Đã đăng bản tin y tế!');
+                document.getElementById('newsForm').reset();
+                document.getElementById('newsCoverPreview').style.display = 'none';
+                document.getElementById('newsCoverData').value = '';
+                document.getElementById('newsCoverUrl').value = '';
+                if (newsQuill) newsQuill.root.innerHTML = '';
+                loadNews();
+            } catch (error) {
+                showToast('Lỗi: ' + error.message, true);
+            }
+        });
+
+        async function approvePost(id) {
+            await db.collection('posts').doc(id).update({ status: 'approved', approvedAt: firebase.firestore.FieldValue.serverTimestamp() });
+            showToast('✅ Đã duyệt bài đăng!');
+            loadPostsForApproval();
+        }
+
+        async function rejectPost(id) {
+            if (confirm('Xóa bài đăng này?')) {
+                await db.collection('posts').doc(id).delete();
+                showToast('Đã từ chối bài đăng');
+                loadPostsForApproval();
+            }
+        }
+
+        async function deletePost(id) {
+            if (confirm('Xóa bài đăng này?')) {
+                await db.collection('posts').doc(id).delete();
+                showToast('Đã xóa bài đăng');
+                loadPostsForApproval();
+            }
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+        
+        function formatChatTime(timestamp) {
+            if (!timestamp) return '';
+            const date = timestamp.toDate();
+            const now = new Date();
+            const diff = now - date;
+            if (diff < 3600000) return `${Math.floor(diff / 60000)} phút trước`;
+            if (diff < 86400000) return `${Math.floor(diff / 3600000)} giờ trước`;
+            return date.toLocaleDateString('vi-VN');
+        }
+
+        function getImageUrl(dataId, urlId) {
+            const base64 = document.getElementById(dataId).value;
+            if (base64) return base64;
+            const url = document.getElementById(urlId).value;
+            if (url && url.trim()) return url.trim();
+            return '';
+        }
+
+        window.selectQuizAnswer = (qIdx, optIdx, correctIdx) => {
+            const options = document.querySelectorAll(`.quiz-option[data-q="${qIdx}"]`);
+            const selected = document.querySelector(`.quiz-option[data-q="${qIdx}"][data-opt="${optIdx}"]`);
+            
+            options.forEach(opt => {
+                const optVal = parseInt(opt.dataset.opt);
+                const isCorrect = (optVal === correctIdx);
+                
+                if (isCorrect) {
+                    opt.classList.add('correct');
+                } else if (opt === selected) {
+                    opt.classList.add('wrong');
+                }
+                
+                if (opt === selected) {
+                    opt.classList.add('selected');
+                }
+            });
+        };
+
+        window.switchTab = switchTab;
+        window.deleteLocation = deleteLocation;
+        window.editLocation = editLocation;
+        window.approvePost = approvePost;
+        window.rejectPost = rejectPost;
+        window.deletePost = deletePost;
+        window.deleteHandbookPost = deleteHandbookPost;
+        window.deleteNewsPost = deleteNewsPost;
+        window.loadLocations = loadLocations;
+        window.loadHandbook = loadHandbook;
+        window.loadNews = loadNews;
+        window.viewForumPost = viewForumPost;
+        window.viewHandbookPost = viewHandbookPost;
+        window.viewNewsPost = viewNewsPost;
+        window.closeModal = closeModal;
+        window.saveKnowledge = saveKnowledge;
+        window.importWordToEditor = importWordToEditor;
+        window.importWordToKnowledge = importWordToKnowledge;
+        window.uploadImageToBase64 = uploadImageToBase64;
+
+        // Khởi tạo
+        loadLocations();
+        loadPostsForApproval();
+        loadHandbook();
+        loadNews();
+        loadKnowledge();
+        initNewsEditor();
+        initLocationMap();
+
+        document.getElementById('postModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('postModal')) closeModal();
+        });
+
+        // Setup drag drop cho các upload area
+        const setupDragDrop = (uploadAreaId, fileInputId, previewId, dataId) => {
+            const area = document.getElementById(uploadAreaId);
+            if (!area) return;
+            
+            area.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                area.style.borderColor = 'var(--blue-primary)';
+                area.style.background = 'var(--bg-surface)';
+            });
+            
+            area.addEventListener('dragleave', () => {
+                area.style.borderColor = 'var(--border-light)';
+                area.style.background = 'transparent';
+            });
+            
+            area.addEventListener('drop', async (e) => {
+                e.preventDefault();
+                area.style.borderColor = 'var(--border-light)';
+                area.style.background = 'transparent';
+                
+                const file = e.dataTransfer.files[0];
+                if (file && file.type.startsWith('image/')) {
+                    const input = document.getElementById(fileInputId);
+                    const fakeEvent = { target: { files: [file] } };
+                    await uploadImageToBase64(fakeEvent.target, previewId, dataId);
+                }
+            });
+        };
+        
+        setupDragDrop('handbookCoverUpload', 'handbookCoverFile', 'handbookCoverPreview', 'handbookCoverData');
+        setupDragDrop('handbookImage1Upload', 'handbookImage1File', 'handbookImage1Preview', 'handbookImage1Data');
+        setupDragDrop('handbookImage2Upload', 'handbookImage2File', 'handbookImage2Preview', 'handbookImage2Data');
+        setupDragDrop('newsCoverUpload', 'newsCoverFile', 'newsCoverPreview', 'newsCoverData');
+
+        // Theme
+        const themeBtn = document.getElementById('themeToggleBtn');
+        const body = document.body;
+        function setTheme(theme) {
+            body.classList.toggle('dark', theme === 'dark');
+            localStorage.setItem('eduhealth-theme', theme);
+            const icon = themeBtn.querySelector('i');
+            const span = themeBtn.querySelector('span');
+            if (theme === 'dark') {
+                icon.className = 'fas fa-sun';
+                span.innerText = 'Chế độ sáng';
+            } else {
+                icon.className = 'fas fa-moon';
+                span.innerText = 'Chế độ tối';
+            }
+        }
+        const savedTheme = localStorage.getItem('eduhealth-theme');
+        if (savedTheme === 'dark') setTheme('dark');
+        else setTheme('light');
+        themeBtn.onclick = () => setTheme(body.classList.contains('dark') ? 'light' : 'dark');
+    </script>
+</body>
+</html>
+

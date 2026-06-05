@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Khóa học - EduHealth AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;0,600;1,300;1,500&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --blue-primary: #3b82f6;
+            --blue-deep: #2563eb;
+            --pink-primary: #f472b6;
+            --pink-deep: #ec489a;
+            --grad-blue-pink: linear-gradient(135deg, #4f8eff, #ff7eb3);
+            --grad-pink-blue: linear-gradient(135deg, #ff6ba6, #4f8eff);
+            --bg-body: linear-gradient(135deg, #ffffff 0%, #fff5f8 100%);
+            --bg-surface: #fff5f8;
+            --card-bg: #ffffff;
+            --text-dark: #0f172a;
+            --text-mid: #334155;
+            --text-dim: #64748b;
+            --border-light: #ffe0ec;
+            --border-soft: #fef0f5;
+            --shadow-sm: 0 10px 25px -5px rgba(0,0,0,0.05);
+            --shadow-md: 0 20px 35px -12px rgba(0,0,0,0.1);
+            --nav-bg: rgba(255,255,255,0.95);
+            --tag-bg: #fce7f3;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        body.dark {
+            --bg-body: linear-gradient(135deg, #0f172a 0%, #1e1b2e 100%);
+            --bg-surface: #1e293b;
+            --card-bg: #1e293b;
+            --text-dark: #f1f5f9;
+            --text-mid: #cbd5e1;
+            --text-dim: #94a3b8;
+            --border-light: #334155;
+            --border-soft: #2d3a4e;
+            --nav-bg: rgba(15,23,42,0.95);
+            --tag-bg: #2d3a4e;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-body);
+            color: var(--text-dark);
+            min-height: 100vh;
+            transition: all 0.3s;
+        }
+
+        /* ========== NAVIGATION ========== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+            height: 74px;
+            background: var(--nav-bg);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-mark {
+            width: 42px;
+            height: 42px;
+            background: var(--grad-blue-pink);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+        }
+
+        .logo-type {
+            font-family: 'Fraunces', serif;
+            font-size: 26px;
+            font-weight: 700;
+            background: var(--grad-blue-pink);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-link {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-mid);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-link i {
+            color: var(--pink-primary);
+        }
+
+        .nav-link:hover {
+            color: var(--blue-primary);
+        }
+        .nav-link:hover i {
+            color: var(--blue-primary);
+        }
+
+        .theme-toggle {
+            background: transparent;
+            border: 1px solid var(--border-light);
+            border-radius: 40px;
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-mid);
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--blue-primary);
+            color: var(--blue-primary);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: transparent;
+            border: 1px solid var(--border-light);
+            border-radius: 40px;
+            padding: 8px 18px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--pink-primary);
+            cursor: pointer;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .menu-toggle:hover {
+            background: var(--grad-pink-blue);
+            color: white;
+            border-color: transparent;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .mobile-menu-panel {
+            position: fixed;
+            top: 74px;
+            left: 0;
+            right: 0;
+            background: var(--bg-surface);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-light);
+            z-index: 99;
+            transform: translateY(-100%);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            pointer-events: none;
+        }
+
+        .mobile-menu-panel.open {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .mobile-menu-panel .nav-links-mobile {
+            display: flex;
+            flex-direction: column;
+            padding: 24px 6%;
+            gap: 20px;
+        }
+
+        .mobile-menu-panel .nav-link-mobile {
+            padding: 12px 0;
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .mobile-menu-panel .nav-link-mobile i {
+            width: 28px;
+            color: var(--blue-primary);
+            font-size: 18px;
+        }
+
+        /* ========== MAIN CONTENT ========== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px 60px;
+        }
+
+        .page-header {
+            margin-bottom: 32px;
+        }
+
+        .page-header h1 {
+            font-family: 'Fraunces', serif;
+            font-size: 32px;
+            font-weight: 500;
+            background: var(--grad-blue-pink);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .course-card {
+            background: var(--card-bg);
+            border-radius: 28px;
+            border: 1px solid var(--border-light);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--pink-primary);
+        }
+
+        .course-cover {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            background: var(--tag-bg);
+        }
+
+        .course-info {
+            padding: 20px;
+        }
+
+        .course-title {
+            font-family: 'Fraunces', serif;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .course-desc {
+            font-size: 14px;
+            color: var(--text-mid);
+            line-height: 1.5;
+            margin-bottom: 12px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .course-meta {
+            display: flex;
+            gap: 16px;
+            font-size: 13px;
+            color: var(--text-dim);
+            padding-top: 12px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+
+        .modal-content {
+            background: var(--card-bg);
+            border-radius: 32px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border: 1px solid var(--border-light);
+            overflow: hidden;
+        }
+
+        .modal-header {
+            flex-shrink: 0;
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--card-bg);
+        }
+
+        .modal-header h3 {
+            font-family: 'Fraunces', serif;
+            font-size: 22px;
+            background: var(--grad-blue-pink);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--text-dim);
+            transition: 0.2s;
+        }
+
+        .modal-close:hover { color: var(--pink-primary); }
+
+        .modal-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+        }
+
+        .course-detail-video {
+            margin: 20px 0;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .course-detail-video iframe {
+            width: 100%;
+            height: 315px;
+            border-radius: 16px;
+        }
+
+        .course-detail-content {
+            line-height: 1.6;
+            color: var(--text-mid);
+            margin: 20px 0;
+        }
+
+        .quiz-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid var(--border-light);
+        }
+
+        .quiz-question {
+            background: var(--bg-surface);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .quiz-question-text {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .quiz-option {
+            background: var(--card-bg);
+            border: 2px solid var(--border-light);
+            border-radius: 16px;
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--blue-primary);
+            transform: translateX(5px);
+        }
+
+        .quiz-option.correct {
+            background: var(--success);
+            color: white;
+            border-color: var(--success);
+        }
+
+        .quiz-option.wrong {
+            background: var(--danger);
+            color: white;
+            border-color: var(--danger);
+        }
+
+        .quiz-option-letter {
+            font-weight: 700;
+            width: 30px;
+        }
+
+        .btn-join {
+            background: var(--grad-blue-pink);
+            border: none;
+            padding: 14px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        .btn-join:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* ===== GIẤY CHỨNG NHẬN KIỂU MỚI (từ code 2) ===== */
+        .certificate-container-new {
+            background: #fefefe;
+            border-radius: 24px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 1px solid #e2edf2;
+        }
+        
+        .cert-canvas-wrapper {
+            background: #f1f3f7;
+            border-radius: 20px;
+            padding: 16px;
+            text-align: center;
+        }
+        
+        .cert-canvas {
+            max-width: 100%;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            background: #fff;
+            display: block;
+            margin: 0 auto;
+            border: 1px solid #e2edf2;
+        }
+        
+        .cert-info-note {
+            margin-top: 16px;
+            font-size: 0.8rem;
+            color: #2c5a6e;
+            background: #eef3fa;
+            padding: 10px 14px;
+            border-radius: 28px;
+            text-align: center;
+        }
+        
+        .cert-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-download-cert-new {
+            background: linear-gradient(135deg, #1a2b44, #2c5a6e);
+            border: none;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+        
+        .btn-download-cert-new:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(26,43,68,0.3);
+        }
+        
+        .btn-close-modal-new {
+            background: #6c757d;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.2s;
+        }
+        
+        .btn-close-modal-new:hover {
+            background: #5a6268;
+        }
+
+        .result-stats {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            margin: 20px auto;
+            background: var(--grad-blue-pink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+            font-weight: bold;
+        }
+
+        .loading-spinner {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-dim);
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .menu-toggle { display: flex; }
+            .course-grid { grid-template-columns: 1fr; }
+            .modal-content { max-width: 95%; }
+            .course-detail-video iframe { height: 200px; }
+            .container { padding: 90px 16px 40px; }
+            .cert-buttons { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <nav id="nav">
+        <a href="index.html" class="logo">
+            <div class="logo-mark"><i class="fas fa-heartbeat"></i></div>
+            <div class="logo-type">EduHealth AI</div>
+        </a>
+        <div class="nav-menu">
+            <a href="index.html" class="nav-link"><i class="fas fa-heartbeat"></i> Cẩm nang sức khỏe</a>
+            <a href="checkin.html" class="nav-link"><i class="fas fa-clipboard-list"></i> Check-in sức khỏe</a>
+            <a href="map.html" class="nav-link"><i class="fas fa-hospital-user"></i> Điểm hỗ trợ y tế</a>
+            <a href="forum.html" class="nav-link"><i class="fas fa-comments"></i> Diễn đàn</a>
+            <a href="EPH.html" class="nav-link" style="background: linear-gradient(135deg, #f59e0b, #ec489a); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700;">
+                <i class="fas fa-gamepad" style="color: #f59e0b;"></i> EduPlay Health
+            </a>
+        </div>
+        <div class="nav-right">
+            <button class="theme-toggle" id="themeToggleBtn"><i class="fas fa-moon"></i> <span>Chế độ tối</span></button>
+            <button class="menu-toggle" id="menuToggleBtn"><i class="fas fa-bars"></i> Menu</button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu-panel" id="mobileMenuPanel">
+        <div class="nav-links-mobile">
+            <a href="index.html" class="nav-link-mobile"><i class="fas fa-heartbeat"></i> Cẩm nang sức khỏe</a>
+            <a href="checkin.html" class="nav-link-mobile"><i class="fas fa-clipboard-list"></i> Check-in sức khỏe</a>
+            <a href="map.html" class="nav-link-mobile"><i class="fas fa-hospital-user"></i> Điểm hỗ trợ y tế</a>
+            <a href="forum.html" class="nav-link-mobile"><i class="fas fa-comments"></i> Diễn đàn</a>
+            <a href="EPH.html" class="nav-link-mobile"><i class="fas fa-gamepad"></i> EduPlay Health</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="page-header">
+            <h1><i class="fas fa-graduation-cap"></i> Khóa học sức khỏe học đường</h1>
+        </div>
+        <div class="course-grid" id="courseGrid">
+            <div class="loading-spinner"><i class="fas fa-spinner fa-pulse"></i> Đang tải khóa học...</div>
+        </div>
+    </div>
+
+    <!-- Modal chi tiết khóa học -->
+    <div id="courseModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Chi tiết khóa học</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-check-compat.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDOYFgLyliWFfNWtXHzxDQrbe_ISgmavno",
+            authDomain: "eduhealth-4bcab.firebaseapp.com",
+            projectId: "eduhealth-4bcab",
+            storageBucket: "eduhealth-4bcab.firebasestorage.app",
+            messagingSenderId: "390541255938",
+            appId: "1:390541255938:web:aa7b5beca0105c28f70e1b",
+            measurementId: "G-GSP46EVLYG"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const appCheck = firebase.appCheck();
+        appCheck.activate(
+            new firebase.appCheck.ReCaptchaEnterpriseProvider(
+                '6LfZOsIsAAAAAK_vBWSNgoIkHjLsFwXgBCixs37'
+            ),
+            true
+        );
+
+        const db = firebase.firestore();
+
+        let allCourses = [];
+        let allQuestions = [];
+        let currentCourse = null;
+        let currentQuestions = [];
+        let shuffledQuestions = [];
+        let currentQuestionIndex = 0;
+        let correctAnswers = 0;
+        let studentName = '';
+        let canAnswer = true;
+        
+        // Biến cho giấy chứng nhận mới
+        let certBackgroundImage = null;
+        let certCanvas = null;
+
+        async function initSampleData() {
+            try {
+                const snapshot = await db.collection('courses').limit(1).get();
+                if (snapshot.empty) {
+                    console.log('📚 Tạo dữ liệu mẫu...');
+                    const course1Ref = await db.collection('courses').add({
+                        title: 'I. Da liễu học đường',
+                        emoji: '🧴',
+                        shortDesc: 'Tìm hiểu về các bệnh da liễu thường gặp ở học đường như mụn, viêm da, dị ứng...',
+                        content: 'Da liễu học đường là chuyên ngành nghiên cứu các bệnh về da thường gặp trong môi trường học đường.',
+                        videoUrl: '',
+                        coverImage: '',
+                        views: 0,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                    const course2Ref = await db.collection('courses').add({
+                        title: 'II. Bệnh truyền nhiễm học đường',
+                        emoji: '🤒',
+                        shortDesc: 'Nhận biết và phòng ngừa các bệnh truyền nhiễm thường gặp ở trường học',
+                        content: 'Môi trường học đường là nơi dễ lây lan các bệnh truyền nhiễm.',
+                        videoUrl: '',
+                        coverImage: '',
+                        views: 0,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                    await db.collection('courseQuestions').add({ courseId: course1Ref.id, text: 'Mụn trứng cá thường gặp nhất ở lứa tuổi nào?', type: 'multiple', answers: { A: 'Trẻ em dưới 5 tuổi', B: 'Tuổi dậy thì (12-18 tuổi)', C: 'Người lớn trên 40 tuổi', D: 'Người cao tuổi' }, correctAnswer: 'B' });
+                    await db.collection('courseQuestions').add({ courseId: course1Ref.id, text: 'Nặn mụn bằng tay bẩn có thể gây viêm nhiễm nặng hơn và để lại sẹo.', type: 'truefalse', answers: { A: 'Đúng', B: 'Sai' }, correctAnswer: true });
+                    await db.collection('courseQuestions').add({ courseId: course1Ref.id, text: 'Khi bị viêm da tiếp xúc do mỹ phẩm, việc đầu tiên cần làm là gì?', type: 'multiple', answers: { A: 'Tiếp tục dùng sản phẩm', B: 'Ngừng ngay sản phẩm gây kích ứng', C: 'Dùng thêm nhiều sản phẩm khác', D: 'Chờ tự khỏi' }, correctAnswer: 'B' });
+                    await db.collection('courseQuestions').add({ courseId: course2Ref.id, text: 'Bệnh thủy đậu do loại virus nào gây ra?', type: 'multiple', answers: { A: 'Virus cúm', B: 'Virus Herpes', C: 'Virus Varicella Zoster', D: 'Virus HIV' }, correctAnswer: 'C' });
+                    await db.collection('courseQuestions').add({ courseId: course2Ref.id, text: 'Rửa tay bằng xà phòng trước khi ăn giúp phòng ngừa bệnh truyền nhiễm.', type: 'truefalse', answers: { A: 'Đúng', B: 'Sai' }, correctAnswer: true });
+                    await db.collection('courseQuestions').add({ courseId: course2Ref.id, text: 'Khi bị sốt cao kèm phát ban, học sinh nên làm gì?', type: 'multiple', answers: { A: 'Tự mua thuốc', B: 'Đi học bình thường', C: 'Báo cha mẹ và đi khám', D: 'Chờ tự khỏi' }, correctAnswer: 'C' });
+                    console.log('✅ Đã tạo dữ liệu mẫu!');
+                }
+            } catch (error) { console.error('Lỗi:', error); }
+        }
+
+        async function loadCourses() {
+            try {
+                await initSampleData();
+                const snapshot = await db.collection('courses').orderBy('createdAt', 'desc').get();
+                allCourses = [];
+                snapshot.forEach(doc => { allCourses.push({ id: doc.id, ...doc.data() }); });
+                const qSnapshot = await db.collection('courseQuestions').get();
+                allQuestions = [];
+                qSnapshot.forEach(doc => { allQuestions.push({ id: doc.id, ...doc.data() }); });
+                displayCourses();
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('courseGrid').innerHTML = '<div class="loading-spinner">⚠️ Lỗi tải dữ liệu</div>';
+            }
+        }
+
+        function displayCourses() {
+            const container = document.getElementById('courseGrid');
+            if (allCourses.length === 0) {
+                container.innerHTML = '<div class="loading-spinner">📭 Chưa có khóa học nào</div>';
+                return;
+            }
+            container.innerHTML = allCourses.map(course => {
+                const courseQuestions = allQuestions.filter(q => q.courseId === course.id);
+                return `
+                    <div class="course-card" onclick="openCourse('${course.id}')">
+                        <div class="course-cover" style="display: flex; align-items: center; justify-content: center; font-size: 64px; background: var(--tag-bg);">${course.emoji || '📚'}</div>
+                        <div class="course-info">
+                            <div class="course-title">${course.emoji || '📚'} ${escapeHtml(course.title)}</div>
+                            <div class="course-desc">${escapeHtml(course.shortDesc || '')}</div>
+                            <div class="course-meta"><span><i class="fas fa-question-circle"></i> ${courseQuestions.length} câu hỏi</span><span><i class="fas fa-eye"></i> ${course.views || 0} lượt xem</span></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function getYouTubeEmbedUrl(url) {
+            if (!url) return '';
+            let videoId = '';
+            if (url.includes('youtube.com/watch')) videoId = url.split('v=')[1]?.split('&')[0];
+            else if (url.includes('youtu.be/')) videoId = url.split('youtu.be/')[1]?.split('?')[0];
+            return videoId ? `https://www.youtube.com/embed/${videoId}` : '';
+        }
+
+        async function openCourse(courseId) {
+            currentCourse = allCourses.find(c => c.id === courseId);
+            if (!currentCourse) return;
+            await db.collection('courses').doc(courseId).update({ views: firebase.firestore.FieldValue.increment(1) });
+            currentCourse.views = (currentCourse.views || 0) + 1;
+            currentQuestions = allQuestions.filter(q => q.courseId === courseId);
+            const modal = document.getElementById('courseModal');
+            const modalBody = document.getElementById('modalBody');
+            const embedUrl = getYouTubeEmbedUrl(currentCourse.videoUrl);
+            modalBody.innerHTML = `
+                <div class="course-detail">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;"><span style="font-size: 48px;">${currentCourse.emoji || '📚'}</span><h2 style="font-family: Fraunces, serif;">${escapeHtml(currentCourse.title)}</h2></div>
+                    ${embedUrl ? `<div class="course-detail-video"><iframe src="${embedUrl}" frameborder="0" allowfullscreen></iframe></div>` : ''}
+                    <div class="course-detail-content"><p>${escapeHtml(currentCourse.content || '')}</p></div>
+                    <div class="quiz-section"><h3 style="margin-bottom: 16px;"><i class="fas fa-question-circle"></i> Đánh giá kiến thức</h3><div id="quizContainer"></div><button class="btn-join" id="startQuizBtn" onclick="startQuiz()">🎯 Tham gia đánh giá</button></div>
+                </div>
+            `;
+            document.getElementById('modalTitle').innerHTML = currentCourse.title;
+            modal.classList.add('active');
+        }
+
+        function startQuiz() {
+            if (currentQuestions.length === 0) { alert('Khóa học này chưa có câu hỏi đánh giá!'); return; }
+            studentName = prompt('📝 Vui lòng nhập tên của bạn:', '');
+            if (!studentName || studentName.trim() === '') studentName = 'Học sinh';
+            shuffledQuestions = [...currentQuestions];
+            for (let i = shuffledQuestions.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [shuffledQuestions[i], shuffledQuestions[j]] = [shuffledQuestions[j], shuffledQuestions[i]]; }
+            shuffledQuestions = shuffledQuestions.map(q => {
+                if (q.type === 'multiple') {
+                    const answerEntries = Object.entries(q.answers);
+                    for (let i = answerEntries.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [answerEntries[i], answerEntries[j]] = [answerEntries[j], answerEntries[i]]; }
+                    const shuffledAnswers = Object.fromEntries(answerEntries);
+                    let newCorrectAnswer = null;
+                    for (const [letter, text] of answerEntries) { if (text === q.answers[q.correctAnswer]) { newCorrectAnswer = letter; break; } }
+                    return { ...q, answers: shuffledAnswers, correctAnswer: newCorrectAnswer };
+                }
+                return q;
+            });
+            currentQuestionIndex = 0; correctAnswers = 0; canAnswer = true;
+            displayQuizQuestion();
+        }
+
+        function displayQuizQuestion() {
+            if (currentQuestionIndex >= shuffledQuestions.length) { showQuizResult(); return; }
+            const question = shuffledQuestions[currentQuestionIndex];
+            const total = shuffledQuestions.length;
+            let optionsHtml = '';
+            if (question.type === 'multiple') {
+                optionsHtml = Object.entries(question.answers).map(([letter, text]) => `<div class="quiz-option" onclick="checkAnswer('${letter}')"><div class="quiz-option-letter"><strong>${letter}.</strong></div><div>${escapeHtml(text)}</div></div>`).join('');
+            } else {
+                optionsHtml = `<div class="quiz-option" onclick="checkAnswer('true')"><div class="quiz-option-letter"><strong>✅</strong></div><div>Đúng</div></div><div class="quiz-option" onclick="checkAnswer('false')"><div class="quiz-option-letter"><strong>❌</strong></div><div>Sai</div></div>`;
+            }
+            document.getElementById('quizContainer').innerHTML = `<div class="quiz-question"><div class="quiz-question-text">Câu ${currentQuestionIndex + 1}/${total}: ${escapeHtml(question.text)}</div><div class="quiz-options" id="quizOptions">${optionsHtml}</div></div><div style="margin-top: 12px; font-size: 14px; color: var(--text-dim);"><i class="fas fa-info-circle"></i> Đang trả lời câu ${currentQuestionIndex + 1}/${total}</div>`;
+            document.getElementById('startQuizBtn').style.display = 'none';
+        }
+
+        async function checkAnswer(selected) {
+            if (!canAnswer) return;
+            const question = shuffledQuestions[currentQuestionIndex];
+            let isCorrect = false;
+            if (question.type === 'multiple') isCorrect = (selected === question.correctAnswer);
+            else { const isTrue = (selected === 'true'); isCorrect = (isTrue === question.correctAnswer); }
+            const options = document.querySelectorAll('.quiz-option');
+            let selectedOption = null;
+            for (let opt of options) {
+                if (question.type === 'multiple') { if (opt.innerHTML.includes(`${selected}.`)) { selectedOption = opt; break; } }
+                else { if ((selected === 'true' && opt.innerHTML.includes('✅')) || (selected === 'false' && opt.innerHTML.includes('❌'))) { selectedOption = opt; break; } }
+            }
+            if (selectedOption) {
+                if (isCorrect) { selectedOption.classList.add('correct'); correctAnswers++; }
+                else {
+                    selectedOption.classList.add('wrong');
+                    for (let opt of options) {
+                        if (question.type === 'multiple') { if (opt.innerHTML.includes(`${question.correctAnswer}.`)) { opt.classList.add('correct'); break; } }
+                        else { const isTrueCorrect = question.correctAnswer === true; if ((isTrueCorrect && opt.innerHTML.includes('✅')) || (!isTrueCorrect && opt.innerHTML.includes('❌'))) { opt.classList.add('correct'); break; } }
+                    }
+                }
+            }
+            canAnswer = false;
+            try { await db.collection('quizResults').add({ studentName, courseId: currentCourse.id, courseName: currentCourse.title, questionId: question.id, questionText: question.text, isCorrect, timestamp: firebase.firestore.FieldValue.serverTimestamp() }); } catch(e) {}
+            setTimeout(() => { currentQuestionIndex++; canAnswer = true; if (currentQuestionIndex < shuffledQuestions.length) displayQuizQuestion(); else showQuizResult(); }, 1000);
+        }
+
+        // Hàm vẽ chứng nhận kiểu code 2 (ảnh nền + chữ cố định tọa độ)
+        function drawCertificateOnCanvas(canvasElement, lessonText, studentText) {
+            return new Promise((resolve, reject) => {
+                if (!certBackgroundImage) {
+                    const img = new Image();
+                    img.crossOrigin = "Anonymous";
+                    img.onload = () => {
+                        certBackgroundImage = img;
+                        drawInternal(canvasElement, lessonText, studentText, resolve, reject);
+                    };
+                    img.onerror = () => reject(new Error("Không tải được ảnh nền bkt.png"));
+                    img.src = "bkt.png";
+                } else {
+                    drawInternal(canvasElement, lessonText, studentText, resolve, reject);
+                }
+            });
+        }
+
+        function drawInternal(canvas, lessonText, studentText, resolve, reject) {
+            try {
+                const ctx = canvas.getContext('2d');
+                canvas.width = certBackgroundImage.width;
+                canvas.height = certBackgroundImage.height;
+                ctx.drawImage(certBackgroundImage, 0, 0, canvas.width, canvas.height);
+                // Tên bài học: x=1005, y=520, size=65, căn giữa
+                ctx.font = `600 65px "Segoe UI", "Roboto", "Noto Sans", system-ui`;
+                ctx.fillStyle = '#1a2b44';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'top';
+                ctx.fillText(lessonText, 1005, 520);
+                // Tên học sinh: x=540, y=780, size=100, căn trái
+                ctx.font = `500 100px "Segoe UI", "Roboto", "Noto Sans", system-ui`;
+                ctx.fillStyle = '#1a2b44';
+                ctx.textAlign = 'left';
+                ctx.textBaseline = 'top';
+                ctx.fillText(studentText, 540, 780);
+                resolve(canvas.toDataURL('image/png'));
+            } catch(e) { reject(e); }
+        }
+
+        async function showQuizResult() {
+            const total = shuffledQuestions.length;
+            const isAllCorrect = (correctAnswers === total);
+            const percentage = Math.round((correctAnswers / total) * 100);
+            const currentDate = new Date();
+            const formattedDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
+            
+            if (isAllCorrect) {
+                const certificateCode = 'CERT-' + Math.random().toString(36).substr(2, 8).toUpperCase();
+                // Tạo container mới cho chứng nhận dạng ảnh nền
+                document.getElementById('quizContainer').innerHTML = `
+                    <div class="certificate-container-new">
+                        <div class="cert-canvas-wrapper">
+                            <canvas id="certCanvas" class="cert-canvas" style="width:100%; height:auto; max-width:100%;"></canvas>
+                        </div>
+                        <div class="cert-info-note">
+                            🎓 Giấy chứng nhận được tạo từ mẫu bkt.png với tọa độ cố định (bài học: 1005,520 / học sinh: 540,780)
+                        </div>
+                        <div class="cert-buttons">
+                            <button class="btn-download-cert-new" id="downloadCertBtn"><i class="fas fa-download"></i> Tải giấy chứng nhận (PNG)</button>
+                            <button class="btn-close-modal-new" onclick="closeModal()"><i class="fas fa-times"></i> Đóng</button>
+                        </div>
+                    </div>
+                `;
+                const certCanvasElem = document.getElementById('certCanvas');
+                try {
+                    const dataURL = await drawCertificateOnCanvas(certCanvasElem, currentCourse.title, studentName);
+                    const downloadBtn = document.getElementById('downloadCertBtn');
+                    if (downloadBtn) {
+                        downloadBtn.onclick = () => {
+                            const link = document.createElement('a');
+                            link.download = `ChungNhan_${studentName.replace(/[^a-zA-Z0-9]/g, '_')}_${currentCourse.title.replace(/[^a-zA-Z0-9]/g, '_')}.png`;
+                            link.href = dataURL;
+                            link.click();
+                        };
+                    }
+                } catch(err) {
+                    console.error(err);
+                    document.getElementById('quizContainer').innerHTML += `<p style="color:red;">❌ Lỗi: Không tìm thấy ảnh nền "bkt.png". Vui lòng đặt file bkt.png cùng thư mục.</p>`;
+                }
+            } else {
+                document.getElementById('quizContainer').innerHTML = `
+                    <div class="result-stats">
+                        <h2>📊 KẾT QUẢ ĐÁNH GIÁ</h2>
+                        <div class="score-circle">${percentage}%</div>
+                        <div style="font-size: 32px; font-weight: bold; margin: 20px 0;">${correctAnswers}/${total}</div>
+                        <div style="background: var(--bg-surface); border-radius: 16px; padding: 20px;"><p>Bạn đã trả lời đúng <strong style="color: #28a745;">${correctAnswers}</strong> trên tổng số <strong>${total}</strong> câu hỏi.</p><p>Tỷ lệ đúng: <strong>${percentage}%</strong></p></div>
+                        <p style="margin-top: 20px; color: var(--warning);">💪 Hãy học lại và thử đánh giá một lần nữa nhé! 💪</p>
+                        <button class="btn-join" onclick="resetQuiz()" style="background: var(--warning);">🔄 Làm lại bài đánh giá</button>
+                    </div>
+                `;
+            }
+            document.getElementById('startQuizBtn').style.display = 'none';
+        }
+
+        function resetQuiz() { currentQuestionIndex = 0; correctAnswers = 0; canAnswer = true; startQuiz(); }
+        function closeModal() { document.getElementById('courseModal').classList.remove('active'); currentQuestionIndex = 0; correctAnswers = 0; canAnswer = true; }
+        function escapeHtml(str) { if (!str) return ''; const div = document.createElement('div'); div.textContent = str; return div.innerHTML; }
+
+        // Theme toggle
+        const themeBtn = document.getElementById('themeToggleBtn');
+        const body = document.body;
+        function setTheme(theme) {
+            body.classList.toggle('dark', theme === 'dark');
+            localStorage.setItem('eduhealth-theme', theme);
+            const icon = themeBtn.querySelector('i');
+            const span = themeBtn.querySelector('span');
+            if (theme === 'dark') { icon.className = 'fas fa-sun'; span.innerText = 'Chế độ sáng'; }
+            else { icon.className = 'fas fa-moon'; span.innerText = 'Chế độ tối'; }
+        }
+        const savedTheme = localStorage.getItem('eduhealth-theme');
+        if (savedTheme === 'dark') setTheme('dark');
+        else setTheme('light');
+        if (themeBtn) themeBtn.onclick = () => setTheme(body.classList.contains('dark') ? 'light' : 'dark');
+
+        // Mobile menu
+        const menuToggle = document.getElementById('menuToggleBtn');
+        const mobilePanel = document.getElementById('mobileMenuPanel');
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                mobilePanel.classList.toggle('open');
+                const icon = menuToggle.querySelector('i');
+                if (mobilePanel.classList.contains('open')) { icon.classList.remove('fa-bars'); icon.classList.add('fa-times'); }
+                else { icon.classList.remove('fa-times'); icon.classList.add('fa-bars'); }
+            });
+        }
+        document.getElementById('courseModal').addEventListener('click', (e) => { if (e.target === document.getElementById('courseModal')) closeModal(); });
+        
+        // Preload ảnh nền cho chứng nhận
+        const preloadCertImg = new Image();
+        preloadCertImg.src = "bkt.png";
+        preloadCertImg.onload = () => { certBackgroundImage = preloadCertImg; };
+        
+        loadCourses();
+    </script>
+</body>
+</html>
