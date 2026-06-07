@@ -14,16 +14,16 @@
             --blue-deep: #E67E22;
             --pink-primary: #FFFFFF;
             --pink-deep: #FFFFFF;
-            --grad-blue-pink: linear-gradient(135deg, var(--blue-primary), var(--pink-primary));
-            --grad-pink-blue: linear-gradient(135deg, var(--pink-deep), var(--blue-primary));
+            --grad-blue-pink: #FF9500;
+            --grad-pink-blue: #FF9500;
             --bg-body: #ffffff;
-            --bg-surface: #FFF9F0;
+            --bg-surface: #ffffff;
             --card-bg: #ffffff;
             --text-dark: #0f172a;
             --text-mid: #334155;
             --text-dim: #64748b;
             --border-light: #FFE0CC;
-            --border-soft: #f1f5f9;
+            --border-soft: #FFF9F0;
             --shadow-sm: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
             --shadow-md: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
             --nav-bg: rgba(255, 255, 255, 0.92);
@@ -38,16 +38,16 @@
         }
 
         body.dark {
-            --bg-body: #0f172a;
-            --bg-surface: #1e293b;
-            --card-bg: #1e293b;
+            --bg-body: #ffffff;
+            --bg-surface: #ffffff;
+            --card-bg: #ffffff;
             --text-dark: #f1f5f9;
             --text-mid: #cbd5e1;
             --text-dim: #94a3b8;
-            --border-light: #334155;
-            --border-soft: #2d3a4e;
+            --border-light: #FFE0CC;
+            --border-soft: #FFF9F0;
             --nav-bg: rgba(15, 23, 42, 0.94);
-            --tag-bg: #2d3a4e;
+            --tag-bg: #FFF0E0;
             --input-bg: #1e293b;
         }
 
@@ -108,7 +108,7 @@
             font-family: 'Fraunces', serif;
             font-size: 24px;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--pink-deep), var(--blue-primary));
+            background: var(--blue-primary);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -595,7 +595,7 @@
         }
 
         .btn-pdf {
-            background: linear-gradient(135deg, #ef4444, #f97316);
+            background: #E67E22;
             border: none;
             padding: 10px 24px;
             border-radius: 40px;
@@ -755,7 +755,7 @@
 }
 
 .warning-popup-btn {
-    background: linear-gradient(135deg, var(--blue-primary), var(--pink-primary));
+    background: var(--blue-primary);
     border: none;
     padding: 12px 24px;
     border-radius: 40px;
@@ -795,7 +795,7 @@
 }
 
 #demoNoticeModal h3 {
-    background: linear-gradient(135deg, var(--blue-primary), var(--pink-primary));
+    background: var(--blue-primary);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -1013,7 +1013,7 @@
             <a href="checkin.html" class="nav-link"><i class="fas fa-clipboard-list"></i> Check-in sức khỏe</a>
             <a href="map.html" class="nav-link"><i class="fas fa-hospital-user"></i> Điểm hỗ trợ y tế</a>
             <a href="forum.html" class="nav-link"><i class="fas fa-comments"></i> Diễn đàn</a>
-            <a href="EPH.html" class="nav-link" style="background: linear-gradient(135deg, #f59e0b, #FFFFFF); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700;">
+            <a href="EPH.html" class="nav-link" style="color: var(--blue-primary); font-weight: 700;">
                 <i class="fas fa-gamepad" style="color: #f59e0b;"></i> EduPlay Health
             </a>
         </div>
@@ -1713,7 +1713,7 @@ function showRejectModal() {
             <a href="index.html" class="btn-primary" style="text-decoration: none; padding: 10px 20px;">
                 <i class="fas fa-book-open"></i> Đến Thư viện sức khỏe
             </a>
-            <a href="chatbox.html" class="btn-primary" style="text-decoration: none; background: linear-gradient(135deg, #10b981, #FF9500); padding: 10px 20px;">
+            <a href="chatbox.html" class="btn-primary" style="text-decoration: none; background: var(--blue-primary); padding: 10px 20px;">
                 <i class="fas fa-comment-dots"></i> Trò chuyện với AI
             </a>
             <button class="btn-outline" id="closeModalBtn" style="padding: 10px 20px;">Đóng</button>
@@ -2825,7 +2825,7 @@ try {
             
             return `
                 <div class="result-simple">
-                    <div style="background: linear-gradient(135deg, var(--blue-primary), var(--pink-primary)); border-radius: 20px; padding: 20px; margin-bottom: 20px; color: white;">
+                    <div style="background: var(--blue-primary); border-radius: 20px; padding: 20px; margin-bottom: 20px; color: white;">
                         <h3 style="color: white; margin: 0 0 8px 0;"><i class="fas fa-clipboard-list"></i> Nhận biết sơ bộ</h3>
                         <p style="margin: 0; font-size: 1.1rem;">${escapeHtml(preliminary)}</p>
                     </div>
@@ -2963,7 +2963,7 @@ try {
                 const levelText = fr.action_level === 1 ? '🟢 Mức 1 - Theo dõi' : (fr.action_level === 2 ? '🟡 Mức 2 - Đi khám sớm' : '🔴 Mức 3 - Đi khám ngay');
                 formattedResult = `
                     <div style="margin: 15px 0;">
-                        <div style="background: linear-gradient(135deg, #FF9500, #FFFFFF); border-radius: 16px; padding: 20px; color: white;">
+                        <div style="background: var(--blue-primary); border-radius: 16px; padding: 20px; color: white;">
                             <h3 style="color: white; margin: 0 0 8px 0;">🔍 Nhận biết sơ bộ</h3>
                             <p style="margin: 0;">${escapeHtml(fr.preliminary || '')}</p>
                         </div>
@@ -3500,6 +3500,8 @@ async function initApp() {
 </script>
 </body>
 </html>
+
+
 
 
 

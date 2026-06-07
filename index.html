@@ -19,11 +19,11 @@
   --blue-deep: #E67E22;
   --pink-primary: #FFFFFF;
   --pink-deep: #FFFFFF;
-  --grad-blue-pink: linear-gradient(135deg, #FF9500, #FFFFFF);
-  --grad-pink-blue: linear-gradient(135deg, #FFFFFF, #FF9500);
+  --grad-blue-pink: #FF9500;
+  --grad-pink-blue: #FF9500;
   
-  --bg-body: linear-gradient(135deg, #ffffff 0%, #fff9f0 100%);
-  --bg-surface: #fff9f0;
+  --bg-body: #ffffff;
+  --bg-surface: #ffffff;
   --card-bg: #ffffff;
   --text-dark: #0f172a;
   --text-mid: #334155;
@@ -45,19 +45,19 @@
 }
 
 body.dark {
-  --bg-body: linear-gradient(135deg, #0f172a 0%, #1e1b2e 100%);
-  --bg-surface: #1e293b;
-  --card-bg: #1e293b;
+  --bg-body: #ffffff;
+  --bg-surface: #ffffff;
+  --card-bg: #ffffff;
   --text-dark: #f1f5f9;
   --text-mid: #cbd5e1;
   --text-dim: #94a3b8;
-  --border-light: #334155;
-  --border-soft: #2d3a4e;
+  --border-light: #FFE0CC;
+  --border-soft: #FFF9F0;
   --shadow-sm: 0 10px 20px -5px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 20px 35px -12px rgba(0, 0, 0, 0.4);
-  --hover-glow: rgba(244, 114, 182, 0.2);
+  --hover-glow: rgba(255, 149, 0, 0.12);
   --nav-bg: rgba(15, 23, 42, 0.95);
-  --tag-bg: #2d3a4e;
+  --tag-bg: #FFF0E0;
   --news-bg: #1e293b;
   --icon-soft: #2d3a4e;
   --glow-blue: rgba(79, 142, 255, 0.2);
@@ -413,7 +413,7 @@ nav {
 
 /* ========== KHỐI QUIZ HERO CARD ========== */
 .quiz-hero-card {
-  background: linear-gradient(135deg, #10b981, #FF9500);
+  background: var(--blue-primary);
   border-radius: 24px;
   padding: 20px 24px;
   margin-bottom: 24px;
@@ -995,7 +995,7 @@ footer {
 }
 
 .article-content .handbook-header {
-  background: linear-gradient(120deg, #f7567c 0%, #ff9a3c 100%);
+  background: var(--blue-primary);
   padding: 28px 32px 24px;
   border-radius: 24px 24px 0 0;
   margin: -24px -24px 0 0px;
@@ -1570,7 +1570,7 @@ footer {
     <a href="checkin.html" class="nav-link"><i class="fas fa-clipboard-list"></i> Check-in sức khỏe</a>
     <a href="map.html" class="nav-link"><i class="fas fa-hospital-user"></i> Điểm hỗ trợ y tế</a>
     <a href="forum.html" class="nav-link"><i class="fas fa-comments"></i> Diễn đàn</a>
-    <a href="EPH.html" class="nav-link" style="background: linear-gradient(135deg, #f59e0b, #FFFFFF); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700;">
+    <a href="EPH.html" class="nav-link" style="color: var(--blue-primary); font-weight: 700;">
                 <i class="fas fa-gamepad" style="color: #f59e0b;"></i> EduPlay Health
             </a>
   </div>
@@ -2018,7 +2018,7 @@ async function openNewsArticle(id) {
     document.getElementById('articleModalTitle').innerHTML = escapeHtml(news.title);
     document.getElementById('articleModalBody').innerHTML = `
         <div class="article-content" style="font-family: 'Nunito', 'DM Sans', sans-serif; line-height: 1.7; color: var(--text-mid);">
-            <div style="background: linear-gradient(120deg, #f7567c 0%, #ff9a3c 100%); padding: 28px 32px 24px; border-radius: 24px 24px 0 0; margin: -24px -24px 0 -24px;">
+            <div style="background: var(--blue-primary); padding: 28px 32px 24px; border-radius: 24px 24px 0 0; margin: -24px -24px 0 -24px;">
                 <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 14px; flex-wrap: wrap;">
                     <div style="width: 64px; height: 64px; background: #fff; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 36px; box-shadow: 0 4px 16px rgba(0,0,0,0.12);">📰</div>
                     <div>
@@ -2083,6 +2083,8 @@ async function openNewsArticle(id) {
 </script>
 </body>
 </html>
+
+
 
 
 

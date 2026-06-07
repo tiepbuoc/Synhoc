@@ -19,10 +19,10 @@
             --blue-deep: #E67E22;
             --pink-primary: #FFFFFF;
             --pink-deep: #FFFFFF;
-            --grad-blue-pink: linear-gradient(135deg, var(--blue-primary), var(--pink-primary));
-            --grad-pink-blue: linear-gradient(135deg, var(--pink-deep), var(--blue-primary));
-            --bg-body: linear-gradient(135deg, #ffffff 0%, #fff9f0 100%);
-            --bg-surface: #fff9f0;
+            --grad-blue-pink: #FF9500;
+            --grad-pink-blue: #FF9500;
+            --bg-body: #ffffff;
+            --bg-surface: #ffffff;
             --card-bg: #ffffff;
             --text-dark: #0f172a;
             --text-mid: #334155;
@@ -41,16 +41,16 @@
         }
 
         body.dark {
-            --bg-body: linear-gradient(135deg, #0f172a 0%, #1e1b2e 100%);
-            --bg-surface: #1e293b;
-            --card-bg: #1e293b;
+            --bg-body: #ffffff;
+            --bg-surface: #ffffff;
+            --card-bg: #ffffff;
             --text-dark: #f1f5f9;
             --text-mid: #cbd5e1;
             --text-dim: #94a3b8;
-            --border-light: #334155;
-            --border-soft: #2d3a4e;
+            --border-light: #FFE0CC;
+            --border-soft: #FFF9F0;
             --nav-bg: rgba(15, 23, 42, 0.95);
-            --tag-bg: #2d3a4e;
+            --tag-bg: #FFF0E0;
             --input-bg: #1e293b;
         }
 
@@ -98,7 +98,7 @@
         .logo-mark {
             width: 42px;
             height: 42px;
-            background: linear-gradient(135deg, var(--pink-deep), var(--blue-primary));
+            background: var(--blue-primary);
             border-radius: 16px;
             display: flex;
             align-items: center;
@@ -111,7 +111,7 @@
             font-family: 'Fraunces', serif;
             font-size: 24px;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--pink-deep), var(--blue-primary));
+            background: var(--blue-primary);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -167,7 +167,7 @@
             font-family: 'Fraunces', serif;
             font-size: 32px;
             font-weight: 500;
-            background: linear-gradient(135deg, var(--blue-primary), var(--pink-primary));
+            background: var(--blue-primary);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -204,7 +204,7 @@
         .tab-btn i { font-size: 16px; }
 
         .tab-btn.active {
-            background: linear-gradient(135deg, var(--blue-primary), var(--pink-primary));
+            background: var(--blue-primary);
             color: white;
             box-shadow: 0 6px 14px rgba(255, 149, 0, 0.3);
         }
@@ -235,7 +235,7 @@
             gap: 15px;
             padding-bottom: 15px;
             border-bottom: 1px solid var(--border-light);
-            background: linear-gradient(135deg, var(--blue-primary), var(--pink-primary));
+            background: var(--blue-primary);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -272,7 +272,7 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--blue-primary), var(--pink-primary));
+            background: var(--blue-primary);
             border: none;
             padding: 12px 28px;
             border-radius: 40px;
@@ -333,7 +333,7 @@
         }
 
         .btn-pdf {
-            background: linear-gradient(135deg, #ef4444, #f97316);
+            background: #E67E22;
             border: none;
             padding: 8px 18px;
             border-radius: 40px;
@@ -459,7 +459,7 @@
             font-size: 36px;
             font-weight: 700;
             font-family: 'Fraunces', serif;
-            background: linear-gradient(135deg, var(--blue-primary), var(--pink-primary));
+            background: var(--blue-primary);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -740,7 +740,7 @@
         }
 
         .message.admin {
-            background: linear-gradient(135deg, var(--blue-primary), var(--pink-primary));
+            background: var(--blue-primary);
             color: white;
             align-self: flex-end;
             border-bottom-right-radius: 4px;
@@ -824,7 +824,7 @@
 
         .chat-input-area button {
             padding: 12px 24px;
-            background: linear-gradient(135deg, var(--blue-primary), var(--pink-primary));
+            background: var(--blue-primary);
             color: white;
             border: none;
             border-radius: 40px;
@@ -883,7 +883,7 @@
         .modal-header h3 { 
             font-family: 'Fraunces', serif; 
             font-size: 22px; 
-            background: linear-gradient(135deg, var(--blue-primary), var(--pink-primary));
+            background: var(--blue-primary);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -1094,7 +1094,7 @@
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--blue-primary), var(--pink-primary));
+            background: var(--blue-primary);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1134,7 +1134,7 @@
             border: 1px solid var(--border-light);
         }
         .poll-bar {
-            background: linear-gradient(90deg, var(--pink-primary), var(--pink-deep));
+            background: var(--blue-primary);
             height: 100%;
             position: absolute;
             left: 0;
@@ -1446,7 +1446,7 @@
             <a href="checkin.html" class="nav-link"><i class="fas fa-clipboard-list"></i> Check-in sức khỏe</a>
             <a href="map.html" class="nav-link"><i class="fas fa-hospital-user"></i> Điểm hỗ trợ y tế</a>
             <a href="forum.html" class="nav-link"><i class="fas fa-comments"></i> Diễn đàn</a>
-            <a href="EPH.html" class="nav-link" style="background: linear-gradient(135deg, #f59e0b, #FFFFFF); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700;">
+            <a href="EPH.html" class="nav-link" style="color: var(--blue-primary); font-weight: 700;">
                 <i class="fas fa-gamepad" style="color: #f59e0b;"></i> EduPlay Health
             </a>
         </div>
@@ -3126,7 +3126,7 @@ let locations = [];
             return `
                 <div style="font-family: 'Nunito', 'DM Sans', sans-serif;">
                     <!-- Header -->
-                    <div style="background: linear-gradient(120deg, #f7567c 0%, #ff9a3c 100%); padding: 28px 32px 24px; border-radius: 24px 24px 0 0;">
+                    <div style="background: var(--blue-primary); padding: 28px 32px 24px; border-radius: 24px 24px 0 0;">
                         <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 14px;">
                             <div style="width: 64px; height: 64px; background: #fff; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 36px; box-shadow: 0 4px 16px rgba(0,0,0,0.12);">${data.emoji || '😟'}</div>
                             <div>
@@ -3690,6 +3690,8 @@ let locations = [];
     </script>
 </body>
 </html>
+
+
 
 
 
