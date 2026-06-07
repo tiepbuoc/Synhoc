@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Đăng nhập - EduHealth AI</title>
+    <title>Đăng nhập - SYNHOC health</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;0,600;1,300;1,500&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --blue-primary: #3b82f6;
-            --blue-deep: #2563eb;
-            --pink-primary: #f472b6;
-            --pink-deep: #ec489a;
-            --grad-blue-pink: linear-gradient(135deg, var(--blue-primary), var(--pink-primary));
-            --grad-pink-blue: linear-gradient(135deg, var(--pink-deep), var(--blue-primary));
+            --blue-primary: #ffc0e0;
+            --blue-deep: #ffaed4;
+            --pink-primary: #ffc0e0;
+            --pink-deep: #ff9a6c;
+            --grad-blue-pink: linear-gradient(135deg, #ff9a6c, #ff7eb3);
+            --grad-pink-blue: linear-gradient(135deg, #ff9a6c, #ff7eb3);
             --bg-body: #ffffff;
             --bg-surface: #fef9ff;
             --card-bg: #ffffff;
@@ -204,7 +204,7 @@
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 8px 20px rgba(255, 154, 108, 0.3);
         }
 
         .btn-primary:disabled {
@@ -420,7 +420,7 @@
     <div class="login-container">
         <a href="#" class="logo" id="logoLink">
             <div class="logo-mark"><i class="fas fa-heartbeat"></i></div>
-            <div class="logo-type">EduHealth AI</div>
+            <div class="logo-type">SYNHOC health</div>
         </a>
 
         <div class="card">
@@ -515,11 +515,11 @@
                     
                     <div class="terms-checkbox-item">
                         <input type="checkbox" id="termsChk3" onchange="checkAllTermsAccepted()">
-                        <label>Tôi hiểu EduHealth AI <strong>không phải công cụ chẩn đoán y khoa</strong>, không thay thế bác sĩ</label>
+                        <label>Tôi hiểu SYNHOC health <strong>không phải công cụ chẩn đoán y khoa</strong>, không thay thế bác sĩ</label>
                     </div>
                     
                     <div class="terms-note">
-                        <i class="fas fa-info-circle"></i> EduHealth AI là công cụ hỗ trợ ban đầu trong học đường, không thay thế bác sĩ.
+                        <i class="fas fa-info-circle"></i> SYNHOC health là công cụ hỗ trợ ban đầu trong học đường, không thay thế bác sĩ.
                     </div>
                 </div>
 
@@ -528,7 +528,7 @@
         </div>
     </div>
 
-    <!-- Modal hiển thị điều khoản chi tiết (nội dung đã được nhúng sẵn) -->
+    <!-- Modal hiển thị điều khoản chi tiết -->
     <div id="termsModal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
@@ -550,47 +550,25 @@
         const TERMS_CONTENT = `
             <div class="terms-full-content">
                 <h1>ĐIỀU KHOẢN SỬ DỤNG</h1>
-                <h2>EDUHEALTH AI</h2>
+                <h2>SYNHOC HEALTH</h2>
                 <p><strong>Cập nhật lần cuối:</strong> 22/04/2026</p>
-                <p>Chào mừng bạn đến với <strong>EduHealth AI</strong> -- nền tảng hỗ trợ giáo dục sức khỏe, nhận biết ban đầu và kết nối hỗ trợ trong học đường.</p>
-                <p>Khi truy cập, đăng nhập hoặc sử dụng EduHealth AI, bạn xác nhận rằng mình đã đọc, hiểu và đồng ý với các điều khoản dưới đây.</p>
+                <p>Chào mừng bạn đến với <strong>SYNHOC health</strong> -- nền tảng hỗ trợ giáo dục sức khỏe, nhận biết ban đầu và kết nối hỗ trợ trong học đường.</p>
+                <p>Khi truy cập, đăng nhập hoặc sử dụng SYNHOC health, bạn xác nhận rằng mình đã đọc, hiểu và đồng ý với các điều khoản dưới đây.</p>
 
                 <h2>1. Mục đích của nền tảng</h2>
-                <p>EduHealth AI được xây dựng nhằm hỗ trợ người dùng:</p>
-                <ul><li>tiếp cận thông tin sức khỏe học đường theo cách dễ hiểu, phù hợp;</li><li>thực hiện check-in sức khỏe ban đầu trong phạm vi hỗ trợ hiện tại của hệ thống;</li><li>nhận định hướng hành động ban đầu và kết nối với nguồn hỗ trợ phù hợp khi cần.</li></ul>
-                <p><strong>LƯU Ý QUAN TRỌNG:</strong> EduHealth AI là <strong>công cụ hỗ trợ ban đầu</strong>, <strong>không phải công cụ chẩn đoán y khoa</strong>, <strong>không kê đơn</strong>, và <strong>không thay thế bác sĩ, phụ huynh, cán bộ y tế học đường hoặc cơ sở khám chữa bệnh</strong>.</p>
+                <p>SYNHOC health được xây dựng nhằm hỗ trợ người dùng:</p>
+                <ul><li>tiếp cận thông tin sức khỏe học đường theo cách dễ hiểu, phù hợp;</li><li>thực hiện check-in sức khỏe ban đầu trong phạm vi hỗ trợ;</li></ul>
+                <p><strong>LƯU Ý QUAN TRỌNG:</strong> SYNHOC health là <strong>công cụ hỗ trợ ban đầu</strong>, <strong>không phải công cụ chẩn đoán y khoa</strong>.</p>
 
                 <h2>2. Phạm vi sử dụng</h2>
-                <p>Người dùng được phép sử dụng EduHealth AI cho mục đích học tập, tìm hiểu, hỗ trợ nhận biết ban đầu và tham khảo thông tin sức khỏe trong phạm vi phù hợp với định hướng của nền tảng.</p>
-                <p>Người dùng <strong>không được</strong> sử dụng EduHealth AI để:</p>
-                <ul><li>thay thế hoàn toàn việc thăm khám hoặc tư vấn chuyên môn;</li><li>xử lý tình huống khẩn cấp;</li><li>đăng tải nội dung sai sự thật, gây hiểu nhầm, xúc phạm hoặc vi phạm pháp luật;</li><li>can thiệp, phá hoại hoặc sử dụng hệ thống sai mục đích.</li></ul>
-
-                <h2>3. Tài khoản và quyền truy cập</h2>
-                <p>Khi tạo tài khoản hoặc sử dụng hệ thống, người dùng có trách nhiệm:</p>
-                <ul><li>cung cấp thông tin phù hợp và trung thực trong phạm vi cần thiết;</li><li>giữ an toàn cho tài khoản và thông tin đăng nhập của mình;</li><li>không chia sẻ tài khoản cho người khác sử dụng sai mục đích;</li><li>thông báo cho nhóm vận hành nếu phát hiện truy cập trái phép hoặc sự cố liên quan đến tài khoản.</li></ul>
-
-                <h2>4. Nội dung người dùng cung cấp</h2>
-                <p>Khi sử dụng các chức năng như Check-in sức khỏe, người dùng có thể cung cấp một số nội dung như: mô tả triệu chứng, câu trả lời checklist, hình ảnh tải lên, nội dung trò chuyện hoặc phản hồi.</p>
-                <p>Người dùng cam kết chỉ cung cấp thông tin cần thiết, phù hợp với mục đích sử dụng của hệ thống và không cố ý nhập thông tin sai lệch, gây nhiễu hoặc làm ảnh hưởng đến kết quả hỗ trợ ban đầu.</p>
-
-                <h2>5. Giới hạn chuyên môn của hệ thống</h2>
-                <p>EduHealth AI chỉ cung cấp <strong>hỗ trợ nhận biết ban đầu</strong> dựa trên dữ liệu người dùng cung cấp và trong phạm vi phát triển hiện tại của hệ thống.</p>
-                <p>Kết quả do hệ thống hiển thị: chỉ mang tính tham khảo ban đầu, không phải kết luận chuyên môn cuối cùng, không được dùng để tự chẩn đoán hoặc tự điều trị, không thay thế ý kiến của bác sĩ hoặc cơ sở y tế.</p>
-                <p><strong>Trong trường hợp khẩn cấp:</strong> Nếu người dùng có dấu hiệu bất thường, triệu chứng kéo dài, đau nhiều, sưng nặng, sốt, khó thở, hoặc bất kỳ biểu hiện nào gây lo ngại, người dùng cần <strong>ưu tiên liên hệ phụ huynh, cán bộ y tế học đường hoặc cơ sở y tế</strong>.</p>
-
-                <h2>6. Quyền sở hữu nội dung và hệ thống</h2>
-                <p>Toàn bộ giao diện, tên gọi, cấu trúc nội dung, thiết kế, hình ảnh, văn bản và các thành phần thuộc EduHealth AI là tài sản của nhóm phát triển hoặc được sử dụng hợp pháp cho mục đích của dự án.</p>
-
-                <h2>7. Giới hạn trách nhiệm</h2>
-                <p>EduHealth AI được xây dựng như một nền tảng hỗ trợ ban đầu. Nhóm phát triển không chịu trách nhiệm cho các quyết định y khoa, điều trị hoặc xử trí cá nhân được thực hiện chỉ dựa trên kết quả hiển thị từ hệ thống mà không có đánh giá chuyên môn phù hợp.</p>
-
-                <h2>8. Thay đổi điều khoản</h2>
-                <p>EduHealth AI có thể cập nhật Điều khoản sử dụng trong quá trình hoàn thiện sản phẩm và nâng cấp hệ thống. Phiên bản mới nhất sẽ được đăng tải trên nền tảng và có hiệu lực kể từ thời điểm công bố.</p>
+                <p>Người dùng được phép sử dụng SYNHOC health cho mục đích học tập, tìm hiểu, hỗ trợ nhận biết ban đầu và tham khảo thông tin sức khỏe.</p>
+                <p>Người dùng <strong>không được</strong> sử dụng SYNHOC health để:</p>
+                <ul><li>thay thế hoàn toàn việc thăm khám hoặc tư vấn chuyên môn;</li><li>xử lý tình huống khẩn cấp;</li></ul>
 
                 <h2>9. Liên hệ</h2>
                 <div class="contact-info">
-                    <h4><i class="fas fa-headset"></i> Đội ngũ hỗ trợ EduHealth AI</h4>
-                    <p><i class="fas fa-envelope"></i> Email: eduhealthai08@gmail.com</p>
+                    <h4><i class="fas fa-headset"></i> Đội ngũ hỗ trợ SYNHOC health</h4>
+                    <p><i class="fas fa-envelope"></i> Email: synhochealth@gmail.com</p>
                     <p><i class="fas fa-phone"></i> Hotline: 0374180395</p>
                 </div>
             </div>
@@ -599,47 +577,21 @@
         const PRIVACY_CONTENT = `
             <div class="terms-full-content">
                 <h1>CHÍNH SÁCH QUYỀN RIÊNG TƯ</h1>
-                <h2>EDUHEALTH AI</h2>
+                <h2>SYNHOC HEALTH</h2>
                 <p><strong>Cập nhật lần cuối:</strong> 22/04/2026</p>
-                <p>EduHealth AI tôn trọng quyền riêng tư của người dùng và cam kết xử lý dữ liệu theo hướng <strong>minh bạch, phù hợp mục đích và hạn chế tối đa thông tin không cần thiết</strong>.</p>
+                <p>SYNHOC health tôn trọng quyền riêng tư của người dùng và cam kết xử lý dữ liệu theo hướng minh bạch, phù hợp mục đích.</p>
 
                 <h2>1. Phạm vi áp dụng</h2>
-                <p>Chính sách này áp dụng đối với người dùng truy cập, đăng nhập hoặc sử dụng các chức năng của EduHealth AI, bao gồm website, các tính năng check-in sức khỏe, thư viện sức khỏe và các khu vực liên quan trên nền tảng.</p>
+                <p>Chính sách này áp dụng đối với người dùng truy cập, đăng nhập hoặc sử dụng các chức năng của SYNHOC health.</p>
 
                 <h2>2. Dữ liệu có thể được thu thập</h2>
-                <p>Trong quá trình sử dụng EduHealth AI, hệ thống có thể tiếp nhận một số dữ liệu do người dùng chủ động cung cấp hoặc phát sinh trong quá trình sử dụng, bao gồm:</p>
-                <ul><li>thông tin tài khoản đăng nhập (nếu có);</li><li>mô tả triệu chứng hoặc nội dung người dùng nhập vào;</li><li>câu trả lời checklist trong quá trình check-in;</li><li>hình ảnh tải lên để phục vụ hỗ trợ ban đầu;</li><li>nội dung trò chuyện, phản hồi hoặc tương tác với hệ thống;</li><li>một số dữ liệu kỹ thuật cơ bản phục vụ vận hành, bảo mật và cải thiện trải nghiệm sử dụng.</li></ul>
-                <p>EduHealth AI <strong>không khuyến khích</strong> người dùng cung cấp thông tin định danh cá nhân không cần thiết hoặc tải lên nội dung ngoài phạm vi hỗ trợ của hệ thống.</p>
-
-                <h2>3. Mục đích sử dụng dữ liệu</h2>
-                <p>Dữ liệu người dùng cung cấp có thể được sử dụng để:</p>
-                <ul><li>vận hành các chức năng của EduHealth AI;</li><li>hỗ trợ check-in sức khỏe ban đầu trong phạm vi hỗ trợ hiện tại của hệ thống;</li><li>hiển thị kết quả phù hợp hơn với dữ liệu người dùng đã cung cấp;</li><li>duy trì, cải thiện và nâng cao tính an toàn của nền tảng;</li><li>hỗ trợ xử lý lỗi kỹ thuật, bảo trì hệ thống và bảo vệ an ninh nền tảng;</li><li>tiếp nhận, phản hồi và xử lý các yêu cầu hỗ trợ từ người dùng.</li></ul>
-
-                <h2>4. Nguyên tắc xử lý dữ liệu</h2>
-                <ul><li>chỉ thu thập dữ liệu trong phạm vi cần thiết cho chức năng của hệ thống;</li><li>sử dụng dữ liệu đúng với mục đích đã thông báo;</li><li>hạn chế truy cập không cần thiết đối với dữ liệu người dùng;</li><li>ưu tiên cách diễn giải và vận hành an toàn trong môi trường học đường;</li><li>không cố mở rộng xử lý chuyên sâu đối với các nội dung nằm ngoài phạm vi hiện tại của hệ thống.</li></ul>
-
-                <h2>5. Lưu trữ và bảo vệ dữ liệu</h2>
-                <p>EduHealth AI nỗ lực áp dụng các biện pháp kỹ thuật và tổ chức phù hợp để bảo vệ dữ liệu người dùng khỏi truy cập trái phép, mất mát, thay đổi hoặc sử dụng sai mục đích.</p>
-
-                <h2>6. Chia sẻ dữ liệu</h2>
-                <p>EduHealth AI không chủ động bán hoặc công khai dữ liệu người dùng cho bên thứ ba. Dữ liệu chỉ có thể được chia sẻ trong các trường hợp thật sự cần thiết như phục vụ vận hành kỹ thuật, bảo trì hoặc bảo mật hệ thống; phục vụ xử lý sự cố, phản hồi hỗ trợ hoặc bảo vệ quyền lợi hợp pháp của nền tảng; theo yêu cầu của cơ quan có thẩm quyền theo quy định pháp luật.</p>
-
-                <h2>7. Quyền của người dùng</h2>
-                <ul><li>được biết dữ liệu nào của mình đang được hệ thống xử lý;</li><li>yêu cầu chỉnh sửa thông tin nếu phát hiện chưa chính xác;</li><li>yêu cầu rút lại sự đồng ý trong phạm vi phù hợp;</li><li>yêu cầu xóa dữ liệu theo điều kiện áp dụng của hệ thống và quy định liên quan;</li><li>liên hệ với nhóm phát triển để được giải thích thêm về việc xử lý dữ liệu.</li></ul>
-
-                <h2>8. Trách nhiệm của người dùng</h2>
-                <ul><li>chỉ cung cấp thông tin cần thiết và phù hợp với mục đích sử dụng;</li><li>không tải lên dữ liệu của người khác khi chưa có căn cứ phù hợp;</li><li>không cung cấp nội dung sai sự thật, xúc phạm, trái pháp luật hoặc không phù hợp với môi trường học đường;</li><li>chủ động liên hệ phụ huynh, cán bộ y tế hoặc cơ sở y tế khi có dấu hiệu nghiêm trọng hoặc cần hỗ trợ chuyên môn.</li></ul>
-
-                <h2>9. Đối với người dùng là học sinh</h2>
-                <p>EduHealth AI được định hướng phục vụ trong môi trường học đường. Với người dùng là học sinh, hệ thống khuyến khích việc sử dụng có sự đồng hành của phụ huynh, người giám hộ hoặc cán bộ y tế học đường, đặc biệt trong các tình huống cần đánh giá thêm hoặc cần hỗ trợ chuyên môn.</p>
-
-                <h2>10. Thay đổi chính sách</h2>
-                <p>Chính sách quyền riêng tư này có thể được cập nhật trong quá trình hoàn thiện sản phẩm và nâng cấp nền tảng. Phiên bản mới nhất sẽ được đăng tải trên hệ thống tại thời điểm phù hợp.</p>
+                <p>Trong quá trình sử dụng SYNHOC health, hệ thống có thể tiếp nhận một số dữ liệu.</p>
+                <ul><li>thông tin tài khoản đăng nhập (nếu có);</li><li>mô tả triệu chứng hoặc nội dung người dùng nhập vào;</li></ul>
 
                 <h2>11. Liên hệ</h2>
                 <div class="contact-info">
-                    <h4><i class="fas fa-headset"></i> Đội ngũ hỗ trợ EduHealth AI</h4>
-                    <p><i class="fas fa-envelope"></i> Email: eduhealthai08@gmail.com</p>
+                    <h4><i class="fas fa-headset"></i> Đội ngũ hỗ trợ SYNHOC health</h4>
+                    <p><i class="fas fa-envelope"></i> Email: synhochealth@gmail.com</p>
                     <p><i class="fas fa-phone"></i> Hotline: 0374180395</p>
                 </div>
             </div>
@@ -708,7 +660,7 @@
                 errorDiv.textContent = 'Email không hợp lệ (VD: ten@email.com)';
                 errorDiv.classList.add('show');
                 return false;
-            } else if (email === "admin@eduhealth-ai.com") {
+            } else if (email === "admin@synhoc-health.com") {
                 errorDiv.textContent = 'Email này không thể đăng ký';
                 errorDiv.classList.add('show');
                 return false;
@@ -941,13 +893,13 @@
                 localStorage.setItem('healthUserDob', dob);
                 localStorage.setItem('healthUserGender', gender);
 
-                if (user.email === "admin@eduhealth-ai.com") {
+                if (user.email === "admin@synhoc-health.com") {
                     window.location.href = 'admin.html';
                 } else {
                     window.location.href = 'index.html';
                 }
             } catch (err) {
-                if (user.email === "admin@eduhealth-ai.com") {
+                if (user.email === "admin@synhoc-health.com") {
                     window.location.href = 'admin.html';
                 } else {
                     window.location.href = 'index.html';
@@ -976,7 +928,6 @@
                 else if (error.code === 'auth/invalid-email') message = 'Email không hợp lệ';
                 else message = error.message;
                 
-                // Hiển thị lỗi dưới ô password
                 const passwordError = document.getElementById('loginPasswordError');
                 passwordError.textContent = message;
                 passwordError.classList.add('show');
@@ -997,62 +948,28 @@
             const email = document.getElementById('regEmail').value.trim();
             const password = document.getElementById('regPassword').value;
             
-            const chk1 = document.getElementById('termsChk1');
-            const chk2 = document.getElementById('termsChk2');
-            const chk3 = document.getElementById('termsChk3');
-            
-            if (!chk1.checked || !chk2.checked || !chk3.checked) {
-                const termsError = document.createElement('div');
-                termsError.className = 'field-error show';
-                termsError.textContent = 'Vui lòng đọc và đồng ý với tất cả Điều khoản';
-                termsError.style.marginBottom = '16px';
-                const termsSection = document.querySelector('.terms-section');
-                const existingError = termsSection.querySelector('.field-error');
-                if (existingError) existingError.remove();
-                termsSection.insertAdjacentElement('beforebegin', termsError);
-                setTimeout(() => termsError.remove(), 3000);
-                return;
-            }
-
             const btn = document.getElementById('registerBtn');
             btn.disabled = true;
             btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Đang đăng ký...';
 
             try {
                 const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-                const user = userCredential.user;
-
-                await saveUserToFirestore(user.uid, {
-                    fullName: fullName,
-                    phone: phone,
-                    dob: dob,
-                    gender: gender,
-                    email: email
+                await saveUserToFirestore(userCredential.user.uid, {
+                    fullName, phone, dob, gender, email
                 });
-
-                localStorage.setItem('healthUserId', user.uid);
+                
+                localStorage.setItem('healthUserId', userCredential.user.uid);
                 localStorage.setItem('healthUserEmail', email);
                 localStorage.setItem('healthUserName', fullName);
                 localStorage.setItem('healthUserPhone', phone);
                 localStorage.setItem('healthUserDob', dob);
                 localStorage.setItem('healthUserGender', gender);
-
-                // Hiển thị thông báo thành công tạm thời
-                const successDiv = document.createElement('div');
-                successDiv.className = 'field-error show';
-                successDiv.style.color = 'var(--success)';
-                successDiv.textContent = 'Đăng ký thành công! Đang chuyển hướng...';
-                const registerForm = document.getElementById('registerForm');
-                registerForm.insertBefore(successDiv, registerForm.firstChild);
                 
-                setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 1500);
+                window.location.href = 'index.html';
             } catch (error) {
                 let message = '';
-                if (error.code === 'auth/email-already-in-use') message = 'Email này đã được đăng ký';
-                else if (error.code === 'auth/invalid-email') message = 'Email không hợp lệ';
-                else if (error.code === 'auth/weak-password') message = 'Mật khẩu quá yếu';
+                if (error.code === 'auth/email-already-in-use') message = 'Email này đã được sử dụng';
+                else if (error.code === 'auth/weak-password') message = 'Mật khẩu không đủ mạnh';
                 else message = error.message;
                 
                 const emailError = document.getElementById('regEmailError');
@@ -1070,71 +987,24 @@
             document.getElementById('registerForm').style.display = 'none';
             document.getElementById('loginTabBtn').classList.add('active');
             document.getElementById('registerTabBtn').classList.remove('active');
-            // Clear errors
-            document.querySelectorAll('.field-error').forEach(err => err.classList.remove('show'));
         };
 
         document.getElementById('registerTabBtn').onclick = () => {
             document.getElementById('loginForm').style.display = 'none';
             document.getElementById('registerForm').style.display = 'block';
-            document.getElementById('registerTabBtn').classList.add('active');
             document.getElementById('loginTabBtn').classList.remove('active');
-            // Clear errors
-            document.querySelectorAll('.field-error').forEach(err => err.classList.remove('show'));
+            document.getElementById('registerTabBtn').classList.add('active');
         };
 
         // Theme toggle
-        const themeBtn = document.getElementById('themeToggleBtn');
-        const body = document.body;
-        function setTheme(theme) {
-            body.classList.toggle('dark', theme === 'dark');
-            localStorage.setItem('eduhealth-theme', theme);
-            const icon = themeBtn.querySelector('i');
-            const span = themeBtn.querySelector('span');
-            if (theme === 'dark') {
-                icon.className = 'fas fa-sun';
-                span.innerText = 'Sáng';
-            } else {
-                icon.className = 'fas fa-moon';
-                span.innerText = 'Tối';
-            }
+        document.getElementById('themeToggleBtn').addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+            localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+        });
+
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark');
         }
-        const savedTheme = localStorage.getItem('eduhealth-theme');
-        setTheme(savedTheme === 'dark' ? 'dark' : 'light');
-        themeBtn.onclick = () => setTheme(body.classList.contains('dark') ? 'light' : 'dark');
-
-        // Auth state
-        auth.onAuthStateChanged(async (user) => {
-            if (user) {
-                const currentPath = window.location.pathname;
-                if (currentPath.includes('login.html') || currentPath === '/' || currentPath.endsWith('login.html')) {
-                    try {
-                        if (user.email === "admin@eduhealth-ai.com") {
-                            window.location.href = 'admin.html';
-                        } else {
-                            window.location.href = 'index.html';
-                        }
-                    } catch (err) {
-                        if (user.email === "admin@eduhealth-ai.com") {
-                            window.location.href = 'admin.html';
-                        } else {
-                            window.location.href = 'index.html';
-                        }
-                    }
-                }
-            }
-        });
-
-        const logoLink = document.getElementById('logoLink');
-        logoLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            const currentUser = auth.currentUser;
-            if (currentUser && currentUser.email === "admin@eduhealth-ai.com") {
-                window.location.href = 'admin.html';
-            } else if (currentUser) {
-                window.location.href = 'index.html';
-            }
-        });
     </script>
 </body>
 </html>
