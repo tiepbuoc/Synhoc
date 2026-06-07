@@ -3,7 +3,7 @@
 <head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Quản trị hệ thống - EduHealth AI</title>
+    <title>Quản trị hệ thống - SYNHOC</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;0,600;1,300;1,500&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
@@ -15,25 +15,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         :root {
-            --blue-primary: #3b82f6;
-            --blue-deep: #2563eb;
-            --pink-primary: #f472b6;
-            --pink-deep: #ec489a;
+            --blue-primary: #FF9500;
+            --blue-deep: #E67E22;
+            --pink-primary: #FFFFFF;
+            --pink-deep: #FFFFFF;
             --grad-blue-pink: linear-gradient(135deg, var(--blue-primary), var(--pink-primary));
             --grad-pink-blue: linear-gradient(135deg, var(--pink-deep), var(--blue-primary));
-            --bg-body: linear-gradient(135deg, #ffffff 0%, #fff5f8 100%);
-            --bg-surface: #fff5f8;
+            --bg-body: linear-gradient(135deg, #ffffff 0%, #fff9f0 100%);
+            --bg-surface: #fff9f0;
             --card-bg: #ffffff;
             --text-dark: #0f172a;
             --text-mid: #334155;
             --text-dim: #64748b;
-            --border-light: #ffe0ec;
-            --border-soft: #fef0f5;
+            --border-light: #FFE0CC;
+            --border-soft: #FFF9F0;
             --shadow-sm: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
             --shadow-md: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
-            --hover-glow: rgba(59, 130, 246, 0.12);
+            --hover-glow: rgba(255, 149, 0, 0.12);
             --nav-bg: rgba(255, 255, 255, 0.95);
-            --tag-bg: #fce7f3;
+            --tag-bg: #FFF0E0;
             --input-bg: #ffffff;
             --success: #10b981;
             --warning: #f59e0b;
@@ -206,7 +206,7 @@
         .tab-btn.active {
             background: linear-gradient(135deg, var(--blue-primary), var(--pink-primary));
             color: white;
-            box-shadow: 0 6px 14px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 6px 14px rgba(255, 149, 0, 0.3);
         }
 
         .tab-btn:hover:not(.active) {
@@ -263,7 +263,7 @@
         .form-control:focus, .form-select:focus {
             outline: none;
             border-color: var(--blue-primary);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            box-shadow: 0 0 0 3px rgba(255, 149, 0, 0.1);
         }
 
         textarea.form-control {
@@ -285,7 +285,7 @@
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 8px 20px rgba(255, 149, 0, 0.3);
         }
 
         .btn-success {
@@ -1439,14 +1439,14 @@
     <nav>
         <a href="index.html" class="logo">
             <div class="logo-mark"><i class="fas fa-heartbeat"></i></div>
-            <div class="logo-type">EduHealth AI</div>
+            <div class="logo-type">SYNHOC</div>
         </a>
         <div class="nav-menu">
             <a href="index.html" class="nav-link"><i class="fas fa-clipboard-list"></i> Cẩm nang sức khỏe</a>
             <a href="checkin.html" class="nav-link"><i class="fas fa-clipboard-list"></i> Check-in sức khỏe</a>
             <a href="map.html" class="nav-link"><i class="fas fa-hospital-user"></i> Điểm hỗ trợ y tế</a>
             <a href="forum.html" class="nav-link"><i class="fas fa-comments"></i> Diễn đàn</a>
-            <a href="EPH.html" class="nav-link" style="background: linear-gradient(135deg, #f59e0b, #ec489a); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700;">
+            <a href="EPH.html" class="nav-link" style="background: linear-gradient(135deg, #f59e0b, #FFFFFF); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700;">
                 <i class="fas fa-gamepad" style="color: #f59e0b;"></i> EduPlay Health
             </a>
         </div>
@@ -1485,7 +1485,7 @@
         <!-- Tab: Quản lý kiến thức AI -->
         <div id="tab-knowledge" class="tab-content">
             <div class="form-card">
-                <h2 style="margin-bottom: 8px;"><i class="fas fa-brain"></i> Kho kiến thức của EduHealth AI</h2>
+                <h2 style="margin-bottom: 8px;"><i class="fas fa-brain"></i> Kho kiến thức của SYNHOC</h2>
                 <p style="color: var(--text-dim); margin-bottom: 24px;">AI sẽ đọc toàn bộ nội dung dưới đây để hỗ trợ người dùng. Hãy cập nhật kiến thức đầy đủ và chính xác nhé.</p>
                 
                 <div class="knowledge-section">
@@ -1792,7 +1792,7 @@
                                 </div>
                             </div>
                             <div class="info-row-preview">
-                                <div class="info-icon-preview" style="background: #fce7f3;">🧬</div>
+                                <div class="info-icon-preview" style="background: #FFF0E0;">🧬</div>
                                 <div style="flex:1">
                                     <div class="info-label-preview" style="color: #db2777;">Nó là gì thế?</div>
                                     <textarea class="form-control" id="handbookShortDesc" rows="2" placeholder="VD: Là bệnh do virus gây sốt, mệt và ban ngứa..."></textarea>
@@ -1836,7 +1836,7 @@
                                 <input type="text" class="form-control" id="handbookStep1" placeholder="VD: NGỪNG: Ngừng đi học, đi chơi khi đang sốt hoặc còn nổi nốt mới">
                             </div>
                             <div class="step-preview">
-                                <div class="step-num-preview" style="background: #3b82f6;">2</div>
+                                <div class="step-num-preview" style="background: #FF9500;">2</div>
                                 <input type="text" class="form-control" id="handbookStep2" placeholder="VD: RỬA: Giữ da sạch, rửa tay sau khi chạm vào nốt">
                             </div>
                             <div class="step-preview">
@@ -2518,7 +2518,7 @@ let locations = [];
                 const sender = document.createElement('div');
                 sender.className = 'message-sender';
                 let senderName = '';
-                if (message.senderId === 'ai') senderName = '🤖 EduHealth AI';
+                if (message.senderId === 'ai') senderName = '🤖 SYNHOC';
                 else if (message.senderId === 'user') senderName = message.senderName || 'Khách hàng';
                 else senderName = message.senderName || 'Khách hàng';
                 sender.textContent = senderName;
@@ -2577,7 +2577,7 @@ let locations = [];
                 let messagesHtml = '';
                 messagesSnapshot.forEach(doc => {
                     const msg = doc.data();
-                    const senderName = msg.senderName || (msg.senderId === 'admin_support' ? 'Cộng tác viên y tế' : (msg.senderId === 'ai' ? 'EduHealth AI' : 'Học sinh'));
+                    const senderName = msg.senderName || (msg.senderId === 'admin_support' ? 'Cộng tác viên y tế' : (msg.senderId === 'ai' ? 'SYNHOC' : 'Học sinh'));
                     const time = msg.timestamp ? msg.timestamp.toDate().toLocaleString('vi-VN') : '';
                     
                     let messageText = msg.text || '';
@@ -2585,7 +2585,7 @@ let locations = [];
                     
                     messagesHtml += `
                         <div style="margin-bottom: 20px; padding: 12px; border-bottom: 1px solid #e0e0e0;">
-                            <div style="font-weight: bold; color: #3b82f6; margin-bottom: 6px;">${escapeHtml(senderName)}</div>
+                            <div style="font-weight: bold; color: #FF9500; margin-bottom: 6px;">${escapeHtml(senderName)}</div>
                             <div style="margin: 5px 0; line-height: 1.6;">${messageText}</div>
                             ${msg.imageData ? `<img src="${msg.imageData}" style="max-width: 200px; border-radius: 12px; margin-top: 8px;">` : ''}
                             <div style="font-size: 10px; color: #999; margin-top: 6px;">${time}</div>
@@ -2600,14 +2600,14 @@ let locations = [];
                     <head><meta charset="UTF-8"><title>Lịch sử trò chuyện</title>
                     <style>
                         body { font-family: 'DM Sans', Arial, sans-serif; padding: 40px; line-height: 1.6; }
-                        .header { text-align: center; border-bottom: 2px solid #f472b6; padding-bottom: 15px; margin-bottom: 20px; }
+                        .header { text-align: center; border-bottom: 2px solid #FFFFFF; padding-bottom: 15px; margin-bottom: 20px; }
                         .info { background: #f7fafc; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
                         .footer { text-align: center; margin-top: 30px; font-size: 10px; color: #718096; }
                         .message-container { margin-top: 20px; }
                         strong { font-weight: 700; color: #1e293b; }
                         em { font-style: italic; }
-                        h2 { font-size: 1.3em; margin: 1em 0 0.5em; color: #3b82f6; }
-                        h3 { font-size: 1.2em; margin: 0.8em 0 0.4em; color: #f472b6; }
+                        h2 { font-size: 1.3em; margin: 1em 0 0.5em; color: #FF9500; }
+                        h3 { font-size: 1.2em; margin: 0.8em 0 0.4em; color: #FFFFFF; }
                         h4 { font-size: 1.1em; margin: 0.6em 0 0.3em; }
                         ul, ol { margin: 0.5em 0 0.5em 1.5em; }
                         li { margin: 0.2em 0; }
@@ -2616,7 +2616,7 @@ let locations = [];
                     </head>
                     <body>
                         <div class="header">
-                            <h1>🏥 EduHealth AI - Lịch sử trò chuyện</h1>
+                            <h1>🏥 SYNHOC - Lịch sử trò chuyện</h1>
                             <p>Ngày xuất: ${new Date().toLocaleString('vi-VN')}</p>
                         </div>
                         <div class="info">
@@ -2628,7 +2628,7 @@ let locations = [];
                             <h2>💬 Nội dung trò chuyện</h2>
                             ${messagesHtml || '<p>Chưa có tin nhắn nào.</p>'}
                         </div>
-                        <div class="footer">© 2026 EduHealth AI</div>
+                        <div class="footer">© 2026 SYNHOC</div>
                     </body>
                     </html>
                 `;
@@ -3110,7 +3110,7 @@ let locations = [];
             if (data.step1 || data.step2 || data.step3 || data.step4) {
                 const steps = [
                     { num: 1, text: data.step1, color: '#f97316' },
-                    { num: 2, text: data.step2, color: '#3b82f6' },
+                    { num: 2, text: data.step2, color: '#FF9500' },
                     { num: 3, text: data.step3, color: '#f59e0b' },
                     { num: 4, text: data.step4, color: '#22c55e' }
                 ].filter(s => s.text);
@@ -3157,7 +3157,7 @@ let locations = [];
                                 <div><div style="font-size: 0.82rem; font-weight: 800; color: #7c3aed; margin-bottom: 2px;">Cái tên \"sang chảnh\"</div><div style="font-size: 0.9rem; color: var(--text-dark); line-height: 1.5;">${escapeHtml(data.scientificName || '')}</div></div>
                             </div>
                             <div style="display: flex; align-items: flex-start; gap: 14px; background: var(--bg-surface); border-radius: 14px; padding: 14px 16px;">
-                                <div style="width: 40px; height: 40px; border-radius: 12px; background: #fce7f3; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">🧬</div>
+                                <div style="width: 40px; height: 40px; border-radius: 12px; background: #FFF0E0; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">🧬</div>
                                 <div><div style="font-size: 0.82rem; font-weight: 800; color: #db2777; margin-bottom: 2px;">Nó là gì thế?</div><div style="font-size: 0.9rem; color: var(--text-dark); line-height: 1.5;">${escapeHtml(data.shortDesc || '')}</div></div>
                             </div>
                             <div style="display: flex; align-items: flex-start; gap: 14px; background: var(--bg-surface); border-radius: 14px; padding: 14px 16px;">
@@ -3690,4 +3690,7 @@ let locations = [];
     </script>
 </body>
 </html>
+
+
+
 

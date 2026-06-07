@@ -3,31 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Check-in sức khỏe cùng EduHealth AI</title>
+    <title>Check-in sức khỏe cùng SYNHOC</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;0,600;1,300;1,500&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         :root {
-            --blue-primary: #3b82f6;
-            --blue-deep: #2563eb;
-            --pink-primary: #f472b6;
-            --pink-deep: #ec489a;
+            --blue-primary: #FF9500;
+            --blue-deep: #E67E22;
+            --pink-primary: #FFFFFF;
+            --pink-deep: #FFFFFF;
             --grad-blue-pink: linear-gradient(135deg, var(--blue-primary), var(--pink-primary));
             --grad-pink-blue: linear-gradient(135deg, var(--pink-deep), var(--blue-primary));
             --bg-body: #ffffff;
-            --bg-surface: #fef9ff;
+            --bg-surface: #FFF9F0;
             --card-bg: #ffffff;
             --text-dark: #0f172a;
             --text-mid: #334155;
             --text-dim: #64748b;
-            --border-light: #ffe4f0;
+            --border-light: #FFE0CC;
             --border-soft: #f1f5f9;
             --shadow-sm: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
             --shadow-md: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
             --nav-bg: rgba(255, 255, 255, 0.92);
-            --tag-bg: #fce7f3;
+            --tag-bg: #FFF0E0;
             --input-bg: #ffffff;
             --success: #10b981;
             --warning: #f59e0b;
@@ -174,7 +174,7 @@
         }
         .auth-btn:hover {
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 4px 12px rgba(255, 149, 0, 0.3);
         }
 
         .user-info {
@@ -297,7 +297,7 @@
         }
         .chat-nav-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 8px 20px rgba(255, 149, 0, 0.3);
         }
 
         .card {
@@ -358,7 +358,7 @@
         }
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 5px 15px rgba(255, 149, 0, 0.3);
         }
         .btn-outline {
             background: transparent;
@@ -774,7 +774,7 @@
 
 .warning-popup-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 5px 15px rgba(255, 149, 0, 0.3);
 }
         @media (max-width: 768px) {
             .nav-menu { display: none; }
@@ -1006,14 +1006,14 @@
     <nav id="nav">
         <a href="index.html" class="logo">
             <div class="logo-mark"><i class="fas fa-heartbeat"></i></div>
-            <div class="logo-type">EduHealth AI</div>
+            <div class="logo-type">SYNHOC</div>
         </a>
         <div class="nav-menu">
             <a href="index.html" class="nav-link"><i class="fas fa-heartbeat"></i> Cẩm nang sức khỏe</a>
             <a href="checkin.html" class="nav-link"><i class="fas fa-clipboard-list"></i> Check-in sức khỏe</a>
             <a href="map.html" class="nav-link"><i class="fas fa-hospital-user"></i> Điểm hỗ trợ y tế</a>
             <a href="forum.html" class="nav-link"><i class="fas fa-comments"></i> Diễn đàn</a>
-            <a href="EPH.html" class="nav-link" style="background: linear-gradient(135deg, #f59e0b, #ec489a); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700;">
+            <a href="EPH.html" class="nav-link" style="background: linear-gradient(135deg, #f59e0b, #FFFFFF); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700;">
                 <i class="fas fa-gamepad" style="color: #f59e0b;"></i> EduPlay Health
             </a>
         </div>
@@ -1034,7 +1034,7 @@
     </div>
     <div class="container">
         <div class="page-header">
-            <h1 class="page-title"><i class="fas fa-stethoscope"></i> Check-in sức khỏe cùng EduHealth AI</h1>
+            <h1 class="page-title"><i class="fas fa-stethoscope"></i> Check-in sức khỏe cùng SYNHOC</h1>
             <a href="chatbox.html" class="chat-nav-btn"><i class="fas fa-comment-dots"></i> Liên hệ CBYT/Trò chuyện EduhealthAI</a>
         </div>
 <!-- PRIVACY & DEMO MODAL - BẮT BUỘC TICK HẾT -->
@@ -1115,7 +1115,7 @@
 </div>
         <!-- BƯỚC 1: NHẬP ẢNH + MÔ TẢ + THỜI GIAN -->
         <div id="step1Container" class="card">
-            <h3 style="margin-bottom: 16px;"><i class="fas fa-camera-retro"></i> Để EduHealth AI giúp bạn nhận biết sớm vấn đề!</h3>
+            <h3 style="margin-bottom: 16px;"><i class="fas fa-camera-retro"></i> Để SYNHOC giúp bạn nhận biết sớm vấn đề!</h3>
             <div class="upload-area" id="dropZone">
                 <i class="fas fa-cloud-upload-alt"></i>
                 <p>Tải ảnh hoặc chụp trực tiếp <span style="color: var(--text-dim);">(không bắt buộc)</span></p>
@@ -1140,7 +1140,7 @@
             </div>
             
             <label class="symptom-description"><i class="fas fa-edit"></i> 📝 Hãy mô tả cảm giác của bạn lúc này <span style="color: var(--danger);">*</span>:</label>
-            <textarea id="symptomText" rows="3" placeholder="Ví dụ: Em bị đau họng 2 ngày nay, kèm theo sốt nhẹ và mệt mỏi... Càng chi tiết, EduHealth AI càng hỗ trợ bạn tốt hơn."></textarea>
+            <textarea id="symptomText" rows="3" placeholder="Ví dụ: Em bị đau họng 2 ngày nay, kèm theo sốt nhẹ và mệt mỏi... Càng chi tiết, SYNHOC càng hỗ trợ bạn tốt hơn."></textarea>
             
             <label class="symptom-description"><i class="fas fa-clock"></i> ⏱️ Bạn đã gặp tình trạng này trong bao lâu?</label>
             <input type="text" id="durationText" class="duration-input" placeholder="Ví dụ: 2 ngày, 1 tuần, 1 tháng, từ hồi tháng trước..." autocomplete="off">
@@ -1149,13 +1149,13 @@
                 <button class="btn btn-primary" id="step1Btn"><i class="fas fa-magic"></i> Bắt đầu check-in sức khỏe</button>
             </div>
             <div class="footer-note">
-                <i class="fas fa-shield-alt"></i> EduHealth AI hỗ trợ chăm sóc sức khỏe học đường, không thay thế bác sĩ hay chẩn đoán trực tiếp.
+                <i class="fas fa-shield-alt"></i> SYNHOC hỗ trợ chăm sóc sức khỏe học đường, không thay thế bác sĩ hay chẩn đoán trực tiếp.
             </div>
         </div>
 
         <!-- BƯỚC 2: CHECKLIST -->
         <div id="step2Container" class="card" style="display: none;">
-            <h3 style="margin-bottom: 16px;"><i class="fas fa-check-square"></i> 2️⃣ Hãy cho EduHealth AI biết thêm về tình trạng của bạn</h3>
+            <h3 style="margin-bottom: 16px;"><i class="fas fa-check-square"></i> 2️⃣ Hãy cho SYNHOC biết thêm về tình trạng của bạn</h3>
             <div id="checklistArea" class="checklist-container">
                 <div style="text-align:center; color: var(--text-dim); padding: 40px 20px;">
                     <i class="fas fa-spinner fa-pulse"></i> Đang tạo checklist...
@@ -1172,8 +1172,8 @@
         <!-- BƯỚC 3: KẾT QUẢ -->
         <div id="step3Container" class="card" style="display: none;">
             <div class="result-area" style="padding: 0;">
-                <div class="result-title"><i class="fas fa-chart-line"></i> 📊 Kết quả nhận biết từ EduHealth AI</div>
-                <div id="analysisResult">✨ EduHealth AI đã sẵn sàng, hãy chia sẻ cùng mình nhé!</div>
+                <div class="result-title"><i class="fas fa-chart-line"></i> 📊 Kết quả nhận biết từ SYNHOC</div>
+                <div id="analysisResult">✨ SYNHOC đã sẵn sàng, hãy chia sẻ cùng mình nhé!</div>
                 <div id="imageAnalysisSection" style="display: none;"></div>
                 <div id="pdfButtonSection" class="chat-btn-section" style="display: none;">
                     <button class="btn-pdf" id="downloadPdfBtn"><i class="fas fa-file-pdf"></i> Tải xuống PDF đánh giá</button>
@@ -1200,7 +1200,7 @@
         <div class="modal-content">
             <i class="fas fa-exclamation-triangle" style="font-size: 48px; color: var(--warning); margin-bottom: 16px;"></i>
             <h3>⚠️ Không hỗ trợ vấn đề này</h3>
-            <p>EduHealth AI hiện tại chỉ hỗ trợ nhận biết <strong>các vấn đề về da liễu</strong> (mụn, phát ban, mẩn đỏ, vết thương, tổn thương da).</p>
+            <p>SYNHOC hiện tại chỉ hỗ trợ nhận biết <strong>các vấn đề về da liễu</strong> (mụn, phát ban, mẩn đỏ, vết thương, tổn thương da).</p>
             <p>Thông tin bạn cung cấp (cả ảnh và mô tả) không liên quan đến da liễu.</p>
             <p>Vui lòng quay lại <strong>Thư viện Cẩm nang sức khỏe</strong> để tìm hiểu thêm,<br>
             và liên hệ với <strong>Cán bộ y tế nhà trường</strong> để được hỗ trợ kịp thời.</p>
@@ -1695,7 +1695,7 @@ function showRejectModal() {
         <i class="fas fa-info-circle" style="font-size: 48px; color: var(--warning); margin-bottom: 16px;"></i>
         <h3 style="font-family: 'Fraunces', serif; margin-bottom: 16px;">⚠️ Thông báo</h3>
         <p style="line-height: 1.6; margin-bottom: 16px; text-align: left;">
-            Hiện tại AI Check-in của EduHealth AI đang hỗ trợ chuyên sâu cho <strong>module mụn học đường</strong>. 
+            Hiện tại AI Check-in của SYNHOC đang hỗ trợ chuyên sâu cho <strong>module mụn học đường</strong>. 
             Với vấn đề bạn đang gặp, hệ thống chưa đủ cơ sở để đưa ra hỗ trợ check-in chuyên sâu một cách an toàn.
         </p>
         <p style="line-height: 1.6; margin-bottom: 16px; text-align: left;">
@@ -1704,7 +1704,7 @@ function showRejectModal() {
         <ul style="text-align: left; margin-bottom: 20px; padding-left: 20px; line-height: 1.8;">
             <li><strong>(1)</strong> Xem thông tin phù hợp trong <strong>Thư viện sức khỏe</strong></li>
             <li><strong>(2)</strong> Liên hệ <strong>CBYT / phụ huynh</strong> để được hỗ trợ thêm</li>
-            <li><strong>(3)</strong> Trò chuyện với <strong>EduHealth AI</strong> để được hướng dẫn bước tiếp theo</li>
+            <li><strong>(3)</strong> Trò chuyện với <strong>SYNHOC</strong> để được hướng dẫn bước tiếp theo</li>
         </ul>
         <p style="line-height: 1.6; margin-bottom: 20px; font-size: 13px; color: var(--text-dim);">
             Nếu có dấu hiệu bất thường hoặc bạn đang lo lắng nhiều, hãy ưu tiên liên hệ người lớn hoặc cơ sở y tế.
@@ -1713,7 +1713,7 @@ function showRejectModal() {
             <a href="index.html" class="btn-primary" style="text-decoration: none; padding: 10px 20px;">
                 <i class="fas fa-book-open"></i> Đến Thư viện sức khỏe
             </a>
-            <a href="chatbox.html" class="btn-primary" style="text-decoration: none; background: linear-gradient(135deg, #10b981, #3b82f6); padding: 10px 20px;">
+            <a href="chatbox.html" class="btn-primary" style="text-decoration: none; background: linear-gradient(135deg, #10b981, #FF9500); padding: 10px 20px;">
                 <i class="fas fa-comment-dots"></i> Trò chuyện với AI
             </a>
             <button class="btn-outline" id="closeModalBtn" style="padding: 10px 20px;">Đóng</button>
@@ -1909,7 +1909,7 @@ Quy tắc:
             const referenceQuestions = await loadChecklistQuestionsFromFirestore();
             const referenceText = referenceQuestions.map((q, idx) => `${idx + 1}. ${q}`).join('\n');
             
-            const prompt = `Bạn là trợ lý y tế của EduHealth AI. Hãy tạo một CHECKLIST các triệu chứng để hỏi người dùng dựa trên thông tin sau:
+            const prompt = `Bạn là trợ lý y tế của SYNHOC. Hãy tạo một CHECKLIST các triệu chứng để hỏi người dùng dựa trên thông tin sau:
 
 THÔNG TIN NGƯỜI DÙNG:
 - Mô tả triệu chứng: "${userSymptom}"
@@ -2054,7 +2054,7 @@ Trả về JSON thuần túy, không có markdown.`;
                     const ctx = canvas.getContext('2d');
                     ctx.drawImage(img, 0, 0);
                     
-                    const colors = ['#ef4444', '#f59e0b', '#10b981', '#3b82f6', '#8b5cf6'];
+                    const colors = ['#ef4444', '#f59e0b', '#10b981', '#FF9500', '#8b5cf6'];
                     
                     areas.forEach((area, idx) => {
                         const color = colors[idx % colors.length];
@@ -2248,7 +2248,7 @@ async function drawFinalBoxes(base64, areas) {
             canvas.height = img.height;
             const ctx = canvas.getContext('2d');
             ctx.drawImage(img, 0, 0);
-            const colors = ['#ef4444', '#3b82f6', '#10b981'];
+            const colors = ['#ef4444', '#FF9500', '#10b981'];
             areas.forEach((area, idx) => {
                 const color = colors[idx % colors.length];
                 const cx = area.x_percent * img.width;
@@ -2492,7 +2492,7 @@ function displayComparisonImages(originalImage, highlightedImage, detectionSumma
                 diagnosisKnowledge = "";
             }
             
-            const prompt = `Bạn là trợ lý y tế của EduHealth AI, hỗ trợ nhận biết sớm vấn đề sức khỏe cho HỌC SINH.
+            const prompt = `Bạn là trợ lý y tế của SYNHOC, hỗ trợ nhận biết sớm vấn đề sức khỏe cho HỌC SINH.
 
 THÔNG TIN:
 - Mô tả triệu chứng: "${userSymptom}"
@@ -2550,14 +2550,14 @@ async function step1CreateChecklist() {
     const userDuration = durationInput.value.trim();
     
     if (!userSymptom) { 
-        alert("Vui lòng mô tả cảm giác của bạn để EduHealth AI hỗ trợ tốt hơn."); 
+        alert("Vui lòng mô tả cảm giác của bạn để SYNHOC hỗ trợ tốt hơn."); 
         return; 
     }
     
     if (isProcessing) return;
     isProcessing = true;
     step1Btn.disabled = true;
-    step1Btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> EduHealth AI đang phân tích...';
+    step1Btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> SYNHOC đang phân tích...';
     
     try {
         // ========== BƯỚC 1: KIỂM TRA ĐỘ NÉT ẢNH TRƯỚC TIÊN ==========
@@ -2696,11 +2696,11 @@ async function step1CreateChecklist() {
             if (isProcessing) return;
             isProcessing = true;
             step2Btn.disabled = true;
-            step2Btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> EduHealth AI đang phân tích...';
+            step2Btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> SYNHOC đang phân tích...';
             
             step2Container.style.display = "none";
             step3Container.style.display = "block";
-            analysisResultDiv.innerHTML = '<div class="loading"><i class="fas fa-brain"></i> EduHealth AI đang xem xét thông tin của bạn... (15-20s)</div>';
+            analysisResultDiv.innerHTML = '<div class="loading"><i class="fas fa-brain"></i> SYNHOC đang xem xét thông tin của bạn... (15-20s)</div>';
             chatButtonSection.style.display = "none";
             pdfButtonSection.style.display = "none";
             historySection.style.display = "none";
@@ -2913,7 +2913,7 @@ try {
                 await db.collection('health_chats').doc(chatId).collection('messages').add({ 
                     text: resultMessage, 
                     senderId: 'system', 
-                    senderName: 'EduHealth AI', 
+                    senderName: 'SYNHOC', 
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(), 
                     isSystem: true 
                 });
@@ -2941,7 +2941,7 @@ try {
                 const highlightedImg = data.highlightedImageBase64 || data.originalImageBase64;
                 imageComparisonHtml = `
                     <div style="margin: 20px 0; padding: 15px; border: 1px solid #e0e0e0; border-radius: 16px;">
-                        <h3 style="color: #2563eb;">🖼️ Phân tích ảnh</h3>
+                        <h3 style="color: #E67E22;">🖼️ Phân tích ảnh</h3>
                         <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
                             <div style="flex: 1; min-width: 200px; text-align: center;">
                                 <p><strong>Ảnh gốc</strong></p>
@@ -2963,12 +2963,12 @@ try {
                 const levelText = fr.action_level === 1 ? '🟢 Mức 1 - Theo dõi' : (fr.action_level === 2 ? '🟡 Mức 2 - Đi khám sớm' : '🔴 Mức 3 - Đi khám ngay');
                 formattedResult = `
                     <div style="margin: 15px 0;">
-                        <div style="background: linear-gradient(135deg, #3b82f6, #f472b6); border-radius: 16px; padding: 20px; color: white;">
+                        <div style="background: linear-gradient(135deg, #FF9500, #FFFFFF); border-radius: 16px; padding: 20px; color: white;">
                             <h3 style="color: white; margin: 0 0 8px 0;">🔍 Nhận biết sơ bộ</h3>
                             <p style="margin: 0;">${escapeHtml(fr.preliminary || '')}</p>
                         </div>
                         
-                        <h3 style="margin-top: 20px; color: #3b82f6;">💡 Giải thích</h3>
+                        <h3 style="margin-top: 20px; color: #FF9500;">💡 Giải thích</h3>
                         <p>${escapeHtml(fr.explanation || '')}</p>
                         
                         <h3 style="margin-top: 20px; color: #f59e0b;">⚠️ Dấu hiệu cần lưu ý</h3>
@@ -2987,7 +2987,7 @@ try {
             <head><meta charset="UTF-8"><title>Kết quả check-in</title>
             <style>
                 body { font-family: 'DM Sans', Arial, sans-serif; padding: 40px; }
-                .header { text-align: center; border-bottom: 2px solid #f472b6; padding-bottom: 15px; margin-bottom: 20px; }
+                .header { text-align: center; border-bottom: 2px solid #FFFFFF; padding-bottom: 15px; margin-bottom: 20px; }
                 .info { background: #f7fafc; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
                 .row { margin: 8px 0; }
                 .label { font-weight: bold; display: inline-block; width: 140px; }
@@ -2998,11 +2998,11 @@ try {
             </head>
             <body>
                 <div class="header">
-                    <h1>🏥 EduHealth AI - Kết quả check-in</h1>
+                    <h1>🏥 SYNHOC - Kết quả check-in</h1>
                     <p>Ngày: ${formattedDate} | Mã: ${data.checkinId || ''}</p>
                 </div>
                 <div class="info">
-                    <h3 style="margin-bottom: 12px; color: #2563eb;">📋 Thông tin học sinh</h3>
+                    <h3 style="margin-bottom: 12px; color: #E67E22;">📋 Thông tin học sinh</h3>
                     <div class="row"><span class="label">👤 Họ và tên:</span> ${escapeHtml(studentName)}</div>
                     <div class="row"><span class="label">📞 Số điện thoại:</span> ${escapeHtml(studentPhone)}</div>
                     <div class="row"><span class="label">🎂 Ngày sinh:</span> ${escapeHtml(studentDob)}</div>
@@ -3010,7 +3010,7 @@ try {
                     <div class="row"><span class="label">📧 Email:</span> ${escapeHtml(studentEmail)}</div>
                 </div>
                 <div class="info">
-                    <h3 style="margin-bottom: 12px; color: #2563eb;">📝 Triệu chứng</h3>
+                    <h3 style="margin-bottom: 12px; color: #E67E22;">📝 Triệu chứng</h3>
                     <div class="row"><span class="label">Mô tả:</span> ${escapeHtml((data.symptomDescription || '').substring(0, 500))}</div>
                     <div class="row"><span class="label">Thời gian:</span> ${escapeHtml(data.duration || '')}</div>
                     <div class="row"><span class="label">Triệu chứng chọn:</span> ${escapeHtml((data.selectedSymptoms || []).join(', '))}</div>
@@ -3018,7 +3018,7 @@ try {
                 ${imageComparisonHtml}
                 ${formattedResult}
                 <div class="warning"><strong>⚠️ Lưu ý:</strong> Kết quả từ AI, không thay thế bác sĩ.</div>
-                <div class="footer">© 2026 EduHealth AI</div>
+                <div class="footer">© 2026 SYNHOC</div>
             </body>
             </html>`;
         }
@@ -3235,7 +3235,7 @@ try {
             step3Container.style.display = "none";
             step1Btn.disabled = false;
             step1Btn.innerHTML = '<i class="fas fa-magic"></i> Bắt đầu check-in sức khỏe';
-            analysisResultDiv.innerHTML = '✨ EduHealth AI đã sẵn sàng, hãy chia sẻ cùng mình nhé!';
+            analysisResultDiv.innerHTML = '✨ SYNHOC đã sẵn sàng, hãy chia sẻ cùng mình nhé!';
             chatButtonSection.style.display = "none";
             pdfButtonSection.style.display = "none";
             historySection.style.display = "none";
@@ -3500,3 +3500,6 @@ async function initApp() {
 </script>
 </body>
 </html>
+
+
+

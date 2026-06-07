@@ -3,30 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Trò chuyện cùng EduHealth AI - Hỗ trợ sức khỏe học đường</title>
+    <title>Trò chuyện cùng SYNHOC - Hỗ trợ sức khỏe học đường</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;0,600;1,300;1,500&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --blue-primary: #3b82f6;
-            --blue-deep: #2563eb;
-            --pink-primary: #f472b6;
-            --pink-deep: #ec489a;
+            --blue-primary: #FF9500;
+            --blue-deep: #E67E22;
+            --pink-primary: #FFFFFF;
+            --pink-deep: #FFFFFF;
             --grad-blue-pink: linear-gradient(135deg, var(--blue-primary), var(--pink-primary));
             --grad-pink-blue: linear-gradient(135deg, var(--pink-deep), var(--blue-primary));
             --bg-body: #ffffff;
-            --bg-surface: #fef9ff;
+            --bg-surface: #FFF9F0;
             --card-bg: #ffffff;
             --text-dark: #0f172a;
             --text-mid: #334155;
             --text-dim: #64748b;
-            --border-light: #ffe4f0;
+            --border-light: #FFE0CC;
             --border-soft: #f1f5f9;
             --shadow-sm: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
             --shadow-md: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
-            --hover-glow: rgba(59, 130, 246, 0.12);
+            --hover-glow: rgba(255, 149, 0, 0.12);
             --nav-bg: rgba(255, 255, 255, 0.92);
-            --tag-bg: #fce7f3;
+            --tag-bg: #FFF0E0;
             --input-bg: #ffffff;
             --success: #10b981;
             --warning: #f59e0b;
@@ -716,7 +716,7 @@
     <nav id="nav">
         <a href="index.html" class="logo">
             <div class="logo-mark"><i class="fas fa-heartbeat"></i></div>
-            <div class="logo-type">EduHealth AI</div>
+            <div class="logo-type">SYNHOC</div>
         </a>
         
         <div class="nav-menu">
@@ -724,7 +724,7 @@
             <a href="checkin.html" class="nav-link"><i class="fas fa-clipboard-list"></i> Check-in sức khỏe</a>
             <a href="map.html" class="nav-link"><i class="fas fa-hospital-user"></i> Điểm hỗ trợ y tế</a>
             <a href="forum.html" class="nav-link"><i class="fas fa-comments"></i> Diễn đàn</a>
-            <a href="EPH.html" class="nav-link" style="background: linear-gradient(135deg, #f59e0b, #ec489a); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700;">
+            <a href="EPH.html" class="nav-link" style="background: linear-gradient(135deg, #f59e0b, #FFFFFF); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700;">
                 <i class="fas fa-gamepad" style="color: #f59e0b;"></i> EduPlay Health
             </a>
         </div>
@@ -1293,7 +1293,7 @@ async function processOfflineQueue() {
             try {
                 const chatKnowledge = await loadChatKnowledge();
                 
-                const systemPrompt = `Bạn là trợ lý của EduHealth AI, chuyên hỗ trợ nhận biết sớm các vấn đề sức khỏe học đường.
+                const systemPrompt = `Bạn là trợ lý của SYNHOC, chuyên hỗ trợ nhận biết sớm các vấn đề sức khỏe học đường.
 
 KIẾN THỨC:
 ${chatKnowledge}
@@ -1307,7 +1307,7 @@ Tin nhắn: ${userMessageText}
 Trả lời:`;
                 
                 const messages = [
-                    { role: "system", content: "Bạn là trợ lý y tế của EduHealth AI." },
+                    { role: "system", content: "Bạn là trợ lý y tế của SYNHOC." },
                     { role: "user", content: systemPrompt }
                 ];
                 
@@ -1316,7 +1316,7 @@ Trả lời:`;
                 await db.collection('health_chats').doc(chatId).collection('messages').add({
                     text: aiText,
                     senderId: 'ai',
-                    senderName: 'EduHealth AI',
+                    senderName: 'SYNHOC',
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                     isAI: true,
                     inResponseTo: responseToMessageId
@@ -1438,7 +1438,7 @@ Trả lời:`;
                 const senderDiv = document.createElement('div');
                 senderDiv.className = 'message-sender';
                 if (message.senderId === 'ai') {
-                    senderDiv.innerHTML = '<i class="fas fa-robot"></i> EduHealth AI';
+                    senderDiv.innerHTML = '<i class="fas fa-robot"></i> SYNHOC';
                 } else {
                     senderDiv.innerHTML = '<i class="fas fa-user-md"></i> ' + (message.senderName || 'Cộng tác viên');
                 }
@@ -1575,7 +1575,7 @@ Trả lời:`;
             try {
                 const chatKnowledge = await loadChatKnowledge();
                 
-                const systemPrompt = `Bạn là trợ lý của EduHealth AI.
+                const systemPrompt = `Bạn là trợ lý của SYNHOC.
 
 KIẾN THỨC:
 ${chatKnowledge}
@@ -1585,7 +1585,7 @@ Tin nhắn: ${userMessageText}
 Trả lời bằng tiếng Việt, dễ hiểu:`;
                 
                 const messages = [
-                    { role: "system", content: "Bạn là trợ lý y tế của EduHealth AI." },
+                    { role: "system", content: "Bạn là trợ lý y tế của SYNHOC." },
                     { role: "user", content: systemPrompt }
                 ];
                 
@@ -1594,7 +1594,7 @@ Trả lời bằng tiếng Việt, dễ hiểu:`;
                 await db.collection('health_chats').doc(currentChatId).collection('messages').add({
                     text: aiText,
                     senderId: 'ai',
-                    senderName: 'EduHealth AI',
+                    senderName: 'SYNHOC',
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                     isAI: true,
                     inResponseTo: userMessageId
@@ -1605,7 +1605,7 @@ Trả lời bằng tiếng Việt, dễ hiểu:`;
                 await db.collection('health_chats').doc(currentChatId).collection('messages').add({
                     text: 'Xin lỗi, tôi đang gặp sự cố. Vui lòng thử lại sau!',
                     senderId: 'ai',
-                    senderName: 'EduHealth AI',
+                    senderName: 'SYNHOC',
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                     isAI: true,
                     isError: true
@@ -2104,3 +2104,4 @@ Trả lời bằng tiếng Việt, dễ hiểu:`;
     </script>
 </body>
 </html>
+
