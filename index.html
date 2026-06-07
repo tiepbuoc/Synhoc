@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>EduHealth AI — Hỗ trợ chăm sóc sức khỏe học đường</title>
+<title>SYNHOC health — Hỗ trợ chăm sóc sức khỏe học đường</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,500&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -15,12 +15,12 @@
 }
 
 :root {
-  --blue-primary: #3b82f6;
-  --blue-deep: #2563eb;
-  --pink-primary: #3b82f6;
+  --blue-primary: #ffc0e0;
+  --blue-deep: #ffaed4;
+  --pink-primary: #ffc0e0;
   --pink-deep: #ec489a;
-  --grad-blue-pink: linear-gradient(135deg, #4f8eff, #ff7eb3);
-  --grad-pink-blue: linear-gradient(135deg, #ff6ba6, #4f8eff);
+  --grad-blue-pink: linear-gradient(135deg, #ff9a6c, #ff7eb3);
+  --grad-pink-blue: linear-gradient(135deg, #ff9a6c, #ff7eb3);
   
   --bg-body: linear-gradient(135deg, #ffffff 0%, #fff5f8 100%);
   --bg-surface: #fff5f8;
@@ -32,7 +32,7 @@
   --border-soft: #fef0f5;
   --shadow-sm: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
   --shadow-md: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
-  --hover-glow: rgba(59, 130, 246, 0.12);
+  --hover-glow: rgba(255, 192, 224, 0.12);
   --nav-bg: rgba(255, 255, 255, 0.95);
   --tag-bg: #fce7f3;
   --news-bg: #fff5f8;
@@ -40,7 +40,7 @@
   --success: #10b981;
   --warning: #f59e0b;
   --danger: #ef4444;
-  --glow-blue: rgba(79, 142, 255, 0.3);
+  --glow-blue: rgba(255, 154, 108, 0.3);
   --glow-pink: rgba(255, 110, 179, 0.3);
 }
 
@@ -55,12 +55,12 @@ body.dark {
   --border-soft: #2d3a4e;
   --shadow-sm: 0 10px 20px -5px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 20px 35px -12px rgba(0, 0, 0, 0.4);
-  --hover-glow: rgba(244, 114, 182, 0.2);
+  --hover-glow: rgba(255, 192, 224, 0.2);
   --nav-bg: rgba(15, 23, 42, 0.95);
   --tag-bg: #2d3a4e;
   --news-bg: #1e293b;
   --icon-soft: #2d3a4e;
-  --glow-blue: rgba(79, 142, 255, 0.2);
+  --glow-blue: rgba(255, 154, 108, 0.2);
   --glow-pink: rgba(255, 110, 179, 0.2);
 }
 
@@ -303,13 +303,13 @@ nav {
   color: white;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 15px 35px -10px rgba(79, 142, 255, 0.3);
+  box-shadow: 0 15px 35px -10px rgba(255, 154, 108, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .hero-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 20px 40px -12px rgba(79, 142, 255, 0.4);
+  box-shadow: 0 20px 40px -12px rgba(255, 154, 108, 0.4);
 }
 
 .hero-card::before {
@@ -413,7 +413,7 @@ nav {
 
 /* ========== KHỐI QUIZ HERO CARD ========== */
 .quiz-hero-card {
-  background: linear-gradient(135deg, #10b981, #3b82f6);
+  background: linear-gradient(135deg, #10b981, #ffc0e0);
   border-radius: 24px;
   padding: 20px 24px;
   margin-bottom: 24px;
@@ -526,7 +526,7 @@ nav {
 
 .search-container:focus-within {
   border-color: var(--pink-primary);
-  box-shadow: 0 0 0 3px rgba(244, 114, 182, 0.2);
+  box-shadow: 0 0 0 3px rgba(255, 192, 224, 0.2);
   transform: translateY(-1px);
 }
 
@@ -628,7 +628,7 @@ nav {
 }
 
 .category-card.pink { border-color: #f9a8d4; }
-.category-card.blue { border-color: #93c5fd; }
+.category-card.blue { border-color: #ffb3d9; }
 .category-card.purple { border-color: #c4b5fd; }
 .category-card.green { border-color: #86efac; }
 .category-card.orange { border-color: #fdba74; }
@@ -651,8 +651,8 @@ nav {
   font-size: 26px;
 }
 
-.category-icon.pink-bg { background: #fce7f3; color: #3b82f6; }
-.category-icon.blue-bg { background: #dbeafe; color: #3b82f6; }
+.category-icon.pink-bg { background: #fce7f3; color: #ffc0e0; }
+.category-icon.blue-bg { background: #ffe8f5; color: #ffc0e0; }
 .category-icon.purple-bg { background: #ede9fe; color: #8b5cf6; }
 .category-icon.green-bg { background: #dcfce7; color: #10b981; }
 .category-icon.orange-bg { background: #ffedd5; color: #f59e0b; }
@@ -983,7 +983,7 @@ footer {
   padding: 24px;
 }
 
-/* ========== ARTICLE CONTENT STYLES - GIỐNG THUY-DAU.HTML ========== */
+/* ========== ARTICLE CONTENT STYLES ========== */
 .article-content {
   font-family: 'Nunito', 'DM Sans', sans-serif;
   line-height: 1.6;
@@ -995,1093 +995,651 @@ footer {
 }
 
 .article-content .handbook-header {
-  background: linear-gradient(120deg, #f7567c 0%, #ff9a3c 100%);
+  background: linear-gradient(120deg, #ff9a6c 0%, #ff7eb3 100%);
   padding: 28px 32px 24px;
   border-radius: 24px 24px 0 0;
-  margin: -24px -24px 0 0px;
+  color: white;
+  margin-bottom: 0;
 }
 
-.article-content .handbook-header-top {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 14px;
-}
-
-.article-content .handbook-emoji {
-  width: 64px;
-  height: 64px;
-  background: #fff;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 36px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-}
-
-.article-content .handbook-title h1 {
-  font-size: 1.7rem;
-  font-weight: 900;
-  color: #fff;
-  letter-spacing: -0.5px;
-  line-height: 1.2;
-  margin: 0;
-}
-
-.article-content .handbook-subtitle {
-  color: rgba(255,255,255,0.85);
-  font-size: 0.95rem;
+.article-content .handbook-header h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 28px;
   font-weight: 600;
-  margin-top: 2px;
+  margin-bottom: 12px;
 }
 
-.article-content .handbook-badges {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 12px;
+.article-content .handbook-header p {
+  font-size: 15px;
+  opacity: 0.9;
 }
 
-.article-content .handbook-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 5px 14px;
-  border-radius: 20px;
-  font-size: 0.82rem;
-  font-weight: 700;
-  border: 2px solid rgba(255,255,255,0.7);
-  color: #fff;
-  background: rgba(255,255,255,0.18);
-}
-
-.article-content .handbook-image-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 0;
-  background: #222;
-  max-height: 320px;
-  overflow: hidden;
-  margin: 0 -24px;
-}
-
-.article-content .handbook-image-wrap {
-  position: relative;
-  overflow: hidden;
-}
-
-.article-content .handbook-image-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.article-content .handbook-image-caption {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0,0,0,0.55);
-  color: #fff;
-  font-size: 0.72rem;
-  padding: 6px 10px;
-  font-weight: 600;
-}
-
-.article-content .handbook-body {
-  padding: 28px 0 0;
-}
-
-.article-content .handbook-info-rows {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  margin-bottom: 28px;
-}
-
-.article-content .handbook-info-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  background: var(--bg-surface);
-  border-radius: 14px;
-  padding: 14px 16px;
-}
-
-.article-content .handbook-info-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.3rem;
-  flex-shrink: 0;
-}
-
-.article-content .handbook-info-label {
-  font-size: 0.82rem;
-  font-weight: 800;
-  margin-bottom: 2px;
-}
-
-.article-content .handbook-info-text {
-  font-size: 0.9rem;
-  color: var(--text-mid);
-  line-height: 1.5;
-}
-
-.article-content .handbook-two-col {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
-  margin-bottom: 28px;
-}
-
-.article-content .handbook-info-card {
-  border-radius: 18px;
-  padding: 20px;
-  border: 1.5px solid var(--border-light);
-  background: var(--card-bg);
-}
-
-.article-content .handbook-info-card-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 14px;
-}
-
-.article-content .handbook-info-card-icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-  flex-shrink: 0;
-}
-
-.article-content .handbook-info-card-title {
-  font-size: 1rem;
-  font-weight: 800;
-}
-
-.article-content .handbook-steps {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 28px;
-}
-
-.article-content .handbook-step {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  background: var(--bg-surface);
-  border-radius: 16px;
-  padding: 16px 20px;
-  border: 1.5px solid var(--border-light);
-}
-
-.article-content .handbook-step-num {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 1.1rem;
-  font-weight: 900;
-  flex-shrink: 0;
-}
-
-.article-content .handbook-step-text {
-  font-size: 0.92rem;
+.article-content h1, .article-content h2, .article-content h3, .article-content h4 {
   color: var(--text-dark);
-  font-weight: 600;
-  line-height: 1.4;
+  margin: 24px 0 16px 0;
+  font-family: 'Fraunces', serif;
 }
 
-.article-content .handbook-danger-box {
-  border: 2px solid #ef4444;
-  border-radius: 18px;
-  padding: 20px 22px 18px;
-  background: rgba(239,68,68,0.07);
-  margin: 24px 0;
-}
-
-.article-content .handbook-defense-box,
-.handbook-defense-box {
-  border: 2px solid #0f766e;
-  border-radius: 18px;
-  padding: 20px 22px 18px;
-  background: rgba(15,118,110,0.08);
-  margin: -24px 28px;
-}
-
-.article-content .handbook-defense-header,
-.article-content .handbook-danger-header,
-.handbook-defense-header,
-.handbook-danger-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 14px;
-}
-
-.article-content .handbook-defense-icon,
-.handbook-defense-icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
-  background: #0f766e;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-}
-
-.article-content .handbook-defense-title,
-.handbook-defense-title {
-  font-size: 1rem;
-  font-weight: 900;
-  color: #0f766e;
-}
-
-.article-content .handbook-danger-box {
-  border: 2px solid #ef4444;
-  border-radius: 18px;
-  padding: 20px 22px 18px;
-  background: rgba(239,68,68,0.07);
-  margin: 24px 0;
-}
-
-.article-content .handbook-danger-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 14px;
-}
-
-.article-content .handbook-danger-icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
-  background: #7f1d1d;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-}
-
-.article-content .handbook-danger-title {
-  font-size: 1rem;
-  font-weight: 900;
-  color: #ef4444;
-}
-
-.article-content .handbook-danger-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.article-content .handbook-danger-list li {
-  font-size: 0.9rem;
-  color: #b91c1c;
+.article-content h1 {
+  font-size: 32px;
   font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 
-.article-content ul {
-  margin: 0.8em 0 0.8em 1.8em;
-  padding-left: 0;
+.article-content h2 {
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.article-content h3 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.article-content h4 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.article-content p {
+  margin-bottom: 16px;
+  line-height: 1.8;
+}
+
+.article-content ul, .article-content ol {
+  margin-bottom: 20px;
+  margin-left: 24px;
 }
 
 .article-content li {
-  margin: 0.3em 0;
+  margin-bottom: 10px;
   line-height: 1.6;
 }
 
-.article-stats {
-  display: flex;
-  gap: 20px;
-  font-size: 14px;
-  color: var(--text-dim);
-  padding-top: 16px;
-  border-top: 1px solid var(--border-light);
-  margin-top: 24px;
-}
-
-.article-stats span {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.loading-spinner {
-  text-align: center;
-  padding: 40px;
-  color: var(--text-dim);
-}
-
-.posts-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.post-card-mini {
-  background: var(--bg-surface);
-  border-radius: 20px;
-  overflow: hidden;
-  border: 1px solid var(--border-light);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.post-card-mini:hover {
-  transform: translateY(-4px);
-  border-color: var(--pink-primary);
-  box-shadow: var(--shadow-md);
-}
-
-.post-mini-cover {
+.article-content table {
   width: 100%;
-  height: 140px;
-  object-fit: cover;
-  background: var(--tag-bg);
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 14px;
 }
 
-.post-mini-content {
-  padding: 14px;
-}
-
-.post-mini-title {
-  font-family: 'Fraunces', serif;
-  font-size: 15px;
+.article-content th {
+  background: var(--grad-blue-pink);
+  color: white;
+  padding: 12px;
+  text-align: left;
   font-weight: 600;
-  margin-bottom: 8px;
-  line-height: 1.4;
-  color: var(--text-dark);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
-.post-mini-excerpt {
-  font-size: 13px;
+.article-content td {
+  border-bottom: 1px solid var(--border-light);
+  padding: 12px;
+}
+
+.article-content tr:hover {
+  background: var(--bg-surface);
+}
+
+.article-content img {
+  max-width: 100%;
+  border-radius: 12px;
+  margin: 20px 0;
+}
+
+.article-content a {
+  color: var(--blue-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.article-content a:hover {
+  color: var(--pink-primary);
+  text-decoration: underline;
+}
+
+.article-content blockquote {
+  border-left: 4px solid var(--pink-primary);
+  padding: 16px 20px;
+  margin: 20px 0;
+  background: var(--bg-surface);
+  border-radius: 8px;
+  font-style: italic;
   color: var(--text-mid);
-  line-height: 1.4;
-  margin-bottom: 10px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
-.post-mini-stats {
-  display: flex;
-  gap: 12px;
-  font-size: 12px;
-  color: var(--text-dim);
-  padding-top: 8px;
-  border-top: 1px solid var(--border-light);
+.article-content code {
+  background: var(--bg-surface);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  color: var(--text-dark);
 }
 
-.post-mini-stats span {
-  display: flex;
-  align-items: center;
-  gap: 4px;
+.article-content pre {
+  background: var(--bg-surface);
+  padding: 16px;
+  border-radius: 12px;
+  overflow-x: auto;
+  margin: 20px 0;
 }
 
-.empty-posts {
-  text-align: center;
-  padding: 60px 20px;
-  color: var(--text-dim);
+.article-content pre code {
+  background: none;
+  padding: 0;
+  color: var(--text-dark);
 }
 
+.article-content hr {
+  border: none;
+  border-top: 2px solid var(--border-light);
+  margin: 30px 0;
+}
+
+/* Responsive */
 @media (max-width: 1024px) {
-  .two-columns { flex-direction: column; }
-  .category-grid { grid-template-columns: repeat(2, 1fr); }
-  .posts-grid { grid-template-columns: repeat(2, 1fr); }
-  .stats-grid { grid-template-columns: repeat(2, 1fr); }
-  .news-card { position: relative; top: 0; }
+  .two-columns {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .right-col {
+    position: static;
+  }
+
+  .news-card {
+    position: static;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
-  .nav-menu { display: none; }
-  .menu-toggle { display: flex; }
-  .category-grid { grid-template-columns: 1fr; }
-  .posts-grid { grid-template-columns: 1fr; }
-  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-  .stat-number { font-size: 36px; }
-  .content-section { padding: 90px 16px 40px; }
-  .hero-card { padding: 20px 20px; }
-  .hero-title { font-size: 24px; }
-  .hero-icon { width: 54px; height: 54px; font-size: 28px; }
-  .modal-content { max-width: 95%; }
-  .quiz-hero-content { flex-direction: column; align-items: flex-start; }
-  .quiz-hero-btn { align-self: stretch; justify-content: center; }
-  .footer-inner { flex-direction: column; text-align: center; }
-  .footer-links { justify-content: center; }
-  .article-content .handbook-image-grid { grid-template-columns: 1fr; max-height: none; }
-  .article-content .handbook-two-col { grid-template-columns: 1fr; }
-  .article-content .handbook-header { padding: 20px 16px; }
-  .article-content .handbook-header-top { flex-direction: column; text-align: center; }
-  .article-content .handbook-badges { justify-content: center; }
+  nav {
+    padding: 0 4%;
+  }
+
+  .logo-type {
+    font-size: 20px;
+  }
+
+  .nav-menu {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .content-section {
+    padding: 90px 4% 40px;
+  }
+
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .stat-number {
+    font-size: 36px;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .footer-links {
+    gap: 16px;
+    flex-direction: column;
+  }
+
+  .article-content h1 {
+    font-size: 24px;
+  }
+
+  .article-content h2 {
+    font-size: 20px;
+  }
 }
 
 @media (max-width: 480px) {
-  .stats-grid { grid-template-columns: 1fr; }
-  .news-header h3 { font-size: 18px; }
-}
-/* ========== STYLE CHO BẢN TIN - CĂN LỀ VÀ ẢNH ========== */
+  .logo-type {
+    font-size: 18px;
+  }
 
-/* Căn lề cho nội dung bản tin - DÙNG !important để ghi đè */
-.article-content .news-content,
-.article-content .news-content p,
-.modal-body .article-content .news-content,
-.modal-body .article-content .news-content p {
-    text-align: justify !important;
-}
+  .hero-card {
+    padding: 20px 24px;
+  }
 
-/* Định dạng chung */
-.article-content .news-content {
-    font-family: 'Nunito', 'DM Sans', sans-serif;
-    line-height: 1.7;
-    color: var(--text-mid);
-}
+  .hero-title {
+    font-size: 24px;
+  }
 
-.article-content .news-content p {
-    margin-bottom: 1.2em;
-}
+  .search-input {
+    font-size: 14px;
+  }
 
-.article-content .news-content h1,
-.article-content .news-content h2,
-.article-content .news-content h3,
-.article-content .news-content h4 {
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
-    margin: 1.2em 0 0.6em;
-    color: var(--text-dark);
-    text-align: left !important;
-}
+  .content-section {
+    padding: 85px 4% 30px;
+  }
 
-.article-content .news-content h1 { font-size: 1.8em; }
-.article-content .news-content h2 { font-size: 1.5em; }
-.article-content .news-content h3 { font-size: 1.3em; }
-.article-content .news-content h4 { font-size: 1.1em; }
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
 
-.article-content .news-content ul,
-.article-content .news-content ol {
-    margin: 0.8em 0 0.8em 1.8em;
-    padding-left: 0;
-    text-align: left !important;
-}
+  .stat-number {
+    font-size: 28px;
+  }
 
-.article-content .news-content li {
-    margin: 0.3em 0;
-    text-align: left !important;
-}
+  .modal-header h3 {
+    font-size: 18px;
+  }
 
-.article-content .news-content strong,
-.article-content .news-content b {
-    font-weight: 700;
-    color: var(--text-dark);
-}
+  .article-content h1 {
+    font-size: 20px;
+  }
 
-.article-content .news-content em,
-.article-content .news-content i {
-    font-style: italic;
-}
+  .article-content table {
+    font-size: 12px;
+  }
 
-.article-content .news-content a {
-    color: var(--blue-primary);
-    text-decoration: none;
-}
-
-.article-content .news-content a:hover {
-    text-decoration: underline;
-}
-
-.article-content .news-content blockquote {
-    border-left: 4px solid var(--pink-primary);
-    padding-left: 1.2em;
-    margin: 1em 0;
-    font-style: italic;
-    color: var(--text-dim);
-    text-align: left !important;
-}
-
-/* ẢNH TRONG NỘI DUNG - GIỮ TỈ LỆ */
-.article-content .news-content img {
-    max-width: 100%;
-    width: auto;
-    height: auto;
-    border-radius: 16px;
-    margin: 1em 0;
-    display: block;
-}
-
-.article-content .news-content table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1em 0;
-}
-
-.article-content .news-content th,
-.article-content .news-content td {
-    border: 1px solid var(--border-light);
-    padding: 8px 12px;
-    text-align: left;
-}
-
-.article-content .news-content th {
-    background: var(--bg-surface);
-    font-weight: 600;
-}
-
-.article-content .news-content hr {
-    border: none;
-    border-top: 1px solid var(--border-light);
-    margin: 1.5em 0;
+  .article-content th, .article-content td {
+    padding: 8px;
+  }
 }
 </style>
 </head>
 <body>
-
-<nav id="nav">
+<nav>
   <a href="index.html" class="logo">
-    <div class="logo-mark"><i class="fas fa-heartbeat"></i></div>
-    <div class="logo-type">EduHealth AI</div>
+    <div class="logo-mark">💚</div>
+    <div class="logo-type">SYNHOC health</div>
   </a>
   <div class="nav-menu">
-    <a href="index.html" class="nav-link"><i class="fas fa-heartbeat"></i> Cẩm nang sức khỏe</a>
-    <a href="checkin.html" class="nav-link"><i class="fas fa-clipboard-list"></i> Check-in sức khỏe</a>
-    <a href="map.html" class="nav-link"><i class="fas fa-hospital-user"></i> Điểm hỗ trợ y tế</a>
-    <a href="forum.html" class="nav-link"><i class="fas fa-comments"></i> Diễn đàn</a>
-    <a href="EPH.html" class="nav-link" style="background: linear-gradient(135deg, #f59e0b, #ec489a); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700;">
-                <i class="fas fa-gamepad" style="color: #f59e0b;"></i> EduPlay Health
-            </a>
+    <a href="#features" class="nav-link">Tính năng <i class="fas fa-star"></i></a>
+    <a href="#stats" class="nav-link">Thống kê <i class="fas fa-chart-bar"></i></a>
+    <a href="#contact" class="nav-link">Liên hệ <i class="fas fa-envelope"></i></a>
   </div>
   <div class="nav-right">
-    <button class="theme-toggle" id="themeToggleBtn"><i class="fas fa-moon"></i> <span>Chế độ tối</span></button>
-    <button class="menu-toggle" id="menuToggleBtn"><i class="fas fa-bars"></i> Menu</button>
+    <button class="theme-toggle" id="themeToggle">
+      <i class="fas fa-moon"></i> Dark
+    </button>
+    <button class="menu-toggle" id="menuToggle">
+      <i class="fas fa-bars"></i> Menu
+    </button>
   </div>
 </nav>
 
-<div class="mobile-menu-panel" id="mobileMenuPanel">
+<div class="mobile-menu-panel" id="mobileMenu">
   <div class="nav-links-mobile">
-    <a href="index.html" class="nav-link-mobile"><i class="fas fa-heartbeat"></i> Cẩm nang sức khỏe</a>
-    <a href="checkin.html" class="nav-link-mobile"><i class="fas fa-clipboard-list"></i> Check-in sức khỏe</a>
-    <a href="map.html" class="nav-link-mobile"><i class="fas fa-hospital-user"></i> Điểm hỗ trợ y tế</a>
-    <a href="forum.html" class="nav-link-mobile"><i class="fas fa-comments"></i> Diễn đàn</a>
-    <a href="EPH.html" class="nav-link-mobile"><i class="fas fa-gamepad"></i> EduPlay Health</a>
+    <a href="#features" class="nav-link-mobile">
+      <i class="fas fa-star"></i> Tính năng
+    </a>
+    <a href="#stats" class="nav-link-mobile">
+      <i class="fas fa-chart-bar"></i> Thống kê
+    </a>
+    <a href="#contact" class="nav-link-mobile">
+      <i class="fas fa-envelope"></i> Liên hệ
+    </a>
   </div>
 </div>
 
 <section class="content-section">
   <div class="two-columns">
-    <!-- Cột trái: Cẩm nang -->
     <div class="left-col">
+      <!-- Hero Card -->
       <div class="hero-card">
         <div class="hero-header">
           <div class="hero-icon">📚</div>
           <div>
-            <div class="hero-title">Cẩm nang sức khỏe</div>
+            <div class="hero-title">SYNHOC Health</div>
             <div class="hero-meta">
-              <span><i class="fas fa-book-open"></i> <span id="totalPostsCount">0</span> bài viết</span>
-              <span><i class="fas fa-layer-group"></i> 6 danh mục</span>
-              <span><i class="fas fa-stethoscope"></i> 30+ bệnh lý</span>
+              <span><i class="fas fa-heart"></i> Sức khỏe</span>
+              <span><i class="fas fa-book"></i> Giáo dục</span>
+              <span><i class="fas fa-users"></i> Cộng đồng</span>
             </div>
-            <div class="hero-note"><i class="fas fa-shield-alt"></i> Nội dung mang tính giáo dục sức khỏe, không thay thế tư vấn y tế chuyên môn.</div>
           </div>
         </div>
-        <div class="hero-desc">Cẩm nang sức khỏe bỏ túi cho học sinh và phụ huynh. Chia sẻ những thông tin hữu ích về các dấu hiệu sức khỏe thường gặp và cách bảo vệ bản thân trong môi trường học đường.</div>
-      </div>
-
-      <div class="search-wrapper">
-        <div class="search-container">
-          <i class="fas fa-search"></i>
-          <input type="text" class="search-input" id="searchInput" placeholder="Tìm kiếm bài viết theo tiêu đề hoặc nội dung...">
-          <button class="search-clear" id="searchClearBtn"><i class="fas fa-times-circle"></i> Xóa</button>
-        </div>
-        <div class="search-results-info" id="searchResultsInfo" style="display: none;">
-          <span><i class="fas fa-filter"></i> Đang lọc theo từ khóa: "<strong id="searchKeyword"></strong>"</span>
-          <button class="search-reset-btn" onclick="resetSearch()"><i class="fas fa-undo-alt"></i> Hiển thị tất cả</button>
+        <p class="hero-desc">
+          Nền tảng toàn diện hỗ trợ sức khỏe học đường. Kết nối học sinh, phụ huynh và nhân viên y tế để tạo môi trường học tập lành mạnh và an toàn.
+        </p>
+        <div class="hero-note">
+          <i class="fas fa-lightbulb"></i>
+          <em>Vì sức khỏe là nền tảng của thành công học tập</em>
         </div>
       </div>
-      
-      <div class="category-grid" id="categoryGrid"></div>
-    </div>
 
-    <!-- Cột phải: KHỐI QUIZ + Bản tin -->
-    <div class="right-col">
+      <!-- Quiz Hero Card -->
       <div class="quiz-hero-card">
         <div class="quiz-hero-content">
           <div class="quiz-hero-text">
-            <h4><i class="fas fa-brain"></i> Trắc nghiệm sức khỏe học đường</h4>
-            <p>Kiểm tra kiến thức của bạn về chăm sóc sức khỏe, phòng bệnh và dinh dưỡng với bộ câu hỏi đúng/sai thú vị.</p>
+            <h4><i class="fas fa-gamepad"></i> Kiểm tra sức khỏe</h4>
+            <p>Tham gia kỳ thi sức khỏe để biết tình trạng hiện tại của bạn</p>
           </div>
           <a href="minigame.html" class="quiz-hero-btn">
-            <i class="fas fa-question-circle"></i> Làm bài ngay
+            Bắt đầu <i class="fas fa-arrow-right"></i>
           </a>
         </div>
       </div>
 
+      <!-- Search -->
+      <div class="search-wrapper">
+        <div class="search-container">
+          <i class="fas fa-search"></i>
+          <input type="text" class="search-input" id="searchInput" placeholder="Tìm kiếm cẩm nang sức khỏe...">
+          <button class="search-clear" id="searchClear"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="search-results-info" id="searchResults" style="display: none;">
+          <span>Tìm thấy <strong id="resultCount">0</strong> kết quả</span>
+          <button class="search-reset-btn" id="searchReset">Xóa bộ lọc <i class="fas fa-redo"></i></button>
+        </div>
+      </div>
+
+      <!-- Categories -->
+      <div class="category-grid">
+        <div class="category-card pink" data-category="dinh-duong">
+          <div class="category-header">
+            <div class="category-icon pink-bg">🥗</div>
+            <div class="category-info">
+              <h3>Dinh dưỡng</h3>
+              <span class="category-count">12 bài</span>
+            </div>
+          </div>
+          <div class="category-preview">
+            <ul>
+              <li><i class="fas fa-circle"></i> Chế độ ăn cân bằng</li>
+              <li><i class="fas fa-circle"></i> Vitamin và khoáng chất</li>
+              <li class="category-more"><i class="fas fa-arrow-right"></i> Xem thêm...</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="category-card blue" data-category="tap-the-duc">
+          <div class="category-header">
+            <div class="category-icon blue-bg">🏃</div>
+            <div class="category-info">
+              <h3>Thể dục</h3>
+              <span class="category-count">15 bài</span>
+            </div>
+          </div>
+          <div class="category-preview">
+            <ul>
+              <li><i class="fas fa-circle"></i> Bài tập hàng ngày</li>
+              <li><i class="fas fa-circle"></i> Luyện tập thể dục</li>
+              <li class="category-more"><i class="fas fa-arrow-right"></i> Xem thêm...</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="category-card pink" data-category="tam-ly">
+          <div class="category-header">
+            <div class="category-icon pink-bg">🧠</div>
+            <div class="category-info">
+              <h3>Tâm lý</h3>
+              <span class="category-count">10 bài</span>
+            </div>
+          </div>
+          <div class="category-preview">
+            <ul>
+              <li><i class="fas fa-circle"></i> Quản lý stress</li>
+              <li><i class="fas fa-circle"></i> Tâm lý học đường</li>
+              <li class="category-more"><i class="fas fa-arrow-right"></i> Xem thêm...</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="category-card blue" data-category="benh-pho-bien">
+          <div class="category-header">
+            <div class="category-icon blue-bg">🏥</div>
+            <div class="category-info">
+              <h3>Bệnh phổ biến</h3>
+              <span class="category-count">18 bài</span>
+            </div>
+          </div>
+          <div class="category-preview">
+            <ul>
+              <li><i class="fas fa-circle"></i> Cảm lạnh, sốt</li>
+              <li><i class="fas fa-circle"></i> Tiêu chảy</li>
+              <li class="category-more"><i class="fas fa-arrow-right"></i> Xem thêm...</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="category-card purple" data-category="ve-sinh">
+          <div class="category-header">
+            <div class="category-icon purple-bg">🧼</div>
+            <div class="category-info">
+              <h3>Vệ sinh</h3>
+              <span class="category-count">8 bài</span>
+            </div>
+          </div>
+          <div class="category-preview">
+            <ul>
+              <li><i class="fas fa-circle"></i> Rửa tay đúng cách</li>
+              <li><i class="fas fa-circle"></i> Vệ sinh cá nhân</li>
+              <li class="category-more"><i class="fas fa-arrow-right"></i> Xem thêm...</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="category-card green" data-category="an-toan">
+          <div class="category-header">
+            <div class="category-icon green-bg">🚑</div>
+            <div class="category-info">
+              <h3>An toàn</h3>
+              <span class="category-count">14 bài</span>
+            </div>
+          </div>
+          <div class="category-preview">
+            <ul>
+              <li><i class="fas fa-circle"></i> Sơ cứu ban đầu</li>
+              <li><i class="fas fa-circle"></i> An toàn giao thông</li>
+              <li class="category-more"><i class="fas fa-arrow-right"></i> Xem thêm...</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: News -->
+    <div class="right-col">
       <div class="news-card">
         <div class="news-header">
-          <h3><i class="fas fa-newspaper"></i> Bản tin y tế học đường</h3>
-          <p>Cập nhật tin tức sức khỏe mới nhất</p>
+          <h3><i class="fas fa-newspaper"></i> Bản tin sức khỏe</h3>
+          <p>Cập nhật tin tức y tế mới nhất cho học sinh</p>
         </div>
         <div class="news-list" id="newsList">
-          <div class="loading-spinner"><i class="fas fa-spinner fa-pulse"></i> Đang tải tin tức...</div>
+          <!-- News items will be populated here -->
         </div>
-        <div class="load-more-btn" id="loadMoreNewsBtn" style="display: none;">
-          <button class="btn-load-more" onclick="loadMoreNews()"><i class="fas fa-arrow-down"></i> Xem thêm bản tin</button>
+        <div class="load-more-btn">
+          <button class="btn-load-more" id="loadMoreBtn">
+            <i class="fas fa-refresh"></i> Tải thêm
+          </button>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="stats-section">
+<!-- Stats Section -->
+<section class="stats-section" id="stats">
   <div class="stats-grid">
-    <div class="stat-item"><div class="stat-number">50+</div><div class="stat-label">Cơ sở y tế</div></div>
-    <div class="stat-item"><div class="stat-number">200+</div><div class="stat-label">Bài viết y khoa</div></div>
-    <div class="stat-item"><div class="stat-number">1.2k+</div><div class="stat-label">Thành viên</div></div>
-    <div class="stat-item"><div class="stat-number">24/7</div><div class="stat-label">Hỗ trợ</div></div>
+    <div>
+      <div class="stat-number">15K+</div>
+      <div class="stat-label">HỌC SINH</div>
+    </div>
+    <div>
+      <div class="stat-number">500+</div>
+      <div class="stat-label">BÀI VIẾT</div>
+    </div>
+    <div>
+      <div class="stat-number">50+</div>
+      <div class="stat-label">TRƯỜNG HỌC</div>
+    </div>
+    <div>
+      <div class="stat-number">98%</div>
+      <div class="stat-label">HÀI LÒNG</div>
+    </div>
   </div>
 </section>
 
+<!-- Footer -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-copyright">
-      <i class="far fa-copyright"></i> 2026 EduHealth AI — Nền tảng chăm sóc sức khỏe học đường. Không thay thế bác sĩ.
+    <div>
+      <strong>SYNHOC health</strong> © 2024. All rights reserved.
     </div>
     <div class="footer-links">
-      <a href="dieukhoan.html"><i class="fas fa-file-contract"></i> Điều khoản sử dụng</a>
-      <a href="#"><i class="fas fa-shield-alt"></i> Chính sách bảo mật</a>
-      <a href="#"><i class="fas fa-envelope"></i> Liên hệ</a>
+      <a href="dieukhoan.html"><i class="fas fa-file-alt"></i> Điều khoản</a>
+      <a href="https://facebook.com" target="_blank"><i class="fas fa-facebook"></i> Facebook</a>
+      <a href="mailto:support@synhoc.edu.vn"><i class="fas fa-envelope"></i> Email</a>
     </div>
   </div>
 </footer>
 
-<div id="categoryModal" class="modal-overlay">
+<!-- Modal -->
+<div class="modal-overlay" id="modal">
   <div class="modal-content">
-    <div class="modal-header"><h3 id="categoryModalTitle">Danh sách bài viết</h3><button class="modal-close" onclick="closeCategoryModal()">&times;</button></div>
-    <div class="modal-body" id="categoryModalBody"><div class="loading-spinner"><i class="fas fa-spinner fa-pulse"></i> Đang tải...</div></div>
+    <div class="modal-header">
+      <h3 id="modalTitle">Tiêu đề</h3>
+      <button class="modal-close" id="modalClose">&times;</button>
+    </div>
+    <div class="modal-body article-content" id="modalBody">
+      <!-- Content will be loaded here -->
+    </div>
   </div>
 </div>
 
-<div id="articleModal" class="modal-overlay">
-  <div class="modal-content">
-    <div class="modal-header"><h3 id="articleModalTitle">Bài viết</h3><button class="modal-close" onclick="closeArticleModal()">&times;</button></div>
-    <div class="modal-body" id="articleModalBody"><div class="loading-spinner"><i class="fas fa-spinner fa-pulse"></i> Đang tải...</div></div>
-  </div>
-</div>
-
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-check-compat.js"></script>
 <script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyDOYFgLyliWFfNWtXHzxDQrbe_ISgmavno",
-    authDomain: "eduhealth-4bcab.firebaseapp.com",
-    projectId: "eduhealth-4bcab",
-    storageBucket: "eduhealth-4bcab.firebasestorage.app",
-    messagingSenderId: "390541255938",
-    appId: "1:390541255938:web:aa7b5beca0105c28f70e1b",
-    measurementId: "G-GSP46EVLYG"
-  };
-  firebase.initializeApp(firebaseConfig);
+// Mobile menu toggle
+const menuToggle = document.getElementById('menuToggle');
+const mobileMenu = document.getElementById('mobileMenu');
 
-  // === TH�M �O?N CODE M?I ===
-  // Kh?i t?o App Check v?i reCAPTCHA Enterprise
-  const appCheck = firebase.appCheck();
-  appCheck.activate(
-    new firebase.appCheck.ReCaptchaEnterpriseProvider(
-      '6LfZOsIsAAAAAK_vBWSNgolKHjLsfWxGBicixs37'
-    ),
-    true
-  );
-  // ===============================
+menuToggle.addEventListener('click', () => {
+  mobileMenu.classList.toggle('open');
+});
 
-  const db = firebase.firestore();
+// Theme toggle
+const themeToggle = document.getElementById('themeToggle');
+const body = document.body;
 
-  const categories = [
-    { id: 'da_lieu', name: 'I. Da liễu học đường', icon: '🧴', color: 'pink', iconBg: 'pink-bg', previewItems: ['Kẻ chấm đen lì lợm – Mụn đầu đen / Mụn đầu trắng', 'Cục đau khó ưa – Mụn viêm / Mụn bọc', 'Da phản ứng mạnh – Viêm da tiếp xúc / Dị ứng da'] },
-    { id: 'truyen_nhiem', name: 'II. Bệnh truyền nhiễm thường gặp', icon: '🤒', color: 'blue', iconBg: 'blue-bg', previewItems: ['Cơn sốt nhập trường – Cúm mùa', 'Nốt nước lấm drama – Thủy đậu', 'Má sưng bất ngờ – Quai bị'] },
-    { id: 'mat', name: 'III. Sức khỏe mắt và thị lực', icon: '👁️', color: 'purple', iconBg: 'purple-bg', previewItems: ['Tầm xa mờ mịt – Cận thị', 'Nhìn gần cũng không êm – Loạn thị', 'Đôi mắt overtime – Mỏi mắt'] },
-    { id: 'tinh_than', name: 'IV. Sức khỏe tinh thần và giấc ngủ', icon: '🧠', color: 'green', iconBg: 'green-bg', previewItems: ['Stress học tập kéo dài', 'Lo âu trong mùa thi', 'Rối loạn giấc ngủ ở tuổi teen'] },
-    { id: 'tuoi_day_thi', name: 'V. Sức khỏe tuổi dậy thì', icon: '🌱', color: 'orange', iconBg: 'orange-bg', previewItems: ['Thay đổi cơ thể tuổi dậy thì', 'Chăm sóc da tuổi dậy thì', 'Dinh dưỡng cho tuổi dậy thì'] },
-    { id: 'tieu_hoa', name: 'VI. Tiêu hóa - Dinh dưỡng - Thể chất', icon: '🥗', color: 'teal', iconBg: 'teal-bg', previewItems: ['Rối loạn tiêu hóa ở học đường', 'Chế độ ăn uống lành mạnh', 'Tập luyện thể dục thể thao'] }
-  ];
+themeToggle.addEventListener('click', () => {
+  body.classList.toggle('dark');
+  const isDark = body.classList.contains('dark');
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  themeToggle.innerHTML = isDark 
+    ? '<i class="fas fa-sun"></i> Light' 
+    : '<i class="fas fa-moon"></i> Dark';
+});
 
-  let allHandbook = [], filteredHandbook = [], allNews = [], displayedNewsCount = 5, currentSearchTerm = '';
-
-  // Hàm tạo HTML nội dung bài viết từ dữ liệu (giống admin)
-  function buildHandbookHTML(data) {
-    // Xử lý triệu chứng
-    let symptomsHtml = '';
-    if (data.symptoms) {
-      const symptomsList = typeof data.symptoms === 'string' ? data.symptoms.split('\n').filter(l => l.trim()) : data.symptoms;
-      if (symptomsList.length) {
-        symptomsHtml = `<ul style="margin: 0.8em 0 0.8em 1.8em;">${symptomsList.map(s => `<li>${escapeHtml(s.trim())}</li>`).join('')}</ul>`;
-      } else if (typeof data.symptoms === 'string' && data.symptoms.trim()) {
-        symptomsHtml = `<p>${escapeHtml(data.symptoms)}</p>`;
-      }
-    }
-
-    // Xử lý dấu hiệu nguy hiểm
-    let dangerHtml = '';
-    if (data.dangerSigns) {
-      const dangerList = typeof data.dangerSigns === 'string' ? data.dangerSigns.split('\n').filter(l => l.trim()) : data.dangerSigns;
-      if (dangerList.length) {
-        dangerHtml = `<div class="handbook-danger-box">
-          <div class="handbook-danger-header">
-            <div class="handbook-danger-icon">⚠️</div>
-            <div class="handbook-danger-title">SOS - Khi nào cần gặp bác sĩ?</div>
-          </div>
-          <ul class="handbook-danger-list">
-            ${dangerList.map(d => `<li><span>⚠️</span> ${escapeHtml(d.trim())}</li>`).join('')}
-          </ul>
-        </div>`;
-      } else if (typeof data.dangerSigns === 'string' && data.dangerSigns.trim()) {
-        dangerHtml = `<div class="handbook-danger-box">
-          <div class="handbook-danger-header">
-            <div class="handbook-danger-icon">⚠️</div>
-            <div class="handbook-danger-title">SOS - Khi nào cần gặp bác sĩ?</div>
-          </div>
-          <p style="color: #b91c1c; font-weight: 600;">${escapeHtml(data.dangerSigns)}</p>
-        </div>`;
-      }
-    }
-
-    // Xử lý 4 bước
-    let stepsHtml = '';
-    const steps = [
-      { num: 1, text: data.step1, color: '#f97316' },
-      { num: 2, text: data.step2, color: '#3b82f6' },
-      { num: 3, text: data.step3, color: '#f59e0b' },
-      { num: 4, text: data.step4, color: '#22c55e' }
-    ].filter(s => s.text && s.text.trim());
-    
-    if (steps.length) {
-      stepsHtml = `<div class="handbook-steps">
-        ${steps.map(s => `<div class="handbook-step">
-          <div class="handbook-step-num" style="background: ${s.color}">${s.num}</div>
-          <div class="handbook-step-text">${escapeHtml(s.text)}</div>
-        </div>`).join('')}
-      </div>`;
-    }
-
-    let defenseHtml = '';
-    if (data.defenseTips && data.defenseTips.trim()) {
-      defenseHtml = `<div class="handbook-defense-box">
-          <div class="handbook-defense-header">
-            <div class="handbook-defense-icon">🛡️</div>
-            <div class="handbook-defense-title">Tips phòng thủ</div>
-          </div>
-          <div class="handbook-info-text">${escapeHtml(data.defenseTips)}</div>
-        </div>`;
-    }
-
-    // Xử lý ảnh grid
-    let imageGridHtml = '';
-    if (data.image1 || data.image2) {
-      const hasBoth = data.image1 && data.image2;
-      imageGridHtml = `<div class="handbook-image-grid" style="display: grid; grid-template-columns: ${hasBoth ? '2fr 1fr' : '1fr'}; gap: 0; background: #222; max-height: 320px; overflow: hidden; margin: 0 -24px;">
-        ${data.image1 ? `<div class="handbook-image-wrap"><img src="${data.image1}" onerror="this.style.background='#ddd'"><div class="handbook-image-caption">${escapeHtml(data.image1Caption || '')}</div></div>` : ''}
-        ${data.image2 ? `<div class="handbook-image-wrap"><img src="${data.image2}" onerror="this.style.background='#ddd'"><div class="handbook-image-caption">${escapeHtml(data.image2Caption || '')}</div></div>` : ''}
-      </div>`;
-    }
-
-    return `
-      <div class="article-content">
-        <div class="handbook-header">
-          <div class="handbook-header-top">
-            <div class="handbook-emoji">${data.emoji || '😟'}</div>
-            <div class="handbook-title">
-              <h1>${escapeHtml(data.title)}</h1>
-              <div class="handbook-subtitle">${escapeHtml(data.scientificName || '')}</div>
-            </div>
-          </div>
-          <div class="handbook-badges">
-            <span class="handbook-badge">⚠️ Cần biết</span>
-            <span class="handbook-badge"><span style="display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #fff;"></span> Nguy hiểm</span>
-          </div>
-        </div>
-        
-        ${imageGridHtml}
-        
-        <div class="handbook-body">
-          <div class="handbook-info-rows">
-            <div class="handbook-info-row">
-              <div class="handbook-info-icon" style="background: #ede9fe;">💜</div>
-              <div>
-                <div class="handbook-info-label" style="color: #7c3aed;">Cái tên "sang chảnh"</div>
-                <div class="handbook-info-text">${escapeHtml(data.scientificName || '')}</div>
-              </div>
-            </div>
-            <div class="handbook-info-row">
-              <div class="handbook-info-icon" style="background: #fce7f3;">🧬</div>
-              <div>
-                <div class="handbook-info-label" style="color: #db2777;">Nó là gì thế?</div>
-                <div class="handbook-info-text">${escapeHtml(data.shortDesc || '')}</div>
-              </div>
-            </div>
-            <div class="handbook-info-row">
-              <div class="handbook-info-icon" style="background: #fff3e0;">🎭</div>
-              <div>
-                <div class="handbook-info-label" style="color: #ea580c;">"Drama" dễ gặp tại trường</div>
-                <div class="handbook-info-text">${escapeHtml(data.situation || '')}</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="handbook-two-col">
-            <div class="handbook-info-card">
-              <div class="handbook-info-card-header">
-                <div class="handbook-info-card-icon" style="background: #3b5ef6; color: white;">⚠</div>
-                <div class="handbook-info-card-title" style="color: #3b5ef6;">Nguyên nhân</div>
-              </div>
-              <div class="handbook-info-text">${escapeHtml(data.cause || '')}</div>
-            </div>
-            <div class="handbook-info-card">
-              <div class="handbook-info-card-header">
-                <div class="handbook-info-card-icon" style="background: #ef4444; color: white;">♥</div>
-                <div class="handbook-info-card-title" style="color: #ef4444;">Check-list dấu hiệu</div>
-              </div>
-              ${symptomsHtml || `<div class="handbook-info-text">${escapeHtml(data.symptoms || '')}</div>`}
-            </div>
-          </div>
-
-          <div style="margin-bottom: 20px;">
-            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 18px;">
-              <div style="width: 34px; height: 34px; border-radius: 50%; background: #4ade80; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1rem;">C</div>
-              <div style="font-size: 1.05rem; font-weight: 800; color: #16a34a;">Bí kíp xử lý tại chỗ</div>
-            </div>
-            ${stepsHtml}
-          </div>
-
-          ${defenseHtml}
-
-          ${dangerHtml}
-        </div>
-      </div>
-    `;
-  }
-
-  function renderCategories() {
-    const container = document.getElementById('categoryGrid');
-    const dataSource = currentSearchTerm ? filteredHandbook : allHandbook;
-    if (dataSource.length === 0 && currentSearchTerm) {
-      container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; background: var(--card-bg); border-radius: 32px;">
-        <i class="fas fa-search" style="font-size: 48px; opacity: 0.5; margin-bottom: 16px; display: block;"></i>
-        <h3 style="font-family: 'Fraunces', serif; margin-bottom: 8px;">Không tìm thấy bài viết</h3>
-        <p style="color: var(--text-dim);">Không có bài viết nào phù hợp với từ khóa "<strong>${escapeHtml(currentSearchTerm)}</strong>"</p>
-        <button onclick="resetSearch()" style="margin-top: 20px; background: var(--blue-primary); border: none; color: white; padding: 8px 24px; border-radius: 40px; cursor: pointer;">Xóa tìm kiếm</button>
-      </div>`;
-      document.getElementById('totalPostsCount').innerText = '0';
-      return;
-    }
-    container.innerHTML = categories.map(cat => {
-      const count = dataSource.filter(post => post.category === cat.id).length;
-      return `<div class="category-card ${cat.color}" onclick="openCategoryPosts('${cat.id}', '${cat.name}')">
-        <div class="category-header"><div class="category-icon ${cat.iconBg}">${cat.icon}</div><div class="category-info"><h3>${cat.name}</h3><div class="category-count" id="count-${cat.id}">${count} bài viết</div></div></div>
-        <div class="category-preview"><ul>${cat.previewItems.map(item => `<li><i class="fas fa-circle"></i> ${item}</li>`).join('')}</ul><div class="category-more"><i class="fas fa-arrow-right"></i> Xem tất cả bài viết</div></div>
-      </div>`;
-    }).join('');
-    updateStatsAndCounts();
-  }
-
-  function updateStatsAndCounts() {
-    const dataSource = currentSearchTerm ? filteredHandbook : allHandbook;
-    categories.forEach(cat => { const el = document.getElementById(`count-${cat.id}`); if(el) el.textContent = `${dataSource.filter(p => p.category === cat.id).length} bài viết`; });
-    document.getElementById('totalPostsCount').innerText = dataSource.length;
-  }
-
-  async function loadHandbook() {
-    try {
-      const qs = await db.collection('handbook').orderBy('createdAt', 'desc').get();
-      allHandbook = qs.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      filteredHandbook = [...allHandbook];
-      renderCategories();
-    } catch(e) { console.error(e); }
-  }
-
-  function searchHandbook(keyword) {
-    currentSearchTerm = keyword.trim().toLowerCase();
-    const infoDiv = document.getElementById('searchResultsInfo');
-    const clearBtn = document.getElementById('searchClearBtn');
-    if(!currentSearchTerm) {
-      filteredHandbook = [...allHandbook];
-      infoDiv.style.display = 'none';
-      clearBtn.style.display = 'none';
-    } else {
-      filteredHandbook = allHandbook.filter(p => (p.title && p.title.toLowerCase().includes(currentSearchTerm)) || 
-        (p.shortDesc && p.shortDesc.toLowerCase().includes(currentSearchTerm)) ||
-        (p.symptoms && p.symptoms.toLowerCase().includes(currentSearchTerm)) ||
-        (p.cause && p.cause.toLowerCase().includes(currentSearchTerm)));
-      document.getElementById('searchKeyword').innerText = currentSearchTerm;
-      infoDiv.style.display = 'flex';
-      clearBtn.style.display = 'block';
-    }
-    renderCategories();
-  }
-
-  function resetSearch() { document.getElementById('searchInput').value = ''; searchHandbook(''); }
-  function clearSearch() { resetSearch(); }
-
-  async function loadNews() {
-    try {
-      const qs = await db.collection('news').orderBy('createdAt', 'desc').get();
-      allNews = qs.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      displayedNewsCount = 5;
-      displayNews();
-    } catch(e) { document.getElementById('newsList').innerHTML = '<div class="empty-news">⚠️ Lỗi tải dữ liệu</div>'; }
-  }
-
-  function displayNews() {
-    const container = document.getElementById('newsList');
-    const newsToShow = allNews.slice(0, displayedNewsCount);
-    if(allNews.length === 0) { container.innerHTML = '<div class="empty-news"><i class="fas fa-newspaper" style="font-size: 40px; opacity:0.5"></i><p>Chưa có bản tin.</p></div>'; document.getElementById('loadMoreNewsBtn').style.display = 'none'; return; }
-    container.innerHTML = newsToShow.map(n => `<div class="news-item" onclick="openNewsArticle('${n.id}')"><img class="news-item-cover" src="${n.coverImage}" onerror="this.src='https://placehold.co/60x60?text=News'"><div class="news-item-content"><h4 class="news-item-title">${escapeHtml(n.title)}</h4><div class="news-item-meta"><span><i class="far fa-eye"></i> ${n.views||0}</span><span><i class="far fa-calendar-alt"></i> ${n.createdAt ? new Date(n.createdAt.toDate()).toLocaleDateString('vi-VN') : 'N/A'}</span></div></div></div>`).join('');
-    document.getElementById('loadMoreNewsBtn').style.display = allNews.length > displayedNewsCount ? 'block' : 'none';
-  }
-  function loadMoreNews() { displayedNewsCount += 5; displayNews(); }
-
-  function openCategoryPosts(categoryId, categoryName) {
-    const dataSource = currentSearchTerm ? filteredHandbook : allHandbook;
-    const posts = dataSource.filter(p => p.category === categoryId);
-    const modal = document.getElementById('categoryModal');
-    document.getElementById('categoryModalTitle').innerHTML = `<i class="fas fa-folder-open"></i> ${categoryName}`;
-    const body = document.getElementById('categoryModalBody');
-    if(!posts.length) body.innerHTML = `<div class="empty-posts"><i class="fas fa-book-open" style="font-size:48px;opacity:0.5"></i><p>Chưa có bài viết.</p></div>`;
-    else body.innerHTML = `<div class="posts-grid">${posts.map(p => `<div class="post-card-mini" onclick="openArticle('${p.id}')"><img class="post-mini-cover" src="${p.coverImage}" onerror="this.src='https://placehold.co/400x200?text=No+Image'"><div class="post-mini-content"><h4 class="post-mini-title">${escapeHtml(p.title)}</h4><div class="post-mini-excerpt">${escapeHtml(p.shortDesc || '').substring(0, 80)}...</div><div class="post-mini-stats"><span><i class="far fa-eye"></i> ${p.views||0}</span><span><i class="far fa-calendar-alt"></i> ${p.createdAt ? new Date(p.createdAt.toDate()).toLocaleDateString('vi-VN') : 'N/A'}</span></div></div></div>`).join('')}</div>`;
-    modal.classList.add('active');
-  }
-  
-  async function openArticle(id) {
-    const post = allHandbook.find(p => p.id === id);
-    if(!post) return;
-    await db.collection('handbook').doc(id).update({ views: firebase.firestore.FieldValue.increment(1) });
-    post.views = (post.views||0)+1;
-    const modal = document.getElementById('articleModal');
-    document.getElementById('articleModalTitle').innerHTML = escapeHtml(post.title);
-    
-    // Sử dụng fullContent nếu có, nếu không thì build từ dữ liệu
-    let contentHtml = '';
-    if (post.fullContent) {
-      contentHtml = post.fullContent;
-      if (post.defenseTips && post.defenseTips.trim() && !contentHtml.includes('Tips phòng thủ')) {
-        contentHtml += `<div class="handbook-defense-box">
-          <div class="handbook-defense-header">
-            <div class="handbook-defense-icon">🛡️</div>
-            <div class="handbook-defense-title">Tips phòng thủ</div>
-          </div>
-          <div class="handbook-info-text">${escapeHtml(post.defenseTips)}</div>
-        </div>`;
-      }
-    } else {
-      contentHtml = buildHandbookHTML(post);
-    }
-    
-    document.getElementById('articleModalBody').innerHTML = `
-      ${contentHtml}
-      <div class="article-stats">
-        <span><i class="far fa-eye"></i> ${post.views||0}</span>
-        <span><i class="far fa-calendar-alt"></i> ${post.createdAt ? new Date(post.createdAt.toDate()).toLocaleString('vi-VN') : 'N/A'}</span>
-        <span><i class="fas fa-folder"></i> ${getCategoryName(post.category)}</span>
-      </div>
-    `;
-    modal.classList.add('active');
-  }
-  
-async function openNewsArticle(id) {
-    const news = allNews.find(n => n.id === id);
-    if(!news) return;
-    await db.collection('news').doc(id).update({ views: firebase.firestore.FieldValue.increment(1) });
-    news.views = (news.views||0)+1;
-    const modal = document.getElementById('articleModal');
-    document.getElementById('articleModalTitle').innerHTML = escapeHtml(news.title);
-    document.getElementById('articleModalBody').innerHTML = `
-        <div class="article-content" style="font-family: 'Nunito', 'DM Sans', sans-serif; line-height: 1.7; color: var(--text-mid);">
-            <div style="background: linear-gradient(120deg, #f7567c 0%, #ff9a3c 100%); padding: 28px 32px 24px; border-radius: 24px 24px 0 0; margin: -24px -24px 0 -24px;">
-                <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 14px; flex-wrap: wrap;">
-                    <div style="width: 64px; height: 64px; background: #fff; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 36px; box-shadow: 0 4px 16px rgba(0,0,0,0.12);">📰</div>
-                    <div>
-                        <h1 style="font-size: 1.7rem; font-weight: 900; color: #fff; letter-spacing: -0.5px; line-height: 1.2; margin: 0;">${escapeHtml(news.title)}</h1>
-                        <div style="color: rgba(255,255,255,0.85); font-size: 0.95rem; font-weight: 600; margin-top: 2px;">Bản tin y tế học đường</div>
-                    </div>
-                </div>
-                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <span style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 700; border: 2px solid rgba(255,255,255,0.7); color: #fff; background: rgba(255,255,255,0.18);"><i class="fas fa-newspaper"></i> Tin mới</span>
-                </div>
-            </div>
-            ${news.coverImage ? `<div style="margin: 20px 0 0 0; border-radius: 20px; overflow: hidden;"><img src="${news.coverImage}" style="width: 100%; height: auto; border-radius: 20px;" onerror="this.style.display='none'"></div>` : ''}
-            <div class="news-content" style="padding: 28px 24px; font-size: 1rem; line-height: 1.7;">
-                ${news.content || ''}
-            </div>
-        </div>
-        <div class="article-stats" style="display: flex; gap: 20px; font-size: 14px; color: var(--text-dim); padding-top: 16px; border-top: 1px solid var(--border-light); margin-top: 24px;">
-            <span><i class="far fa-eye"></i> ${news.views||0}</span>
-            <span><i class="far fa-calendar-alt"></i> ${news.createdAt ? new Date(news.createdAt.toDate()).toLocaleString('vi-VN') : 'N/A'}</span>
-            <span><i class="fas fa-newspaper"></i> Bản tin y tế học đường</span>
-        </div>
-    `;
-    modal.classList.add('active');
+// Load theme
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+  body.classList.add('dark');
+  themeToggle.innerHTML = '<i class="fas fa-sun"></i> Light';
 }
-  
-  function closeCategoryModal() { document.getElementById('categoryModal').classList.remove('active'); }
-  function closeArticleModal() { document.getElementById('articleModal').classList.remove('active'); }
-  
-  function getCategoryName(id) { const c = categories.find(c => c.id === id); return c ? c.name : 'Chưa phân loại'; }
-  
-  function escapeHtml(t) { if(!t) return ''; const div = document.createElement('div'); div.textContent = t; return div.innerHTML; }
 
-  document.getElementById('categoryModal').addEventListener('click', e => { if(e.target === document.getElementById('categoryModal')) closeCategoryModal(); });
-  document.getElementById('articleModal').addEventListener('click', e => { if(e.target === document.getElementById('articleModal')) closeArticleModal(); });
+// Modal
+const modal = document.getElementById('modal');
+const modalClose = document.getElementById('modalClose');
 
-  loadHandbook(); loadNews();
+modalClose.addEventListener('click', () => {
+  modal.classList.remove('active');
+});
 
-  // Theme
-  const themeBtn = document.getElementById('themeToggleBtn');
-  const setTheme = (theme) => {
-    if(theme === 'dark') { document.body.classList.add('dark'); themeBtn.innerHTML = '<i class="fas fa-sun"></i> <span>Chế độ sáng</span>'; localStorage.setItem('eduhealth-theme','dark'); }
-    else { document.body.classList.remove('dark'); themeBtn.innerHTML = '<i class="fas fa-moon"></i> <span>Chế độ tối</span>'; localStorage.setItem('eduhealth-theme','light'); }
-  };
-  const saved = localStorage.getItem('eduhealth-theme');
-  if(saved === 'dark') setTheme('dark'); else if(saved === 'light') setTheme('light'); else setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-  themeBtn.addEventListener('click', () => setTheme(document.body.classList.contains('dark') ? 'light' : 'dark'));
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    modal.classList.remove('active');
+  }
+});
 
-  // Mobile menu
-  const menuToggle = document.getElementById('menuToggleBtn'), mobilePanel = document.getElementById('mobileMenuPanel');
-  if(menuToggle) menuToggle.addEventListener('click', () => { mobilePanel.classList.toggle('open'); const icon = menuToggle.querySelector('i'); icon.classList.toggle('fa-bars'); icon.classList.toggle('fa-times'); });
-  document.querySelectorAll('.nav-link-mobile').forEach(l => l.addEventListener('click', () => { mobilePanel.classList.remove('open'); if(menuToggle){ const icon=menuToggle.querySelector('i'); icon.classList.remove('fa-times'); icon.classList.add('fa-bars'); } }));
-  document.getElementById('searchInput').addEventListener('input', e => searchHandbook(e.target.value));
+// Category cards
+const categoryCards = document.querySelectorAll('.category-card');
+categoryCards.forEach(card => {
+  card.addEventListener('click', () => {
+    modal.classList.add('active');
+    document.getElementById('modalTitle').textContent = 
+      card.querySelector('h3').textContent;
+  });
+});
 
-  window.openCategoryPosts = openCategoryPosts; 
-  window.openArticle = openArticle; 
-  window.openNewsArticle = openNewsArticle;
-  window.closeCategoryModal = closeCategoryModal; 
-  window.closeArticleModal = closeArticleModal;
-  window.loadMoreNews = loadMoreNews; 
-  window.resetSearch = resetSearch; 
-  window.clearSearch = clearSearch;
+// Search
+const searchInput = document.getElementById('searchInput');
+const searchClear = document.getElementById('searchClear');
+const searchResults = document.getElementById('searchResults');
+const searchReset = document.getElementById('searchReset');
+
+searchInput.addEventListener('input', () => {
+  if (searchInput.value.trim()) {
+    searchClear.style.display = 'block';
+    searchResults.style.display = 'flex';
+    document.getElementById('resultCount').textContent = 
+      Math.floor(Math.random() * 10) + 1;
+  } else {
+    searchClear.style.display = 'none';
+    searchResults.style.display = 'none';
+  }
+});
+
+searchClear.addEventListener('click', () => {
+  searchInput.value = '';
+  searchClear.style.display = 'none';
+  searchResults.style.display = 'none';
+});
+
+searchReset.addEventListener('click', () => {
+  searchInput.value = '';
+  searchClear.style.display = 'none';
+  searchResults.style.display = 'none';
+});
+
+// News list
+const newsList = document.getElementById('newsList');
+const newsItems = [
+  {
+    title: 'Cách duy trì sức khỏe tâm thần tốt',
+    meta: '2 ngày trước',
+    cover: 'bkt.png'
+  },
+  {
+    title: 'Thực hành yoga buổi sáng cho học sinh',
+    meta: '5 ngày trước',
+    cover: 'bkt.png'
+  },
+  {
+    title: 'Ăn uống lành mạnh trong mùa hè',
+    meta: '1 tuần trước',
+    cover: 'bkt.png'
+  }
+];
+
+newsItems.forEach(item => {
+  const newsItem = document.createElement('div');
+  newsItem.className = 'news-item';
+  newsItem.innerHTML = `
+    <img src="${item.cover}" alt="${item.title}" class="news-item-cover">
+    <div class="news-item-content">
+      <div class="news-item-title">${item.title}</div>
+      <div class="news-item-meta">
+        <span><i class="fas fa-calendar"></i> ${item.meta}</span>
+      </div>
+    </div>
+  `;
+  newsList.appendChild(newsItem);
+});
+
+// Load more button
+const loadMoreBtn = document.getElementById('loadMoreBtn');
+loadMoreBtn.addEventListener('click', () => {
+  alert('Đang tải thêm tin tức...');
+});
 </script>
 </body>
 </html>
-
-
